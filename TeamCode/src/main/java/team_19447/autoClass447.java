@@ -338,14 +338,6 @@ public class autoClass447 {
         }
     }
 
-    public void ChassisReset() {
-        FrontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        FrontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        RearLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        RearRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-    }
-    //is it possible to translate cm distance into the lift??
-
     public void setMode(DcMotor.RunMode mode) {
         FrontLeft.setMode(mode);
         RearLeft.setMode(mode);
@@ -353,6 +345,7 @@ public class autoClass447 {
         RearRight.setMode(mode);
     }
 
+    //whys this not used
     public void drive(int leftTarget1, int leftTarget2, int rightTarget1, int rightTarget2, double speed) {
 
         int leftPos1 = 0;

@@ -27,7 +27,7 @@ public class autonomous_Encoder47 extends LinearOpMode {
         //verticalRack = hardwareMap.get(Servo.class, "verticalRack");
         //Cam = hardwareMap.get(Servo.class, "Cam");
 
-        //Reverse left side motors
+        //Reverse left side motors, as they start out reversed
         FrontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
         RearLeft.setDirection(DcMotorSimple.Direction.REVERSE);
 
@@ -36,6 +36,8 @@ public class autonomous_Encoder47 extends LinearOpMode {
         robot.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         waitForStart();
+
+        robot.Forward(1000, stuff);
 
         if (isStopRequested()) return;
 
@@ -51,6 +53,9 @@ public class autonomous_Encoder47 extends LinearOpMode {
             telemetry.update();
         }
     }
+
+    //---------------------------------------------------------------------------------
+
      /*Ignore this part, not needed for this year robot
 
 
