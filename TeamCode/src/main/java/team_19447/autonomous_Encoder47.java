@@ -37,7 +37,9 @@ public class autonomous_Encoder47 extends LinearOpMode {
 
         waitForStart();
 
-        robot.Forward(1000, stuff);
+        //move it forward by 40cm
+        robot.Forward(40);
+
 
         if (isStopRequested()) return;
 

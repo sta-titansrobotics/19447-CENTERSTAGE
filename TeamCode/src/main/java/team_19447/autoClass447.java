@@ -98,7 +98,7 @@ public class autoClass447 {
         }
     }
 
-    public void Forward(int distanceCM, boolean NextSequence) {
+    public void Forward(int distanceCM) {
         // convert encoder ticks to centimetres
         double tick = distanceCM * forwardTicks;
         int ticks = (int) tick;
@@ -122,7 +122,8 @@ public class autoClass447 {
         RearLeft.setPower(Range.clip(errorLeft * p, -0.4, 0.4));
         RearRight.setPower(Range.clip(errorRight * p, -0.4, 0.4));
 
-        while (FrontLeft.isBusy() && FrontRight.isBusy() && RearLeft.isBusy() && RearRight.isBusy() && NextSequence) {
+        while (FrontLeft.isBusy() && FrontRight.isBusy() && RearLeft.isBusy() && RearRight.isBusy()){
+
         }
 
         FrontLeft.setPower(0);
@@ -131,7 +132,7 @@ public class autoClass447 {
         RearRight.setPower(0);
     }
 
-    public void Backward(int distanceCM, boolean NextSequence) {
+    public void Backward(int distanceCM) {
         // convert encoder ticks to centimetres
         double tick = distanceCM * forwardTicks;
         int ticks = (int) tick;
@@ -155,7 +156,7 @@ public class autoClass447 {
         RearLeft.setPower(Range.clip(errorLeft * p, -0.4, 0.4));
         RearRight.setPower(Range.clip(errorRight * p, -0.4, 0.4));
 
-        while (FrontLeft.isBusy() && FrontRight.isBusy() && RearLeft.isBusy() && RearRight.isBusy() && NextSequence) {
+        while (FrontLeft.isBusy() && FrontRight.isBusy() && RearLeft.isBusy() && RearRight.isBusy()) {
         }
     }
 
