@@ -40,7 +40,6 @@ public class autonomous_Encoder47 extends LinearOpMode {
         //move it forward by 40cm
         robot.Forward(40);
 
-
         if (isStopRequested()) return;
 
         //movement - remember capitalization
@@ -95,7 +94,6 @@ public class autonomous_Encoder47 extends LinearOpMode {
 
     public void dropCone() {
         Cam.setPosition(-0.25); //revert and turn back the 45 deg to drop it.
-    }
 
     public void rack(double position) {
         verticalRack.setPosition(position);
