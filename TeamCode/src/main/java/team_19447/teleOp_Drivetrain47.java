@@ -28,7 +28,7 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
 
         if (isStopRequested()) return;
 
-
+//https://gm0.org/en/latest/docs/software/tutorials/mecanum-drive.html
         while (opModeIsActive()) {
 
             //Driving
