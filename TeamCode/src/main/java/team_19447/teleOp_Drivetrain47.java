@@ -9,8 +9,6 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 @TeleOp
 public class teleOp_Drivetrain47 extends LinearOpMode {
 
-
-
     @Override
     public void runOpMode() {
 
@@ -28,7 +26,7 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
 
         if (isStopRequested()) return;
 
-//https://gm0.org/en/latest/docs/software/tutorials/mecanum-drive.html
+        //https://gm0.org/en/latest/docs/software/tutorials/mecanum-drive.html
         while (opModeIsActive()) {
 
             //Driving
