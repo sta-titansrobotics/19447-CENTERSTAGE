@@ -27,9 +27,16 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
         if (isStopRequested()) return;
 
         //https://gm0.org/en/latest/docs/software/tutorials/mecanum-drive.html
-        //ftc documaentaion https://ftctechnh.github.io/ftc_app/doc/javadoc/com/qualcomm/robotcore/hardware/Gamepad.html
+        https://ftctechnh.github.io/ftc_app/doc/javadoc/com/qualcomm/robotcore/hardware/Gamepad.html
         while (opModeIsActive()) {
 
+            gamepad1.
+            if (gamepad1.left_stick_x>0){
+                motorFL.setPower(1);
+                motorBL.setPower(-1);
+                motorFR.setPower(-1);
+                motorBR.setPower(1);
+            }
             //Driving
 
             double y = -gamepad1.left_stick_y; // Remember, this is reversed!
