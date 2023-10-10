@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.team_19446;
+package team_19447;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -6,10 +6,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 
-//blah blah blah
-
 @TeleOp
-public class driveControlled extends LinearOpMode {
+public class teleOp_Drivetrain47 extends LinearOpMode {
 
 
 
