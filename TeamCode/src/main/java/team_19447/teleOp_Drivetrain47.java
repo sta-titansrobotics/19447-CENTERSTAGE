@@ -31,7 +31,6 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
         while (opModeIsActive()) {
 
             //Driving
-
             double y = -gamepad1.left_stick_y; // Remember, this is reversed!
 
             //STRAFING VARIABLE
@@ -56,8 +55,6 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
             telemetry.addData("RF Power:", motorFR.getPower());
             telemetry.addData("RB Power:", motorBR.getPower());
             telemetry.update();
-
-
         }
     }
 }

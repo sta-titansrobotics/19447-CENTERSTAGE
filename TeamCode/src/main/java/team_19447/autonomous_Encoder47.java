@@ -55,4 +55,50 @@ public class autonomous_Encoder47 extends LinearOpMode {
             telemetry.update();
         }
     }
+
+    //---------------------------------------------------------------------------------
+
+     /*Ignore this part, not needed for this year robot
+
+
+    private void liftPosition(int distanceCM, double Speed, int Tolerance, boolean NextSequence) {
+        // convert encoder ticks to centimetres
+        double tick = distanceCM * forwardTicks;
+        int ticks = (int) tick;
+
+        LiftLeft.setTargetPosition(ticks);
+        LiftRight.setTargetPosition(ticks);
+        LiftLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        LiftRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        LiftLeft.setPower(Speed); //prob best to leave the speed as 1.
+        LiftRight.setPower(Speed);
+        ((DcMotorEx) LiftLeft).setTargetPositionTolerance(Tolerance);
+        ((DcMotorEx) LiftRight).setTargetPositionTolerance(Tolerance);
+        while (LiftLeft.isBusy() && LiftRight.isBusy() && NextSequence) {
+        }
+    }
+
+
+    public void raiseRack() {
+        verticalRack.setPosition(0);
+
+    }
+
+    public void pickupCone() {
+        verticalRack.setPosition(1);
+        sleep(2000);
+        Cam.setPosition(0.25); //turn 45 deg to pick it up
+        sleep(1000);
+        verticalRack.setPosition(0);
+        sleep(1000);
+    }
+
+    public void dropCone() {
+        Cam.setPosition(-0.25); //revert and turn back the 45 deg to drop it.
+    }
+
+    public void rack(double position) {
+        verticalRack.setPosition(position);
+    }
+     */
 }
