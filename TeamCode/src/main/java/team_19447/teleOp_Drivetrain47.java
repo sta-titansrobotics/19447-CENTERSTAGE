@@ -23,7 +23,7 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
         motorBL.setDirection(DcMotorSimple.Direction.REVERSE);
 
         waitForStart();
-    //
+
         if (isStopRequested()) return;
 
         //https://gm0.org/en/latest/docs/software/tutorials/mecanum-drive.html
@@ -34,10 +34,42 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
             double y = -gamepad1.left_stick_y; // Remember, this is reversed!
 
             //STRAFING VARIABLE
-            double x = gamepad1.left_stick_x * 1.1; // Counteract imperfect strafing
+            double x = gamepad1.left_stick_x * 1.1; // Counteract imperfect strafing (moving from side to side)
 
             //THIS IS THE TURNING VARIABLE
             double rx = gamepad1.right_stick_x;
+
+            //Basic movements
+            if(x>0&&y>0){
+                //Moving forward-right (diagonally)
+                motorFL.setPower(1);
+                motorBR.setPower(1);
+            }else if(x>0&&y==0){
+                //Moving right straight
+                motorFL.setPower(1);
+                motorBL.setPower(1);
+                motorFR.setPower(-1);
+                motorBR.setPower(-1);
+            }else if(//insert condition     ){
+                //moving left straight
+            }else if(//insert condition    ){
+                //moving forward straight
+            }else if(  //insert condition   ){
+                //moving forward left (diagonally)
+            }else if(//insert condition     ){
+                //moving backward straight
+            }else if(//insert condition     ){
+                //moving backward-left (diagonally)
+            }else if(//insert condition     ){
+                //moving backward-right (diagonally)
+            }else{
+                //if joystick is not moving, the robot should also stop
+                motorFL.setPower(0);
+                motorBL.setPower(0);
+                motorFR.setPower(0);
+                motorBR.setPower(0);
+            }
+
 
             double denominator = Math.max(Math.abs(y) + Math.abs(x) + Math.abs(rx), 1);
             double frontLeftPower = (y + x + rx) / denominator;
