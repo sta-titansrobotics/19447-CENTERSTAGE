@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.util.Range;
 
-public class autoClass447 {
+public class autoClass447{
 
     DcMotor FrontLeft;
     DcMotor RearLeft;
@@ -122,14 +122,18 @@ public class autoClass447 {
         RearLeft.setPower(Range.clip(errorLeft * p, -0.4, 0.4));
         RearRight.setPower(Range.clip(errorRight * p, -0.4, 0.4));
 
-        while (FrontLeft.isBusy() && FrontRight.isBusy() && RearLeft.isBusy() && RearRight.isBusy()){
-
+        while (FrontLeft.isBusy() && FrontRight.isBusy() && RearLeft.isBusy() && RearRight.isBusy()) {
+            telementary.add
+            if(FrontLeft.getCurrentPosition()>=ticks){
+                FrontLeft.setPower(0);
+                FrontRight.setPower(0);
+                RearLeft.setPower(0);
+                RearRight.setPower(0);
+                break;
+            }
         }
 
-        FrontLeft.setPower(0);
-        FrontRight.setPower(0);
-        RearLeft.setPower(0);
-        RearRight.setPower(0);
+        //RUN_USING_ENCODERS
     }
 
     public void Backward(int distanceCM) {
