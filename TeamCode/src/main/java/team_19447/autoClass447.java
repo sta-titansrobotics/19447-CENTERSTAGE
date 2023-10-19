@@ -51,10 +51,6 @@ public class autoClass447{
         double errorRight = Math.abs(FrontRight.getTargetPosition() - FrontRight.getCurrentPosition());
         double p = 0.5;
 
-        FrontLeft.setPower(Range.clip(errorLeft * p, -0.4, 0.4));
-        FrontRight.setPower(Range.clip(errorRight * p, -0.4, 0.4));
-        RearLeft.setPower(Range.clip(errorLeft * p, -0.4, 0.4));
-        RearRight.setPower(Range.clip(errorRight * p, -0.4, 0.4));
 
         while (FrontLeft.isBusy() && FrontRight.isBusy() && RearLeft.isBusy() && RearRight.isBusy() && NextSequence) {
 

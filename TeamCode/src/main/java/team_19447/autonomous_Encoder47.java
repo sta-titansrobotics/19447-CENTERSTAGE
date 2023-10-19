@@ -40,6 +40,8 @@ public class autonomous_Encoder47 extends LinearOpMode {
         //Auto code
         //move it forward by 60cm
         robot.Forward(60);
+
+
         robot.StrafeLeft(60, true);
 
         //drop the pixels
