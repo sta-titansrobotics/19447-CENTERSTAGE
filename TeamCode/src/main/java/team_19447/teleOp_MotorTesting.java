@@ -16,7 +16,6 @@ public class teleOp_MotorTesting extends LinearOpMode {
         DcMotor placeHolderName3 = hardwareMap.get(DcMotor.class, "placeHolderName3");
         DcMotor placeHolderName4 = hardwareMap.get(DcMotor.class, "placeHolderName4");*/
 
-
         DcMotor placeHolderName1 = hardwareMap.get(DcMotor.class, "motorFrontLeft");
         DcMotor placeHolderName2 = hardwareMap.get(DcMotor.class, "motorBackLeft");
         DcMotor placeHolderName3 = hardwareMap.get(DcMotor.class, "motorFrontRight");
