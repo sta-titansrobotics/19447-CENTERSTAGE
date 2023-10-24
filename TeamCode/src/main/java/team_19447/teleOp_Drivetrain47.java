@@ -18,10 +18,10 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
         DcMotor motorFR = hardwareMap.get(DcMotor.class, "motorFrontRight");
         DcMotor motorBR = hardwareMap.get(DcMotor.class, "motorBackRight");
 
-        DcMotor placeHolderName1 = hardwareMap.get(DcMotor.class, "placeHolderName1");
+        /*DcMotor placeHolderName1 = hardwareMap.get(DcMotor.class, "placeHolderName1");
         DcMotor placeHolderName2 = hardwareMap.get(DcMotor.class, "placeHolderName2");
         DcMotor placeHolderName3 = hardwareMap.get(DcMotor.class, "placeHolderName3");
-        DcMotor placeHolderName4 = hardwareMap.get(DcMotor.class, "placeHolderName4");
+        DcMotor placeHolderName4 = hardwareMap.get(DcMotor.class, "placeHolderName4");*/
 
 
 
