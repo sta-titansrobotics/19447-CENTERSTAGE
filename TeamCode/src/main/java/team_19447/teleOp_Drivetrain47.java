@@ -50,33 +50,33 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
                 motorBL.setPower(1);
                 motorFR.setPower(-1);
                 motorBR.setPower(-1);
-            }else if(//insert condition){
+            }else if(x<0&&y==0){
                 //moving left straight
                 motorFL.setPower(-1);
-                motorBL.setPower(-1);
+                motorBL.setPower(1);
                 motorFR.setPower(1);
-                motorBR.setPower(1);
-            }else if(//insert condition    ){
+                motorBR.setPower(-1);
+            }else if(x==0&&y>0){
                 //moving forward straight
                  motorFL.setPower(1);
                  motorBL.setPower(1);
                  motorFR.setPower(1);
                  motorBR.setPower(1);
-            }else if(  //insert condition   ){
+            }else if(x<0&&y>0){
                 //moving forward left (diagonally)
                  motorFR.setPower(1);
                  motorBL.setPower(1);
-            }else if(//insert condition     ){
+            }else if(x==0&&y<0){
                 //moving backward straight
                 motorFL.setPower(-1);
                 motorBL.setPower(-1);
                 motorFR.setPower(-1);
                 motorBR.setPower(-1);
-            }else if(//insert condition     ){
+            }else if(x<0&&y<0){
                 //moving backward-left (diagonally)
                 motorFR.setPower(-1);
                 motorBL.setPower(-1);
-            }else if(//insert condition     ){
+            }else if(x>0&&y<0){
                 //moving backward-right (diagonally)
                 motorFL.setPower(-1);
                 motorBR.setPower(-1);
