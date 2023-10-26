@@ -50,7 +50,6 @@ public class autonomous_Encoder47 extends LinearOpMode {
 
 
 
-
         if (isStopRequested()) return;
 
         //movement - remember capitalization
