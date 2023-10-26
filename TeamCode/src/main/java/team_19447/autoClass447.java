@@ -119,7 +119,6 @@ public class autoClass447{
         RearRight.setPower(Range.clip(errorRight * p, -0.4, 0.4));
 
         while (FrontLeft.isBusy() && FrontRight.isBusy() && RearLeft.isBusy() && RearRight.isBusy()) {
-
             if(FrontLeft.getCurrentPosition()>=ticks){
                 FrontLeft.setPower(0);
                 FrontRight.setPower(0);
