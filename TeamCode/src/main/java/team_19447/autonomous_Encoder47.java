@@ -42,11 +42,11 @@ public class autonomous_Encoder47 extends LinearOpMode {
         robot.Forward(60);
 
 
-        robot.StrafeLeft(60, true);
+        robot.StrafeLeft(60);
 
         //drop the pixels
         robot.Forward(40);
-        robot.StrafeLeft(35, true);
+        robot.StrafeLeft(35);
 
 
 
