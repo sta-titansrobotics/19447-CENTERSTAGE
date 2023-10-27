@@ -50,36 +50,20 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
                 motorBL.setPower(1);
                 motorFR.setPower(-1);
                 motorBR.setPower(-1);
-            }else if(x<0&&y==0){
+            }
+
+            else if(//insert condition     ){
                 //moving left straight
-                motorFL.setPower(-1);
-                motorBL.setPower(1);
-                motorFR.setPower(1);
-                motorBR.setPower(-1);
-            }else if(x==0&&y>0){
+            }else if(//insert condition    ){
                 //moving forward straight
-                 motorFL.setPower(1);
-                 motorBL.setPower(1);
-                 motorFR.setPower(1);
-                 motorBR.setPower(1);
-            }else if(x<0&&y>0){
+            }else if(  //insert condition   ){
                 //moving forward left (diagonally)
-                 motorFR.setPower(1);
-                 motorBL.setPower(1);
-            }else if(x==0&&y<0){
+            }else if(//insert condition     ){
                 //moving backward straight
-                motorFL.setPower(-1);
-                motorBL.setPower(-1);
-                motorFR.setPower(-1);
-                motorBR.setPower(-1);
-            }else if(x<0&&y<0){
+            }else if(//insert condition     ){
                 //moving backward-left (diagonally)
-                motorFR.setPower(-1);
-                motorBL.setPower(-1);
-            }else if(x>0&&y<0){
+            }else if(//insert condition     ){
                 //moving backward-right (diagonally)
-                motorFL.setPower(-1);
-                motorBR.setPower(-1);
             }else{
                 //if joystick is not moving, the robot should also stop
                 motorFL.setPower(0);

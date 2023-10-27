@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.util.Range;
 
-public class autoClass447 {
+public class autoClass447{
 
     DcMotor FrontLeft;
     DcMotor RearLeft;
@@ -51,10 +51,6 @@ public class autoClass447 {
         double errorRight = Math.abs(FrontRight.getTargetPosition() - FrontRight.getCurrentPosition());
         double p = 0.5;
 
-        FrontLeft.setPower(Range.clip(errorLeft * p, -0.4, 0.4));
-        FrontRight.setPower(Range.clip(errorRight * p, -0.4, 0.4));
-        RearLeft.setPower(Range.clip(errorLeft * p, -0.4, 0.4));
-        RearRight.setPower(Range.clip(errorRight * p, -0.4, 0.4));
 
         while (FrontLeft.isBusy() && FrontRight.isBusy() && RearLeft.isBusy() && RearRight.isBusy() && NextSequence) {
 
@@ -100,8 +96,8 @@ public class autoClass447 {
 
     public void Forward(int distanceCM) {
         // convert encoder ticks to centimetres
-        double tick = distanceCM * forwardTicks;
-        int ticks = (int) tick;
+        int ticks = (int)(distanceCM * forwardTicks);
+
 
         FrontLeft.setTargetPosition(ticks);
         FrontRight.setTargetPosition(ticks);
@@ -115,21 +111,24 @@ public class autoClass447 {
 
         double errorLeft = Math.abs(FrontLeft.getTargetPosition() - FrontLeft.getCurrentPosition());
         double errorRight = Math.abs(FrontRight.getTargetPosition() - FrontRight.getCurrentPosition());
-        double p = 0.5;
+        final double p = 0.5;
 
         FrontLeft.setPower(Range.clip(errorLeft * p, -0.4, 0.4));
         FrontRight.setPower(Range.clip(errorRight * p, -0.4, 0.4));
         RearLeft.setPower(Range.clip(errorLeft * p, -0.4, 0.4));
         RearRight.setPower(Range.clip(errorRight * p, -0.4, 0.4));
 
-        while (FrontLeft.isBusy() && FrontRight.isBusy() && RearLeft.isBusy() && RearRight.isBusy()){
-
+        while (FrontLeft.isBusy() && FrontRight.isBusy() && RearLeft.isBusy() && RearRight.isBusy()) {
+            if(FrontLeft.getCurrentPosition()>=ticks){
+                FrontLeft.setPower(0);
+                FrontRight.setPower(0);
+                RearLeft.setPower(0);
+                RearRight.setPower(0);
+                break;
+            }
         }
 
-        FrontLeft.setPower(0);
-        FrontRight.setPower(0);
-        RearLeft.setPower(0);
-        RearRight.setPower(0);
+        //RUN_USING_ENCODERS
     }
 
     public void Backward(int distanceCM) {
