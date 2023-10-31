@@ -32,7 +32,7 @@ public class teleOp_TankDrive47 extends LinearOpMode {
 
             //Driving
             double rightPower = -gamepad1.right_stick_y; // Remember, this is reversed!
-            double leftPower = gamepad1.left_stick_y;
+            double leftPower = -gamepad1.left_stick_y;
 
             motorFL.setPower(leftPower);
             motorBL.setPower(leftPower);
