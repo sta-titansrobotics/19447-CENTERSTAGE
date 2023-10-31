@@ -36,7 +36,7 @@ public class autonomous_Encoder47 extends LinearOpMode {
         robot.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         waitForStart();
-
+//test
         //Auto code
         //move it forward by 60cm
         robot.Forward(60);
