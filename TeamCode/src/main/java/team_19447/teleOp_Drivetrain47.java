@@ -50,20 +50,36 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
                 motorBL.setPower(1);
                 motorFR.setPower(-1);
                 motorBR.setPower(-1);
-            }
-
-            else if(//insert condition     ){
+            }else if(x<0&&y==0){
                 //moving left straight
-            }else if(//insert condition    ){
+                motorFL.setPower(-1);
+                motorBL.setPower(1);
+                motorFR.setPower(1);
+                motorBR.setPower(-1);
+            }else if(x==0&&y>0){
                 //moving forward straight
-            }else if(  //insert condition   ){
+                motorFL.setPower(1);
+                motorBL.setPower(1);
+                motorFR.setPower(1);
+                motorBR.setPower(1);
+            }else if(x<0&&y>0){
                 //moving forward left (diagonally)
-            }else if(//insert condition     ){
+                motorFR.setPower(1);
+                motorBL.setPower(1);
+            }else if(x==0&&y<0){
                 //moving backward straight
-            }else if(//insert condition     ){
+                motorFL.setPower(-1);
+                motorBL.setPower(-1);
+                motorFR.setPower(-1);
+                motorBR.setPower(-1);
+            }else if(x<0&&y<0){
                 //moving backward-left (diagonally)
-            }else if(//insert condition     ){
+                motorFR.setPower(-1);
+                motorBL.setPower(-1);
+            }else if(x>0&&y<0){
                 //moving backward-right (diagonally)
+                motorFL.setPower(-1);
+                motorBR.setPower(-1);
             }else{
                 //if joystick is not moving, the robot should also stop
                 motorFL.setPower(0);
@@ -72,7 +88,7 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
                 motorBR.setPower(0);
             }
 
-
+/*
             double denominator = Math.max(Math.abs(y) + Math.abs(x) + Math.abs(rx), 1);
             double frontLeftPower = (y + x + rx) / denominator;
             double backLeftPower = (y - x + rx) / denominator;
@@ -82,7 +98,7 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
             motorFL.setPower(frontLeftPower);
             motorBL.setPower(backLeftPower);
             motorFR.setPower(frontRightPower);
-            motorBR.setPower(backRightPower);
+            motorBR.setPower(backRightPower);*/
 
             telemetry.addData("LF Power:", motorFL.getPower());
             telemetry.addData("LB Power:", motorBL.getPower());
