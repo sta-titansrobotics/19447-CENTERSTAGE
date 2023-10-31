@@ -104,8 +104,8 @@ public class autoClass447{
 
     public void Forward(int distanceCM) {
         // convert encoder ticks to centimetres
-        double tick = distanceCM * forwardTicks;
-        int ticks = (int) tick;
+        int ticks = (int)(distanceCM * forwardTicks);
+
 
         FrontLeft.setTargetPosition(ticks);
         FrontRight.setTargetPosition(ticks);
@@ -119,7 +119,7 @@ public class autoClass447{
 
         double errorLeft = Math.abs(FrontLeft.getTargetPosition() - FrontLeft.getCurrentPosition());
         double errorRight = Math.abs(FrontRight.getTargetPosition() - FrontRight.getCurrentPosition());
-        double p = 0.5;
+        final double p = 0.5;
 
         FrontLeft.setPower(Range.clip(errorLeft * p, -0.4, 0.4));
         FrontRight.setPower(Range.clip(errorRight * p, -0.4, 0.4));
@@ -127,7 +127,6 @@ public class autoClass447{
         RearRight.setPower(Range.clip(errorRight * p, -0.4, 0.4));
 
         while (FrontLeft.isBusy() && FrontRight.isBusy() && RearLeft.isBusy() && RearRight.isBusy()) {
-
             if(FrontLeft.getCurrentPosition()>=ticks){
                 FrontLeft.setPower(0);
                 FrontRight.setPower(0);

@@ -18,13 +18,6 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
         DcMotor motorFR = hardwareMap.get(DcMotor.class, "motorFrontRight");
         DcMotor motorBR = hardwareMap.get(DcMotor.class, "motorBackRight");
 
-        /*DcMotor placeHolderName1 = hardwareMap.get(DcMotor.class, "placeHolderName1");
-        DcMotor placeHolderName2 = hardwareMap.get(DcMotor.class, "placeHolderName2");
-        DcMotor placeHolderName3 = hardwareMap.get(DcMotor.class, "placeHolderName3");
-        DcMotor placeHolderName4 = hardwareMap.get(DcMotor.class, "placeHolderName4");*/
-
-
-
         //Reverse right side motors
         motorFL.setDirection(DcMotorSimple.Direction.REVERSE);
         motorBL.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -58,7 +51,7 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
                 motorFR.setPower(-1);
                 motorBR.setPower(-1);
             }
-/*
+
             else if(//insert condition     ){
                 //moving left straight
             }else if(//insert condition    ){
@@ -77,8 +70,7 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
                 motorBL.setPower(0);
                 motorFR.setPower(0);
                 motorBR.setPower(0);
-            }*/
-
+            }
 
 
             double denominator = Math.max(Math.abs(y) + Math.abs(x) + Math.abs(rx), 1);
@@ -100,3 +92,4 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
         }
     }
 }
+//f
