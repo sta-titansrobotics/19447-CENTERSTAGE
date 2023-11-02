@@ -40,13 +40,12 @@ public class autonomous_Encoder47 extends LinearOpMode {
         //Auto code
         //move it forward by 60cm
         robot.Forward(60);
+
         robot.StrafeLeft(50);
 
         //drop the pixels
         robot.Forward(40);
         robot.StrafeLeft(35);
-
-
 
         if (isStopRequested()) return;
 
@@ -66,7 +65,6 @@ public class autonomous_Encoder47 extends LinearOpMode {
     //---------------------------------------------------------------------------------
 
      /*Ignore this part, not needed for this year robot
-
 
     private void liftPosition(int distanceCM, double Speed, int Tolerance, boolean NextSequence) {
         // convert encoder ticks to centimetres
