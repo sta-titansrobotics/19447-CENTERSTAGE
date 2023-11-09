@@ -21,7 +21,7 @@ public class teleOp_TankDrive47 extends LinearOpMode {
         DcMotor motorslider = hardwareMap.get(DcMotor.class, "motorslider");
         DcMotor motorclimbing = hardwareMap.get(DcMotor.class, "motorclimbing");
 
-
+//jk\bhkl
         //Reverse right side motors
         motorFL.setDirection(DcMotorSimple.Direction.REVERSE);
         motorBL.setDirection(DcMotorSimple.Direction.REVERSE);
