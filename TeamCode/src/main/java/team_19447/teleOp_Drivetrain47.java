@@ -25,7 +25,8 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
         DcMotor Climbing = hardwareMap.get(DcMotor.class, "Climbing");
         Servo ClawDrop1 =  hardwareMap.get(Servo.class, "ClawDrop1");
         Servo ClawDrop2 =  hardwareMap.get(Servo.class, "ClawDrop2");
-        Servo Wrist =  hardwareMap.get(Servo.class, "Wrist");*/
+        Servo Wrist =  hardwareMap.get(Servo.class, "Wrist");
+        Servo AirplaneLauncher = hardwareMap.get(Servo.class, "Airplane Launcher");*/
 
         //Reverse right side motors
         motorFL.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -49,6 +50,7 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
             double rx = gamepad1.right_stick_x;
 
             //Basic movements
+            /*
             if(x>0&&y>0){
                 //Moving forward-right (diagonally)
                 motorFL.setPower(1);
@@ -95,9 +97,8 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
                 motorBL.setPower(0);
                 motorFR.setPower(0);
                 motorBR.setPower(0);
-            }
+            }*/
 
-/*
             double denominator = Math.max(Math.abs(y) + Math.abs(x) + Math.abs(rx), 1);
             double frontLeftPower = (y + x + rx) / denominator;
             double backLeftPower = (y - x + rx) / denominator;
@@ -107,7 +108,7 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
             motorFL.setPower(frontLeftPower);
             motorBL.setPower(backLeftPower);
             motorFR.setPower(frontRightPower);
-            motorBR.setPower(backRightPower);*/
+            motorBR.setPower(backRightPower);
 
             telemetry.addData("LF Power:", motorFL.getPower());
             telemetry.addData("LB Power:", motorBL.getPower());

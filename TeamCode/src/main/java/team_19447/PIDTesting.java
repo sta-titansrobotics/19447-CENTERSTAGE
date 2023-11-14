@@ -85,9 +85,9 @@ public class PIDTesting extends LinearOpMode {
         // https://gm0.org/en/latest/docs/software/tutorials/mecanum-drive.html
 
         // Starting position with robot right side
-        PIDDrive(100, -100, -100, 100);
+        PIDDrive(100, 100, 100, 100);
 
-        PIDDrive(250, 250, 250, 250);
+     //   PIDDrive(250, 250, 250, 250);
 
         while (opModeIsActive()) {
             telemetry.addData("motorFL Encoder Position: ", motorFL.getCurrentPosition());
@@ -115,7 +115,6 @@ public class PIDTesting extends LinearOpMode {
         double derivative = (error - lastError) / timer.seconds();
 
         lastError = error;
-
         timer.reset();
 
         return (error * Kp) + (derivative * Kd) + (integralSum * Ki) + (setPosition * Kf);
