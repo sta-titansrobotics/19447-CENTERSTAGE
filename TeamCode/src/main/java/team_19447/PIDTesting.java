@@ -100,12 +100,6 @@ public class PIDTesting extends LinearOpMode {
 
     public void PIDDrive(int TargetPositionMotorFL, int TargetPositionMotorBL, int TargetPositionMotorFR,
                          int TargetPositionMotorBR) {
-        // Just use as a reference conversion:
-        double forwardTicks = 52.3;
-        double strafeTicks = 54.05;
-
-        int forwardTicks1 = (int) forwardTicks;
-        int strafeTicks1 = (int) strafeTicks;
 
         while (opModeIsActive()) {
             motorFL.setPower(PIDControl(TargetPositionMotorFL, motorFL.getCurrentPosition()));

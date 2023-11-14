@@ -12,11 +12,20 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
     @Override
     public void runOpMode() {
 
+
         //Moving
         DcMotor motorFL = hardwareMap.get(DcMotor.class, "motorFrontLeft");
         DcMotor motorBL = hardwareMap.get(DcMotor.class, "motorBackLeft");
         DcMotor motorFR = hardwareMap.get(DcMotor.class, "motorFrontRight");
         DcMotor motorBR = hardwareMap.get(DcMotor.class, "motorBackRight");
+
+        /*
+        DcMotor Intake = hardwareMap.get(DcMotor.class, "Intake");
+        DcMotor Sliders = hardwareMap.get(DcMotor.class, "Sliders");
+        DcMotor Climbing = hardwareMap.get(DcMotor.class, "Climbing");
+        Servo ClawDrop1 =  hardwareMap.get(Servo.class, "ClawDrop1");
+        Servo ClawDrop2 =  hardwareMap.get(Servo.class, "ClawDrop2");
+        Servo Wrist =  hardwareMap.get(Servo.class, "Wrist");*/
 
         //Reverse right side motors
         motorFL.setDirection(DcMotorSimple.Direction.REVERSE);

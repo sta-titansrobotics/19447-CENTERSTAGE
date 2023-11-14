@@ -12,8 +12,7 @@ public class autonomous_Encoder47 extends LinearOpMode {
     public static final double forwardTicks = 52.3;
     public static final double strafeTicks = 54.05;
     double default_power = 1;
-    private DcMotor LiftLeft, LiftRight;
-    private Servo Cam, verticalRack;
+
 
     @Override
     public void runOpMode() {
@@ -24,8 +23,13 @@ public class autonomous_Encoder47 extends LinearOpMode {
         DcMotor FrontRight = hardwareMap.get(DcMotor.class, "motorFrontRight");
         DcMotor RearRight = hardwareMap.get(DcMotor.class, "motorBackRight");
 
-        //verticalRack = hardwareMap.get(Servo.class, "verticalRack");
-        //Cam = hardwareMap.get(Servo.class, "Cam");
+        /*
+        DcMotor Intake = hardwareMap.get(DcMotor.class, "Intake");
+        DcMotor Sliders = hardwareMap.get(DcMotor.class, "Sliders");
+        DcMotor Climbing = hardwareMap.get(DcMotor.class, "Climbing");
+        Servo ClawDrop1 =  hardwareMap.get(Servo.class, "ClawDrop1");
+        Servo ClawDrop2 =  hardwareMap.get(Servo.class, "ClawDrop2");
+        Servo Wrist =  hardwareMap.get(Servo.class, "Wrist");*/
 
         //Reverse left side motors, as they start out reversed
         FrontLeft.setDirection(DcMotorSimple.Direction.REVERSE);

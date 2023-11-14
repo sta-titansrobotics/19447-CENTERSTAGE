@@ -20,16 +20,19 @@ public class Christmas_Promotions extends LinearOpMode {
 
         while (opModeIsActive()) {
             double rightJoystickY = gamepad1.right_stick_y;
+
+
             ClockRotation.setPower(rightJoystickY);
 
 
             if(gamepad1.a){
                 pressed+=1;
             }
+
             if(pressed%2==1){
-                Lights.setPower(1);
-            }else{
                 Lights.setPower(0);
+            }else{
+                Lights.setPower(1);
             }
         }
         telemetry.addData("Clock: ", ClockRotation.getPower());

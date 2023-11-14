@@ -17,11 +17,14 @@ public class teleOp_TankDrive47 extends LinearOpMode {
         DcMotor motorBL = hardwareMap.get(DcMotor.class, "motorBackLeft");
         DcMotor motorFR = hardwareMap.get(DcMotor.class, "motorFrontRight");
         DcMotor motorBR = hardwareMap.get(DcMotor.class, "motorBackRight");
-        DcMotor motorintake = hardwareMap.get(DcMotor.class, "motorsomthing");
-        DcMotor motorslider = hardwareMap.get(DcMotor.class, "motorslider");
-        DcMotor motorclimbing = hardwareMap.get(DcMotor.class, "motorclimbing");
+        /*
+         DcMotor Intake = hardwareMap.get(DcMotor.class, "Intake");
+        DcMotor Sliders = hardwareMap.get(DcMotor.class, "Sliders");
+        DcMotor Climbing = hardwareMap.get(DcMotor.class, "Climbing");
+        Servo ClawDrop1 =  hardwareMap.get(Servo.class, "ClawDrop1");
+        Servo ClawDrop2 =  hardwareMap.get(Servo.class, "ClawDrop2");
+        Servo Wrist =  hardwareMap.get(Servo.class, "Wrist");*/
 
-//jk\b
         //Reverse right side motors
         motorFL.setDirection(DcMotorSimple.Direction.REVERSE);
         motorBL.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -35,8 +38,8 @@ public class teleOp_TankDrive47 extends LinearOpMode {
         while (opModeIsActive()) {
 
             //Driving
-            double rightPower = -gamepad1.right_stick_y; // Remember, this is reversed!
-            double leftPower = -gamepad1.left_stick_y;
+            double leftPower = gamepad1.left_stick_y;
+            double rightPower = gamepad1.right_stick_y; // Remember, this is reversed
 
             motorFL.setPower(leftPower);
             motorBL.setPower(leftPower);
