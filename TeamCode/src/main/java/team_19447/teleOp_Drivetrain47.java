@@ -27,6 +27,50 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
         Servo ClawDrop2 =  hardwareMap.get(Servo.class, "ClawDrop2");
         Servo Wrist =  hardwareMap.get(Servo.class, "Wrist");*/
 
+        //intake
+
+        int buttonA=0;
+
+        if (gamepad1.a)
+            buttonA +=1;
+        if(buttonA%2==1){
+            //Intake.setPower(1);
+        }else{
+            //Intake.setpower(0);
+        }
+
+        int buttonX=0;
+
+        if (gamepad1.a)
+            buttonX +=1;
+        if(buttonX%2==1){
+            //Intake.setPower(1);
+        }else{
+            //Intake.setpower(0);
+        }
+
+        int buttonY=0;
+
+        if (gamepad1.a)
+            buttonY +=1;
+        if(buttonY%2==1){
+            //Intake.setPower(1);
+        }else{
+            //Intake.setpower(0);
+        }
+
+        //slider
+
+        int buttonB=0;
+
+        if (gamepad1.a)
+            buttonB +=1;
+        if(buttonB%2==1){
+            //Intake.setPower(1);
+        }else{
+            //Intake.setpower(0);
+        }
+
         //Reverse right side motors
         motorFL.setDirection(DcMotorSimple.Direction.REVERSE);
         motorBL.setDirection(DcMotorSimple.Direction.REVERSE);
