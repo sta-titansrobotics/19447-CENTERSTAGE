@@ -12,8 +12,6 @@ public class autonomous_Encoder47 extends LinearOpMode {
     public static final double forwardTicks = 52.3;
     public static final double strafeTicks = 54.05;
     double default_power = 1;
-
-
     @Override
     public void runOpMode() {
 
@@ -25,11 +23,12 @@ public class autonomous_Encoder47 extends LinearOpMode {
 
         /*
         DcMotor Intake = hardwareMap.get(DcMotor.class, "Intake");
-        DcMotor Sliders = hardwareMap.get(DcMotor.class, "Sliders");
+        Servo Sliders = hardwareMap.get(Servo.class, "Sliders");
         DcMotor Climbing = hardwareMap.get(DcMotor.class, "Climbing");
-        Servo ClawDrop1 =  hardwareMap.get(Servo.class, "ClawDrop1");
-        Servo ClawDrop2 =  hardwareMap.get(Servo.class, "ClawDrop2");
-        Servo Wrist =  hardwareMap.get(Servo.class, "Wrist");*/
+        Servo ClawDroppers1 =  hardwareMap.get(Servo.class, "ClawDrop1");
+        Servo ClawDroppers2 =  hardwareMap.get(Servo.class, "ClawDrop2");
+        Servo Wrist (thing that moves the board, attached to the sliders =  hardwareMap.get(Servo.class, "Wrist");
+        Servo AirplaneLauncher = hardwareMap.get(Servo.class, "Airplane Launcher");*/
 
         //Reverse left side motors, as they start out reversed
         FrontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -47,6 +46,8 @@ public class autonomous_Encoder47 extends LinearOpMode {
         robot.StrafeLeft(50);
 
         //drop the pixels
+
+        //move
         robot.Forward(40);
         robot.StrafeLeft(35);
 
