@@ -9,6 +9,10 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 @TeleOp
 public class teleOp_Drivetrain47 extends LinearOpMode {
 
+    int buttonA=0;
+    int buttonX=0;
+    int buttonY=0;
+    int buttonB=0;
     @Override
     public void runOpMode() {
 
@@ -30,8 +34,6 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
 
         //intake
 
-        int buttonA=0;
-
         if (gamepad1.a)
             buttonA +=1;
         if(buttonA%2==1){
@@ -40,7 +42,6 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
             //Intake.setpower(0);
         }
 
-        int buttonX=0;
 
         if (gamepad1.a)
             buttonX +=1;
@@ -50,7 +51,6 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
             //Intake.setpower(0);
         }
 
-        int buttonY=0;
 
         if (gamepad1.a)
             buttonY +=1;
@@ -61,8 +61,6 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
         }
 
         //slider
-
-        int buttonB=0;
 
         if (gamepad1.a)
             buttonB +=1;
