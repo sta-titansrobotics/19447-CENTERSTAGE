@@ -10,6 +10,8 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 public class teleOp_Drivetrain47 extends LinearOpMode {
 
     int buttonA=0;
+    int button2A =0;
+    int button2X =0;
     int buttonX=0;
     int buttonY=0;
     int buttonB=0;
@@ -42,7 +44,6 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
             //Intake.setpower(0);
         }
 
-
         if (gamepad1.a)
             buttonX +=1;
         if(buttonX%2==1){
@@ -50,7 +51,6 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
         }else{
             //Intake.setpower(0);
         }
-
 
         if (gamepad1.a)
             buttonY +=1;
@@ -69,6 +69,22 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
         }else{
             //Intake.setpower(0);
         }
+
+        //ClawDrop1
+        if (gamepad2.a)
+            button2A +=1;
+        if(button2A%2==1){
+            //ClawDrop1.setPower(1);
+        }else{
+            //ClawDrop1.setpower(0);
+
+        //ClawDrop2
+            if (gamepad2.a)
+                button2X +=1;
+            if(button2X%2==1){
+                //ClawDrop2.setpower(1);
+            }else{
+                //ClawDrop2.setpower(0);
 
         //Reverse right side motors
         motorFL.setDirection(DcMotorSimple.Direction.REVERSE);
