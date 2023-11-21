@@ -35,8 +35,8 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
         Servo AirplaneLauncher = hardwareMap.get(Servo.class, "Airplane Launcher");
         */
 
-        //intake
-        /*
+        /*intake
+
         if (gamepad1.a)
             buttonA +=1;
         if(buttonA%2==1){
@@ -57,18 +57,6 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
          */
 
         if (gamepad1.a)
-            buttonX +=1;
-        if(buttonX%2==1){
-            //Intake.setPower(1);
-        }else{
-            //Intake.setpower(0);
-        }
-
-        /*
-        if (gamepad1.y)
-
-         */
-        if (gamepad1.a)
             buttonY +=1;
         if(buttonY%2==1){
             //Intake.setPower(1);
@@ -81,17 +69,17 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
         if (gamepad2.a)
             button2A +=1;
         if(button2A%2==1){
-            //ClawDrop1.setPower(1);
+            //ClawDrop1.setPosition(1/4);
         }else{
-            //ClawDrop1.setpower(0);
+            //ClawDrop1.setPosition(0);
 
         //ClawDrop2
         if (gamepad2.a)
             button2X +=1;
         if(button2X%2==1){
-            //ClawDrop2.setpower(1);
+            //ClawDrop2.setPosition(1/4);
         }else{
-            //ClawDrop2.setpower(0);
+            //ClawDrop2.setPosition(0);
 
         //Reverse right side motors
         motorFL.setDirection(DcMotorSimple.Direction.REVERSE);
