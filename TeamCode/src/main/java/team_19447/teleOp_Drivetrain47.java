@@ -86,6 +86,10 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
             }else{
                 //ClawDrop2.setpower(0);
 
+                //ServoWrist
+
+                //AirplaneLauncher
+
         //Reverse right side motors
         motorFL.setDirection(DcMotorSimple.Direction.REVERSE);
         motorBL.setDirection(DcMotorSimple.Direction.REVERSE);
