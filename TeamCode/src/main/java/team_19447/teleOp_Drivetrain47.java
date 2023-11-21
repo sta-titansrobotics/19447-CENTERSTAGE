@@ -10,6 +10,8 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 public class teleOp_Drivetrain47 extends LinearOpMode {
 
     int buttonA=0;
+    int button2A =0;
+    int button2X =0;
     int buttonX=0;
     int buttonY=0;
     int buttonB=0;
@@ -30,50 +32,59 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
         Servo ClawDrop1 =  hardwareMap.get(Servo.class, "ClawDrop1");
         Servo ClawDrop2 =  hardwareMap.get(Servo.class, "ClawDrop2");
         Servo Wrist =  hardwareMap.get(Servo.class, "Wrist");
-        Servo AirplaneLauncher = hardwareMap.get(Servo.class, "Airplane Launcher");
-        */
+        Servo AirplaneLauncher = hardwareMap.get(Servo.class, "Airplane Launcher");*/
 
         //intake
-        /*
+
         if (gamepad1.a)
             buttonA +=1;
         if(buttonA%2==1){
-            Intake.setPower(1);
+            //Intake.setPower(1);
         }else{
-            Intake.setpower(0);
+            //Intake.setpower(0);
         }
-        */
 
-        //Climbing
-        //0.1 because stick drift
-        /*
-        if (gamepad2.right_stick_y > 0.1){
-            Climbing.setpower(gamepad2.right_stick_y);
-        } else if (gamepad2.right_stick_y < -0.1){
-            Climbing.setpower(-gamepad2.right_stick_y);
+        if (gamepad1.a)
+            buttonX +=1;
+        if(buttonX%2==1){
+            //Intake.setPower(1);
+        }else{
+            //Intake.setpower(0);
         }
-        */
 
-        /*
-        if (gamepad1.y)
+        if (gamepad1.a)
             buttonY +=1;
         if(buttonY%2==1){
             //Intake.setPower(1);
         }else{
             //Intake.setpower(0);
         }
-         */
 
         //slider
-        /*
-        if (gamepad1.b)
+
+        if (gamepad1.a)
             buttonB +=1;
         if(buttonB%2==1){
             //Intake.setPower(1);
         }else{
             //Intake.setpower(0);
         }
-        */
+
+        //ClawDrop1
+        if (gamepad2.a)
+            button2A +=1;
+        if(button2A%2==1){
+            //ClawDrop1.setPower(1);
+        }else{
+            //ClawDrop1.setpower(0);
+
+        //ClawDrop2
+            if (gamepad2.a)
+                button2X +=1;
+            if(button2X%2==1){
+                //ClawDrop2.setpower(1);
+            }else{
+                //ClawDrop2.setpower(0);
 
         //Reverse right side motors
         motorFL.setDirection(DcMotorSimple.Direction.REVERSE);
