@@ -46,11 +46,19 @@ public class teleOp_TankDrive47 extends LinearOpMode {
             motorFR.setPower(rightPower);
             motorBR.setPower(rightPower);
 
+            if(gamepad1.right_stick_x > 0.1||gamepad1.left_stick_x < -0.1){
+                motorFL.setPower(gamepad1.right_stick_x);
+                motorBL.setPower(-gamepad1.right_stick_x);
+                motorFR.setPower(-gamepad1.right_stick_x);
+                motorBR.setPower(gamepad1.right_stick_x);
+            }
+
             telemetry.addData("LF Power:", motorFL.getPower());
             telemetry.addData("LB Power:", motorBL.getPower());
             telemetry.addData("RF Power:", motorFR.getPower());
             telemetry.addData("RB Power:", motorBR.getPower());
             telemetry.update();
+
         }
     }
 }

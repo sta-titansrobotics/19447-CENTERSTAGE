@@ -1,10 +1,8 @@
-package team_19447;
+/*package team_19447;
 
 public class TensorFlowTesting {
 
-    /**
-     * Initialize the TensorFlow Object Detection processor.
-     */
+
     private void initTfod() {
 
         // Create the TensorFlow processor the easy way.
@@ -21,9 +19,7 @@ public class TensorFlowTesting {
 
     }   // end method initTfod()
 
-    /**
-     * Add telemetry about TensorFlow Object Detection (TFOD) recognitions.
-     */
+
     private void telemetryTfod() {
 
         List<Recognition> currentRecognitions = tfod.getRecognitions();
@@ -41,4 +37,4 @@ public class TensorFlowTesting {
         }   // end for() loop
 
     }   // end method telemetryTfod()
-}
+}*/

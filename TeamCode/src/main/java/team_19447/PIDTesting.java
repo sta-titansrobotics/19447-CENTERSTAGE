@@ -27,7 +27,7 @@ public class PIDTesting extends LinearOpMode {
     public static final int TARGET_DISTANCE_INCHES = 12; // Replace with your target distance
     public static final double RADIUS = 1.875;
 
-    /*
+    /* HOW TO ADJUST THE CONSTANT VALUES
      * Set all gains to 0.
      * Increase Kd until the system oscillates.
      * Reduce Kd by a factor of 2-4.
