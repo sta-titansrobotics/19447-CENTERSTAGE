@@ -105,6 +105,12 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
             //THIS IS THE TURNING VARIABLE
             double rx = gamepad1.right_stick_x;
 
+            //To prevent stick drift
+            if(Math.abs(y)<0.1)
+                y=0;
+            if(Math.abs(x)<0.1)
+                x=0;
+
             //Basic movements
             /*
             if(x>0&&y>0){
