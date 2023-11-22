@@ -8,9 +8,6 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
-//test
-
-//223423
 @TeleOp
 public class teleOp47LastYear extends LinearOpMode {
 
@@ -157,9 +154,7 @@ public class teleOp47LastYear extends LinearOpMode {
          /*   flipperMotorPower = gamepad1.touchpad_finger_1_y;
             flipperMotorPower = Range.clip(flipperMotorPower, -1, 1);
             rollerFlipper.setPower(flipperMotorPower);
-*/
-            //don't need | rollerFlipper2Power = gamepad1.right_stick_y;
-            //don't need | rollerFlipper2Power = Range.clip(rollerFlipper2Power, -1, 1)
+
 /*            Servo rollerFlipper2 = hardwareMap.get(Servo.class, "rollerFlipper 2");
             rollerFlipper2.setPosition(0);
             double rollerFlipper2Power;

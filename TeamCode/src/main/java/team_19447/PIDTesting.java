@@ -85,7 +85,7 @@ public class PIDTesting extends LinearOpMode {
         // https://gm0.org/en/latest/docs/software/tutorials/mecanum-drive.html
 
         // Starting position with robot right side
-        PIDDrive(100, 100, 100, 100);
+        Drive(100, 100, 100, 100);
 
      //   PIDDrive(250, 250, 250, 250);
 
@@ -98,17 +98,33 @@ public class PIDTesting extends LinearOpMode {
         }
     }
 
-    public void PIDDrive(int TargetPositionMotorFL, int TargetPositionMotorBL, int TargetPositionMotorFR,
+    public void Drive(int TargetPositionMotorFL, int TargetPositionMotorBL, int TargetPositionMotorFR,
                          int TargetPositionMotorBR) {
 
-        while (opModeIsActive()) {
-            motorFL.setPower(PIDControl(TargetPositionMotorFL, motorFL.getCurrentPosition()));
-            motorBL.setPower(PIDControl(TargetPositionMotorBL, motorBL.getCurrentPosition()));
-            motorFR.setPower(PIDControl(TargetPositionMotorFR, motorFR.getCurrentPosition()));
-            motorBR.setPower(PIDControl(TargetPositionMotorBR, motorBR.getCurrentPosition()));
-        }
+        // this is in terms of cm
+       TargetPositionMotorFL  = (int) (TICKS_PER_REVOLUTION * TargetPositionMotorFL / (29.92));
+        TargetPositionMotorBL  = (int) (TICKS_PER_REVOLUTION * TargetPositionMotorBL / (29.92));
+        TargetPositionMotorFR  = (int) (TICKS_PER_REVOLUTION * TargetPositionMotorFR / (29.92));
+        TargetPositionMotorBR = (int) (TICKS_PER_REVOLUTION * TargetPositionMotorBR / (29.92));
+
+        motorFL.setTargetPosition(TargetPositionMotorFL);
+        motorFR.setTargetPosition(TargetPositionMotorFR);
+        motorBL.setTargetPosition(TargetPositionMotorBL);
+        motorBR.setTargetPosition(TargetPositionMotorBR);
+
+        motorFL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        motorFR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        motorBL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        motorBR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        motorFL.setPower(PIDControl(TargetPositionMotorFL, motorFL.getCurrentPosition()));
+        motorBL.setPower(PIDControl(TargetPositionMotorBL, motorBL.getCurrentPosition()));
+        motorFR.setPower(PIDControl(TargetPositionMotorFR, motorFR.getCurrentPosition()));
+        motorBR.setPower(PIDControl(TargetPositionMotorBR, motorBR.getCurrentPosition()));
+
     }
 
+    //calculates the power which the motor should be set at.
     public double PIDControl(double setPosition, double currentPosition) {
         double error = setPosition - currentPosition;
         integralSum += error * timer.seconds();
