@@ -73,16 +73,18 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
             button2A +=1;
         if(button2A%2==1){
             //ClawDrop1.setPower(1);
-        }else{
+        }else {
             //ClawDrop1.setpower(0);
+        }
 
         //ClawDrop2
-        if (gamepad2.a)
+        if (gamepad2.x)
             button2X +=1;
         if(button2X%2==1){
             //ClawDrop2.setpower(1);
-        }else{
+        }else {
             //ClawDrop2.setpower(0);
+        }
 
         //Reverse right side motors
         motorFL.setDirection(DcMotorSimple.Direction.REVERSE);
