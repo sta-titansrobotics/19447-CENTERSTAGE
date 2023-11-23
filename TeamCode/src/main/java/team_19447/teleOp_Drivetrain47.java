@@ -36,7 +36,7 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
 
         Servo DroperTop =  hardwareMap.get(Servo.class, "ClawDrop1"); --> Done
         Servo DroperBottom =  hardwareMap.get(Servo.class, "ClawDrop2"); --> Done
-        Servo Wrist =  hardwareMap.get(Servo.class, "Wrist"); --> No idea
+        Servo Wrist =  hardwareMap.get(Servo.class, "Wrist"); --> the thing that rotates the dropper
         Servo AirplaneLauncher = hardwareMap.get(Servo.class, "Airplane Launcher"); --> Still have to work on
 
         Climbing1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -52,6 +52,9 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
         }else {
             //Intake.setpower(0);
         }
+        //wrist
+        //the strange calculations are because we need to convert (-1 - 1) into (0 - 1)
+        //Wrist.setPosition((gamepad2.left_stick_y*0.5)+0.5);
 
         //Intake
         /*
