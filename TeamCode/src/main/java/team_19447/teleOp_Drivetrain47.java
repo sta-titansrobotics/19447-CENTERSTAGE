@@ -111,8 +111,7 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
             if(Math.abs(x)<0.1)
                 x=0;
 
-            //Basic movements
-            /*
+            //Basic movement
             if(x>0&&y>0){
                 //Moving forward-right (diagonally)
                 motorFL.setPower(1);
@@ -159,7 +158,7 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
                 motorBL.setPower(0);
                 motorFR.setPower(0);
                 motorBR.setPower(0);
-            }*/
+            }
 
             double denominator = Math.max(Math.abs(y) + Math.abs(x) + Math.abs(rx), 1);
             double frontLeftPower = (y + x + rx) / denominator;
