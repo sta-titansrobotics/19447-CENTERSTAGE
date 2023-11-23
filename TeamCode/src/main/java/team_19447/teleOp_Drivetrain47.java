@@ -73,7 +73,7 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
         //dropper
         //drops the bottom slot then waits until button is not pressed
         //when button is not pressed load the top slot into the bottom slot
-        /*
+        /*f
         if (gamepad2.b){
             DropperBottom.setPosition(0.5);
             dropping = true;
