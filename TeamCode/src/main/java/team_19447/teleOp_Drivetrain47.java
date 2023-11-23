@@ -29,22 +29,22 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
         DcMotor motorBR = hardwareMap.get(DcMotor.class, "motorBackRight");
 
         /*
-        DcMotor Intake = hardwareMap.get(DcMotor.class, "Intake");
-        DcMotor Sliders = hardwareMap.get(DcMotor.class, "Sliders");
-        DcMotor Climbing1 = hardwareMap.get(DcMotor.class, "Climbing1"); for the robot to hang
-        DcMotor Climbing2 = hardwareMap.get(DcMotor.class, "Climbing2"); for the robot to hang
+        DcMotor Intake = hardwareMap.get(DcMotor.class, "Intake");   --> Done
+        DcMotor Sliders = hardwareMap.get(DcMotor.class, "Sliders"); --> Done
+        DcMotor Climbing1 = hardwareMap.get(DcMotor.class, "Climbing1"); for the robot to hang --> Done
+        DcMotor Climbing2 = hardwareMap.get(DcMotor.class, "Climbing2"); for the robot to hang --> Done
 
-        Servo DroperTop =  hardwareMap.get(Servo.class, "ClawDrop1");
-        Servo DroperBottom =  hardwareMap.get(Servo.class, "ClawDrop2");
-        Servo Wrist =  hardwareMap.get(Servo.class, "Wrist");
-        Servo AirplaneLauncher = hardwareMap.get(Servo.class, "Airplane Launcher");
+        Servo DroperTop =  hardwareMap.get(Servo.class, "ClawDrop1"); --> Done
+        Servo DroperBottom =  hardwareMap.get(Servo.class, "ClawDrop2"); --> Done
+        Servo Wrist =  hardwareMap.get(Servo.class, "Wrist"); --> No idea
+        Servo AirplaneLauncher = hardwareMap.get(Servo.class, "Airplane Launcher"); --> Still have to work on
 
-          Climbing1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-         Climbing2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        Climbing1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        Climbing2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         */
         boolean dropping = false;
 
-        //toggle template
+        //toggle template, note: its just template, delete after
         if (gamepad1.a)
             buttonA +=1;
         if(buttonX%2==1){
@@ -53,7 +53,7 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
             //Intake.setpower(0);
         }
 
-        //intake
+        //Intake
         /*
         if (gamepad1.a)
             buttonA +=1;
@@ -81,7 +81,8 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
         //dropper
         //drops the bottom slot then waits until button is not pressed
         //when button is not pressed load the top slot into the bottom slot
-        /*f
+
+        /*
         if (gamepad2.b){
             DropperBottom.setPosition(0.5);
             dropping = true;
@@ -91,8 +92,8 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
             DropperTop.setPosition(0.5);
             DropperTop.setPosition(0);
             dropping = false;
-        }
-        */
+        }*/
+
 
         //Reverse right side motors
         motorFL.setDirection(DcMotorSimple.Direction.REVERSE);
