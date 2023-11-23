@@ -27,7 +27,8 @@ public class PIDTesting extends LinearOpMode {
     public static final int TARGET_DISTANCE_INCHES = 12; // Replace with your target distance
     public static final double RADIUS = 1.875;
 
-    /* HOW TO ADJUST THE CONSTANT VALUES
+    /*
+     * HOW TO ADJUST THE CONSTANT VALUES
      * Set all gains to 0.
      * Increase Kd until the system oscillates.
      * Reduce Kd by a factor of 2-4.
@@ -37,7 +38,8 @@ public class PIDTesting extends LinearOpMode {
      * Set Ki to about 1% of Kp.
      * Increase Ki until oscillations start.
      * Decrease Ki by a factor of 2-4.
-     */ double integralSum = 0;
+     */
+    double integralSum = 0;
     double Kp = 0.13;
     double Ki = 0;
     double Kd = 0.0001;
@@ -52,7 +54,7 @@ public class PIDTesting extends LinearOpMode {
         // Initialize motors
         motorFL = hardwareMap.get(DcMotor.class, "motorFrontLeft");
         motorBL = hardwareMap.get(DcMotor.class, "motorBackLeft");
-        motorFR = hardwareMap.get(DcMotor.class, "motorFrontRight");
+        motorFR = hardwareMap.get(DcMotor.class, "motorFrontLeft");
         motorBR = hardwareMap.get(DcMotor.class, "motorBackRight");
 
         // set mode to stop and reset encoders -- resets encoders to the 0 position
@@ -87,7 +89,7 @@ public class PIDTesting extends LinearOpMode {
         // Starting position with robot right side
         Drive(100, 100, 100, 100);
 
-     //   PIDDrive(250, 250, 250, 250);
+        // PIDDrive(250, 250, 250, 250);
 
         while (opModeIsActive()) {
             telemetry.addData("motorFL Encoder Position: ", motorFL.getCurrentPosition());
@@ -99,12 +101,12 @@ public class PIDTesting extends LinearOpMode {
     }
 
     public void Drive(int TargetPositionMotorFL, int TargetPositionMotorBL, int TargetPositionMotorFR,
-                         int TargetPositionMotorBR) {
+                      int TargetPositionMotorBR) {
 
         // this is in terms of cm
-       TargetPositionMotorFL  = (int) (TICKS_PER_REVOLUTION * TargetPositionMotorFL / (29.92));
-        TargetPositionMotorBL  = (int) (TICKS_PER_REVOLUTION * TargetPositionMotorBL / (29.92));
-        TargetPositionMotorFR  = (int) (TICKS_PER_REVOLUTION * TargetPositionMotorFR / (29.92));
+        TargetPositionMotorFL = (int) (TICKS_PER_REVOLUTION * TargetPositionMotorFL / (29.92));
+        TargetPositionMotorBL = (int) (TICKS_PER_REVOLUTION * TargetPositionMotorBL / (29.92));
+        TargetPositionMotorFR = (int) (TICKS_PER_REVOLUTION * TargetPositionMotorFR / (29.92));
         TargetPositionMotorBR = (int) (TICKS_PER_REVOLUTION * TargetPositionMotorBR / (29.92));
 
         motorFL.setTargetPosition(TargetPositionMotorFL);
@@ -122,9 +124,24 @@ public class PIDTesting extends LinearOpMode {
         motorFR.setPower(PIDControl(TargetPositionMotorFR, motorFR.getCurrentPosition()));
         motorBR.setPower(PIDControl(TargetPositionMotorBR, motorBR.getCurrentPosition()));
 
+        // Run to target position
+        motorFL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motorFR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motorBL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motorBR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        // Wait until all motors reach the target position
+        while (opModeIsActive() && motorFL.isBusy() && motorFR.isBusy() && motorBL.isBusy() && motorBR.isBusy()) {
+        }
+
+        motorFL.setPower(0);
+        motorFR.setPower(0);
+        motorBL.setPower(0);
+        motorBR.setPower(0);
+
     }
 
-    //calculates the power which the motor should be set at.
+    // calculates the power which the motor should be set at.
     public double PIDControl(double setPosition, double currentPosition) {
         double error = setPosition - currentPosition;
         integralSum += error * timer.seconds();
@@ -163,41 +180,20 @@ public class PIDTesting extends LinearOpMode {
  * int convertedDistance = (int) distance;
  *
  * // Reset encoders
- * motorFrontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
- * motorFrontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
- * motorBackLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
- * motorBackRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+ * motorFL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+ * motorFR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+ * motorBL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+ * motorBR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
  *
  * // Set the target position for all motors
- * motorFrontLeft.setTargetPosition(-convertedDistance);
- * motorFrontRight.setTargetPosition(convertedDistance);
- * motorBackLeft.setTargetPosition(-convertedDistance);
- * motorBackRight.setTargetPosition(convertedDistance);
+ * motorFL.setTargetPosition(-convertedDistance);
+ * motorFR.setTargetPosition(convertedDistance);
+ * motorBL.setTargetPosition(-convertedDistance);
+ * motorBR.setTargetPosition(convertedDistance);
  *
  * // Run to target position
- * motorFrontLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
- * motorFrontRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
- * motorBackLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
- * motorBackRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
- *
- * motorFrontLeft.setPower(PID(convertedDistance,
- * motorFrontLeft.getCurrentPosition()));
- * motorFrontRight.setPower(PID(convertedDistance,
- * motorFrontRight.getCurrentPosition()));
- * motorBackLeft.setPower(PID(convertedDistance,
- * motorBackLeft.getCurrentPosition()));
- * motorBackRight.setPower(PID(convertedDistance,
- * motorBackLeft.getCurrentPosition()));
- *
- * // Wait until all motors reach the target position
- * while (
- * motorFrontLeft.isBusy() &&
- * motorFrontRight.isBusy() &&
- * motorBackLeft.isBusy() &&
- * motorBackRight.isBusy()) {
- * // You can add other actions or checks here
- * // For example, use sensors to detect obstacles or perform other tasks
- * }
- *
- * }
+ * motorFL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+ * motorFR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+ * motorBL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+ * motorBR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
  */
