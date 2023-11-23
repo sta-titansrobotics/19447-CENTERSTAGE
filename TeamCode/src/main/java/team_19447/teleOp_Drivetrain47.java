@@ -47,26 +47,37 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
             //Intake.setpower(0);
         }
 
-        //intake
+        //Intake: Gamepad1 but ton A controls whether its on or off, the on power is capped at 0.2 to prevent jamming
         /*
-        if (gamepad1.a)
+        if (gamepad.a)
             buttonA +=1;
         if(buttonA%2==1){
-            Intake.setPower(1);
+            Intake.setPower(0.2);
         }else{
             Intake.setpower(0);
         }
         */
 
-        //Climbing
+        //Sliders: Gamepad2 rightstick Y coordinate determines motor power, it is divded by 2 so the motor doesn't run too fast
         //0.1 because stick drift
+
         /*
         if (gamepad2.right_stick_y > 0.1){
-            Climbing.setpower(gamepad2.right_stick_y);
+            Climbing.setpower(gamepad2.right_stick_y/2);
         } else if (gamepad2.right_stick_y < -0.1){
-            Climbing.setpower(-gamepad2.right_stick_y);
-
+            Climbing.setpower(-gamepad2.right_stick_y/2);
          */
+
+        //Climbing: if gamepad2 X is pressed, the climbing motors will go at full power and push the linear actuators up to a certain positiion
+        // If the button X is pressed again, then the
+        if (gamepad2.x)
+            button2X +=1;
+        if(buttonX%2==1){
+            //Intake.setPower(1);
+        }else {
+            //Intake.setpower(0);
+        }
+
 
         //ClawDrop1
         if (gamepad2.a)
