@@ -29,13 +29,17 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
         DcMotor motorBR = hardwareMap.get(DcMotor.class, "motorBackRight");
 
         /*
-        DcMotor Intake = hardwareMap.get(DcMotor.class, "Intake");
-        DcMotor Sliders = hardwareMap.get(DcMotor.class, "Sliders");
-        DcMotor Climbing = hardwareMap.get(DcMotor.class, "Climbing");
+        DcMotor Intake = hardwareMap.get(DcMotor.class, "Intake");  for the intake
+        DcMotor Sliders = hardwareMap.get(DcMotor.class, "Sliders");  for the sliders
+        DcMotor Climbing1 = hardwareMap.get(DcMotor.class, "Climbing1"); for the robot to hang
+        DcMotor Climbing2 = hardwareMap.get(DcMotor.class, "Climbing2"); for the robot to hang
         Servo ClawDrop1 =  hardwareMap.get(Servo.class, "ClawDrop1");
         Servo ClawDrop2 =  hardwareMap.get(Servo.class, "ClawDrop2");
         Servo Wrist =  hardwareMap.get(Servo.class, "Wrist");
-        Servo AirplaneLauncher = hardwareMap.get(Servo.class, "Airplane Launcher");
+        Servo AirplaneLauncher = hardwareMap.get(Servo.class, "Airplane Launcher"); to launch airplane
+
+         Climbing1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+         Climbing2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         */
 
         //toggle template
@@ -69,13 +73,17 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
          */
 
         //Climbing: if gamepad2 X is pressed, the climbing motors will go at full power and push the linear actuators up to a certain positiion
-        // If the button X is pressed again, then the
+        // If the button X is pressed again, then the actuators will descend to [some certain point in terms of encoder reading] at full power and hang the robot
         if (gamepad2.x)
             button2X +=1;
+
+        //Note: the encoder values are placeholders
         if(buttonX%2==1){
-            //Intake.setPower(1);
+           // Climbing1.setTargetPosition(5000);
+            //Climbing2.setTargetPosition(5000);
         }else {
-            //Intake.setpower(0);
+            //Climbing1.setTargetPosition(2000);
+            //Climbing2.setTargetPosition(2000);
         }
 
 
