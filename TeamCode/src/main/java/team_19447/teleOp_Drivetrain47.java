@@ -34,10 +34,10 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
         DcMotor Climbing1 = hardwareMap.get(DcMotor.class, "Climbing1"); for the robot to hang --> Done
         DcMotor Climbing2 = hardwareMap.get(DcMotor.class, "Climbing2"); for the robot to hang --> Done
 
-        Servo DroperTop =  hardwareMap.get(Servo.class, "ClawDrop1"); --> Done
-        Servo DroperBottom =  hardwareMap.get(Servo.class, "ClawDrop2"); --> Done
+        Servo DropperTop =  hardwareMap.get(Servo.class, "DropperTop"); --> Done
+        Servo DropperBottom =  hardwareMap.get(Servo.class, "DropperBottom"); --> Done
         Servo Wrist =  hardwareMap.get(Servo.class, "Wrist"); --> the thing that rotates the dropper
-        Servo AirplaneLauncher = hardwareMap.get(Servo.class, "Airplane Launcher"); --> Still have to work on
+        Servo AirplaneLauncher = hardwareMap.get(Servo.class, "AirplaneLauncher"); --> Still have to work on
 
         Climbing1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         Climbing2.setMode(DcMotor.RunMode.RUN_TO_POSITION);

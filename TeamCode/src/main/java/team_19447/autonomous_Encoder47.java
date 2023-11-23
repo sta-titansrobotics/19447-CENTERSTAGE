@@ -86,28 +86,9 @@ public class autonomous_Encoder47 extends LinearOpMode {
         ((DcMotorEx) LiftRight).setTargetPositionTolerance(Tolerance);
         while (LiftLeft.isBusy() && LiftRight.isBusy() && NextSequence) {
         }
-    }
+    }*/
 
 
-    public void raiseRack() {
-        verticalRack.setPosition(0);
 
-    }
 
-    public void pickupCone() {
-        verticalRack.setPosition(1);
-        sleep(2000);
-        Cam.setPosition(0.25); //turn 45 deg to pick it up
-        sleep(1000);
-        verticalRack.setPosition(0);
-        sleep(1000);
-    }
-
-    public void dropCone() {
-        Cam.setPosition(-0.25); //revert and turn back the 45 deg to drop it.
-
-    public void rack(double position) {
-        verticalRack.setPosition(position);
-    }
-     */
-}
+   }

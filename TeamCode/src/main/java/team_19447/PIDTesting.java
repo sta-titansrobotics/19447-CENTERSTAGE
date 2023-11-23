@@ -80,6 +80,7 @@ public class PIDTesting extends LinearOpMode {
 
         // any code after this command will not be executed until the match has started
         waitForStart();
+        timer.reset();
 
         // can now set drive distance because of the function below; now we just need to
         // input the distance
