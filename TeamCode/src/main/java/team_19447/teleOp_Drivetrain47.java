@@ -31,11 +31,16 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
         /*
         DcMotor Intake = hardwareMap.get(DcMotor.class, "Intake");
         DcMotor Sliders = hardwareMap.get(DcMotor.class, "Sliders");
-        DcMotor Climbing = hardwareMap.get(DcMotor.class, "Climbing");
+        DcMotor Climbing1 = hardwareMap.get(DcMotor.class, "Climbing1"); for the robot to hang
+        DcMotor Climbing2 = hardwareMap.get(DcMotor.class, "Climbing2"); for the robot to hang
+
         Servo DroperTop =  hardwareMap.get(Servo.class, "ClawDrop1");
         Servo DroperBottom =  hardwareMap.get(Servo.class, "ClawDrop2");
         Servo Wrist =  hardwareMap.get(Servo.class, "Wrist");
         Servo AirplaneLauncher = hardwareMap.get(Servo.class, "Airplane Launcher");
+
+          Climbing1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+         Climbing2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         */
         boolean dropping = false;
 
@@ -59,16 +64,19 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
         }
         */
 
-        //Climbing
-        //0.1 because stick drift or something
-        /*
-        if (gamepad2.right_stick_y > 0.1){
-            Climbing.setpower(gamepad2.right_stick_y);
-        } else if (gamepad2.right_stick_y < -0.1){
-            Climbing.setpower(-gamepad2.right_stick_y);
-         */
+        //Climbing: if gamepad2 X is pressed, the climbing motors will go at full power and push the linear actuators up to a certain positiion
+        // If the button X is pressed again, then the actuators will descend to [some certain point in terms of encoder reading] at full power and hang the robot
+        if (gamepad2.x)
+            button2X +=1;
 
-        //
+        //Note: the encoder values are placeholders
+        if(buttonX%2==1){
+            // Climbing1.setTargetPosition(5000);
+            //Climbing2.setTargetPosition(5000);
+        }else {
+            //Climbing1.setTargetPosition(2000);
+            //Climbing2.setTargetPosition(2000);
+        }
 
         //dropper
         //drops the bottom slot then waits until button is not pressed
