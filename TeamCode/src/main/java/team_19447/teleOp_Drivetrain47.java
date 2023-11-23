@@ -32,11 +32,12 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
         DcMotor Intake = hardwareMap.get(DcMotor.class, "Intake");
         DcMotor Sliders = hardwareMap.get(DcMotor.class, "Sliders");
         DcMotor Climbing = hardwareMap.get(DcMotor.class, "Climbing");
-        Servo ClawDrop1 =  hardwareMap.get(Servo.class, "ClawDrop1");
-        Servo ClawDrop2 =  hardwareMap.get(Servo.class, "ClawDrop2");
+        Servo DroperTop =  hardwareMap.get(Servo.class, "ClawDrop1");
+        Servo DroperBottom =  hardwareMap.get(Servo.class, "ClawDrop2");
         Servo Wrist =  hardwareMap.get(Servo.class, "Wrist");
         Servo AirplaneLauncher = hardwareMap.get(Servo.class, "Airplane Launcher");
         */
+        boolean dropping = false;
 
         //toggle template
         if (gamepad1.a)
@@ -59,30 +60,31 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
         */
 
         //Climbing
-        //0.1 because stick drift
+        //0.1 because stick drift or something
         /*
         if (gamepad2.right_stick_y > 0.1){
             Climbing.setpower(gamepad2.right_stick_y);
         } else if (gamepad2.right_stick_y < -0.1){
             Climbing.setpower(-gamepad2.right_stick_y);
-
          */
 
-        //ClawDrop1
-        if (gamepad2.a)
-            button2A +=1;
-        if(button2A%2==1){
-            //ClawDrop1.setPower(1);
-        }else{
-            //ClawDrop1.setpower(0);
+        //
 
-        //ClawDrop2
-        if (gamepad2.a)
-            button2X +=1;
-        if(button2X%2==1){
-            //ClawDrop2.setpower(1);
-        }else{
-            //ClawDrop2.setpower(0);
+        //dropper
+        //drops the bottom slot then waits until button is not pressed
+        //when button is not pressed load the top slot into the bottom slot
+        /*
+        if (gamepad2.b){
+            DropperBottom.setPosition(0.5);
+            dropping = true;
+        }
+        if (!gamepad2.b && dropping) {
+            DropperBottom.setPosition(0);
+            DropperTop.setPosition(0.5);
+            DropperTop.setPosition(0);
+            dropping = false;
+        }
+        */
 
         //Reverse right side motors
         motorFL.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -178,4 +180,4 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
             telemetry.update();
         }
     }
-}}}
+}
