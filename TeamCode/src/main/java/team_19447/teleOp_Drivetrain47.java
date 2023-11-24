@@ -18,6 +18,11 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
     int button2X =0;
     int button2B =0;
     int button2Y =0;
+
+    boolean dropping = false;
+    //change -6 to how long it takes for the servo to change -1
+    //- number to prevent the later if statement from being executed at the start
+    int prevtime = -6;
     @Override
     public void runOpMode() {
 
@@ -29,7 +34,7 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
         DcMotor motorBR = hardwareMap.get(DcMotor.class, "motorBackRight");
 
         /*
-        DcMotor Intake = hardwareMap.get(DcMotor.class, "Intake");   --> Done
+        DcMotor Intake = hardwareMap.get(DcMotor.class, "Intake"); --> Done
         DcMotor Sliders = hardwareMap.get(DcMotor.class, "Sliders"); --> Done
         DcMotor Climbing1 = hardwareMap.get(DcMotor.class, "Climbing1"); for the robot to hang --> Done
         DcMotor Climbing2 = hardwareMap.get(DcMotor.class, "Climbing2"); for the robot to hang --> Done
@@ -42,7 +47,6 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
         Climbing1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         Climbing2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         */
-        boolean dropping = false;
 
         //toggle template, note: its just template, delete after
         if (gamepad1.a)
@@ -92,11 +96,16 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
         }
         if (!gamepad2.b && dropping) {
             DropperBottom.setPosition(0);
+            prevtime = getRuntime();
             DropperTop.setPosition(0.5);
-            DropperTop.setPosition(0);
             dropping = false;
-        }*/
+        }
+        //change 5 to however long it takes for the servo to move into place
+        if (getRuntime() - prevtime == 5){
+            DropperTop.setPosition(0);
+        }
 
+        */
 
         //Reverse right side motors
         motorFL.setDirection(DcMotorSimple.Direction.REVERSE);
