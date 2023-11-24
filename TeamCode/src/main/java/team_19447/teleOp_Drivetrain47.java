@@ -78,7 +78,7 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
 
         //Note: the encoder values are placeholders
         if(buttonX%2==1){
-            // Climbing1.setTargetPosition(5000);
+            //Climbing1.setTargetPosition(5000);
             //Climbing2.setTargetPosition(5000);
         }else {
             //Climbing1.setTargetPosition(2000);
@@ -104,7 +104,6 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
         if (getRuntime() - prevtime == 5){
             DropperTop.setPosition(0);
         }
-
         */
 
         //Reverse right side motors
