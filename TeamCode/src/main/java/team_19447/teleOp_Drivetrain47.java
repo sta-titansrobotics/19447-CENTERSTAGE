@@ -86,8 +86,8 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
 
             //AirplaneLauncher
             if (gamepad2.x)
-                button2X +=1;
-            if(button2X%2==1)
+                button2Y +=1;
+            if(button2Y%2==1)
         }else{
             //AirplaneLauncher.setpower(0);
 
