@@ -56,6 +56,7 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
         }else {
             //Intake.setpower(0);
         }
+
         //wrist
         //the strange calculations are because we need to convert (-1 - 1) into (0 - 1)
         //Wrist.setPosition((gamepad2.left_stick_y*0.5)+0.5);
@@ -101,7 +102,7 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
             dropping = false;
         }
         //change 5 to however long it takes for the servo to move into place
-        if (getRuntime() - prevtime == 5){
+        if (getRuntime() - prevtime == 2000){
             DropperTop.setPosition(0);
         }
         */
