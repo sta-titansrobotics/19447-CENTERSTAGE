@@ -114,8 +114,10 @@ public class AnotherDriveTrain47 extends LinearOpMode {
 
         if (isStopRequested()) return;
 
+        //First link is game manual zero, second link is FTC java syntax documentation
         //https://gm0.org/en/latest/docs/software/tutorials/mecanum-drive.html
         //ftc documentation https://ftctechnh.github.io/ftc_app/doc/javadoc/com/qualcomm/robotcore/hardware/Gamepad.html
+
         while (opModeIsActive()) {
 
             //Driving
