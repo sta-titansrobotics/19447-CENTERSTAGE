@@ -40,7 +40,7 @@ public class PIDTesting extends LinearOpMode {
      * Decrease Ki by a factor of 2-4.
      */
     double integralSum = 0;
-    double Kp = 0.12;
+    double Kp = 0.1;
     double Ki = 0;
     double Kd = 0.01;
     double Kf = 0.2;
@@ -98,7 +98,7 @@ public class PIDTesting extends LinearOpMode {
         // https://gm0.org/en/latest/docs/software/tutorials/mecanum-drive.html
 
         // Starting position with robot right side
-        Drive(100, 100, 100, 100);
+        Drive(50, 50, 50, 50);
 
         // PIDDrive(250, 250, 250, 250);
 

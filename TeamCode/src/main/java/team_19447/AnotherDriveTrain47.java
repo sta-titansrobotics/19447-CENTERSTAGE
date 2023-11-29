@@ -134,6 +134,7 @@ public class AnotherDriveTrain47 extends LinearOpMode {
                 x=0;
 
             double denominator = Math.max(Math.abs(y) + Math.abs(x) + Math.abs(rx), 1);
+            denominator *= 1.2; //complaints of motors being too sensitive so turning down the speed.
             double frontLeftPower = (y + x + rx) / denominator;
             double backLeftPower = (y - x + rx) / denominator;
             double frontRightPower = (y - x - rx) / denominator;
