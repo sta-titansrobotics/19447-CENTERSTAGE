@@ -22,27 +22,27 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
     boolean dropping = false;
     //change -6 to how long it takes for the servo to change -1
     //- number to prevent the later if statement from being executed at the start
-    int prevtime = -6;
+    int prevtime = -2001;
     @Override
     public void runOpMode() {
 
 
         //Moving
-        DcMotor motorFL = hardwareMap.get(DcMotor.class, "motorFrontLeft");
-        DcMotor motorBL = hardwareMap.get(DcMotor.class, "motorBackLeft");
-        DcMotor motorFR = hardwareMap.get(DcMotor.class, "motorFrontRight");
-        DcMotor motorBR = hardwareMap.get(DcMotor.class, "motorBackRight");
+        DcMotor motorFL = hardwareMap.get(DcMotor.class, "motorFrontLeft"); // Port:1 1st
+        DcMotor motorBL = hardwareMap.get(DcMotor.class, "motorBackLeft"); // Port:2 1st
+        DcMotor motorFR = hardwareMap.get(DcMotor.class, "motorFrontRight"); // Port:2 2nd
+        DcMotor motorBR = hardwareMap.get(DcMotor.class, "motorBackRight"); // Port:1 2nd
 
         /*
-        DcMotor Intake = hardwareMap.get(DcMotor.class, "Intake"); --> Done
-        DcMotor Sliders = hardwareMap.get(DcMotor.class, "Sliders"); --> Done
-        DcMotor Climbing1 = hardwareMap.get(DcMotor.class, "Climbing1"); for the robot to hang --> Done
-        DcMotor Climbing2 = hardwareMap.get(DcMotor.class, "Climbing2"); for the robot to hang --> Done
+        DcMotor Intake = hardwareMap.get(DcMotor.class, "Intake"); // --> Done // Port:
+        DcMotor Sliders = hardwareMap.get(DcMotor.class, "Sliders"); // --> Done // Port:
+        DcMotor Climbing1 = hardwareMap.get(DcMotor.class, "Climbing1"); // for the robot to hang --> Done Port:
+        DcMotor Climbing2 = hardwareMap.get(DcMotor.class, "Climbing2"); // for the robot to hang --> Done Port:
 
-        Servo DropperTop =  hardwareMap.get(Servo.class, "DropperTop"); --> Done   //Servo Port 0
-        Servo DropperBottom =  hardwareMap.get(Servo.class, "DropperBottom"); --> Done //Servo Port 1
-        Servo Wrist =  hardwareMap.get(Servo.class, "Wrist"); --> the thing that rotates the dropper //Servo Port 2
-        Servo AirplaneLauncher = hardwareMap.get(Servo.class, "AirplaneLauncher"); --> Still have to work on //Servo Port 3
+        Servo DropperTop =  hardwareMap.get(Servo.class, "DropperTop"); // --> Done Servo Port 0
+        Servo DropperBottom =  hardwareMap.get(Servo.class, "DropperBottom"); // --> Done Servo Port 1
+        Servo Wrist =  hardwareMap.get(Servo.class, "Wrist"); \\ --> the thing that rotates the dropper Servo Port 2
+        Servo AirplaneLauncher = hardwareMap.get(Servo.class, "AirplaneLauncher"); \\ --> Still have to work on //Servo Port 3
 
         Climbing1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         Climbing2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -56,6 +56,7 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
         }else {
             //Intake.setpower(0);
         }
+
         //wrist
         //the strange calculations are because we need to convert (-1 - 1) into (0 - 1)
         //Wrist.setPosition((gamepad2.left_stick_y*0.5)+0.5);
@@ -101,7 +102,7 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
             dropping = false;
         }
         //change 5 to however long it takes for the servo to move into place
-        if (getRuntime() - prevtime == 5){
+        if (getRuntime() - prevtime == 2000){
             DropperTop.setPosition(0);
         }
         */
