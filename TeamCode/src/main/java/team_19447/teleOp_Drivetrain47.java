@@ -18,27 +18,37 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
     int button2X =0;
     int button2B =0;
     int button2Y =0;
+
+    boolean dropping = false;
+    //change -6 to how long it takes for the servo to change -1
+    //- number to prevent the later if statement from being executed at the start
+    int prevtime = -2001;
     @Override
     public void runOpMode() {
 
 
         //Moving
-        DcMotor motorFL = hardwareMap.get(DcMotor.class, "motorFrontLeft");
-        DcMotor motorBL = hardwareMap.get(DcMotor.class, "motorBackLeft");
-        DcMotor motorFR = hardwareMap.get(DcMotor.class, "motorFrontRight");
-        DcMotor motorBR = hardwareMap.get(DcMotor.class, "motorBackRight");
+        DcMotor motorFL = hardwareMap.get(DcMotor.class, "motorFrontLeft"); // Port:1 1st
+        DcMotor motorBL = hardwareMap.get(DcMotor.class, "motorBackLeft"); // Port:2 1st
+        DcMotor motorFR = hardwareMap.get(DcMotor.class, "motorFrontRight"); // Port:2 2nd
+        DcMotor motorBR = hardwareMap.get(DcMotor.class, "motorBackRight"); // Port:1 2nd
 
         /*
-        DcMotor Intake = hardwareMap.get(DcMotor.class, "Intake");
-        DcMotor Sliders = hardwareMap.get(DcMotor.class, "Sliders");
-        DcMotor Climbing = hardwareMap.get(DcMotor.class, "Climbing");
-        Servo ClawDrop1 =  hardwareMap.get(Servo.class, "ClawDrop1");
-        Servo ClawDrop2 =  hardwareMap.get(Servo.class, "ClawDrop2");
-        Servo Wrist =  hardwareMap.get(Servo.class, "Wrist");
-        Servo AirplaneLauncher = hardwareMap.get(Servo.class, "Airplane Launcher");
+        DcMotor Intake = hardwareMap.get(DcMotor.class, "Intake"); // --> Done // Port:
+        DcMotor Sliders = hardwareMap.get(DcMotor.class, "Sliders"); // --> Done // Port:
+        DcMotor Climbing1 = hardwareMap.get(DcMotor.class, "Climbing1"); // for the robot to hang --> Done Port:
+        DcMotor Climbing2 = hardwareMap.get(DcMotor.class, "Climbing2"); // for the robot to hang --> Done Port:
+
+        Servo DropperTop =  hardwareMap.get(Servo.class, "DropperTop"); // --> Done Servo Port 0
+        Servo DropperBottom =  hardwareMap.get(Servo.class, "DropperBottom"); // --> Done Servo Port 1
+        Servo Wrist =  hardwareMap.get(Servo.class, "Wrist"); \\ --> the thing that rotates the dropper Servo Port 2
+        Servo AirplaneLauncher = hardwareMap.get(Servo.class, "AirplaneLauncher"); \\ --> Still have to work on //Servo Port 3
+
+        Climbing1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        Climbing2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         */
 
-        //toggle template
+        //toggle template, note: its just template, delete after
         if (gamepad1.a)
             buttonA +=1;
         if(buttonX%2==1){
@@ -47,7 +57,11 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
             //Intake.setpower(0);
         }
 
-        //intake
+        //wrist
+        //the strange calculations are because we need to convert (-1 - 1) into (0 - 1)
+        //Wrist.setPosition((gamepad2.left_stick_y*0.5)+0.5);
+
+        //Intake
         /*
         if (gamepad1.a)
             buttonA +=1;
@@ -58,38 +72,40 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
         }
         */
 
-        //Climbing
-        //0.1 because stick drift
-        /*
-        if (gamepad2.right_stick_y > 0.1){
-            Climbing.setpower(gamepad2.right_stick_y);
-        } else if (gamepad2.right_stick_y < -0.1){
-            Climbing.setpower(-gamepad2.right_stick_y);
-
-         */
-
-        //ClawDrop1
-        if (gamepad2.a)
-            button2A +=1;
-        if(button2A%2==1){
-            //ClawDrop1.setPower(1);
-        }else{
-            //ClawDrop1.setpower(0);
-
-        //ClawDrop2
-        if (gamepad2.a)
+        //Climbing: if gamepad2 X is pressed, the climbing motors will go at full power and push the linear actuators up to a certain positiion
+        // If the button X is pressed again, then the actuators will descend to [some certain point in terms of encoder reading] at full power and hang the robot
+        if (gamepad2.x)
             button2X +=1;
-        if(button2X%2==1){
-            //ClawDrop2.setpower(1);
-        }else{
-            //ClawDrop2.setpower(0);
 
-            //AirplaneLauncher
-            if (gamepad2.x)
-                button2X +=1;
-            if(button2X%2==1)
-        }else{
-            //AirplaneLauncher.setpower(0);
+        //Note: the encoder values are placeholders
+        if(buttonX%2==1){
+            //Climbing1.setTargetPosition(5000);
+            //Climbing2.setTargetPosition(5000);
+        }else {
+            //Climbing1.setTargetPosition(2000);
+            //Climbing2.setTargetPosition(2000);
+        }
+
+        //dropper
+        //drops the bottom slot then waits until button is not pressed
+        //when button is not pressed load the top slot into the bottom slot
+
+        /*
+        if (gamepad2.b){
+            DropperBottom.setPosition(0.5);
+            dropping = true;
+        }
+        if (!gamepad2.b && dropping) {
+            DropperBottom.setPosition(0);
+            prevtime = getRuntime();
+            DropperTop.setPosition(0.5);
+            dropping = false;
+        }
+        //change 5 to however long it takes for the servo to move into place
+        if (getRuntime() - prevtime == 2000){
+            DropperTop.setPosition(0);
+        }
+        */
 
         //Reverse right side motors
         motorFL.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -118,8 +134,7 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
             if(Math.abs(x)<0.1)
                 x=0;
 
-            //Basic movements
-            /*
+            //Basic movement
             if(x>0&&y>0){
                 //Moving forward-right (diagonally)
                 motorFL.setPower(1);
@@ -166,7 +181,7 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
                 motorBL.setPower(0);
                 motorFR.setPower(0);
                 motorBR.setPower(0);
-            }*/
+            }
 
             double denominator = Math.max(Math.abs(y) + Math.abs(x) + Math.abs(rx), 1);
             double frontLeftPower = (y + x + rx) / denominator;
@@ -186,4 +201,4 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
             telemetry.update();
         }
     }
-}}}
+}
