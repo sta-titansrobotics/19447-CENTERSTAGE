@@ -7,7 +7,8 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 
 @TeleOp
-public class teleOp_TankDrive47 extends LinearOpMode {
+public class AnotherDriveTrain47 extends LinearOpMode {
+
     int buttonA=0;
     int buttonX=0;
     int buttonY=0;
@@ -18,8 +19,13 @@ public class teleOp_TankDrive47 extends LinearOpMode {
     int button2B =0;
     int button2Y =0;
 
+    boolean dropping = false;
+    //change -6 to how long it takes for the servo to change -1
+    //- number to prevent the later if statement from being executed at the start
+    int prevtime = -6;
     @Override
     public void runOpMode() {
+
 
         //Moving
         DcMotor motorFL = hardwareMap.get(DcMotor.class, "motorFrontLeft");
@@ -28,20 +34,19 @@ public class teleOp_TankDrive47 extends LinearOpMode {
         DcMotor motorBR = hardwareMap.get(DcMotor.class, "motorBackRight");
 
         /*
-        DcMotor Intake = hardwareMap.get(DcMotor.class, "Intake");   --> Done
+        DcMotor Intake = hardwareMap.get(DcMotor.class, "Intake"); --> Done
         DcMotor Sliders = hardwareMap.get(DcMotor.class, "Sliders"); --> Done
         DcMotor Climbing1 = hardwareMap.get(DcMotor.class, "Climbing1"); for the robot to hang --> Done
         DcMotor Climbing2 = hardwareMap.get(DcMotor.class, "Climbing2"); for the robot to hang --> Done
 
-        Servo DroperTop =  hardwareMap.get(Servo.class, "ClawDrop1"); --> Done
-        Servo DroperBottom =  hardwareMap.get(Servo.class, "ClawDrop2"); --> Done
-        Servo Wrist =  hardwareMap.get(Servo.class, "Wrist"); --> No idea
-        Servo AirplaneLauncher = hardwareMap.get(Servo.class, "Airplane Launcher"); --> Still have to work on
+        Servo DropperTop =  hardwareMap.get(Servo.class, "DropperTop"); --> Done   //Servo Port 0
+        Servo DropperBottom =  hardwareMap.get(Servo.class, "DropperBottom"); --> Done //Servo Port 1
+        Servo Wrist =  hardwareMap.get(Servo.class, "Wrist"); --> the thing that rotates the dropper //Servo Port 2
+        Servo AirplaneLauncher = hardwareMap.get(Servo.class, "AirplaneLauncher"); --> Still have to work on //Servo Port 3
 
         Climbing1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         Climbing2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         */
-        boolean dropping = false;
 
         //toggle template, note: its just template, delete after
         if (gamepad1.a)
@@ -51,6 +56,9 @@ public class teleOp_TankDrive47 extends LinearOpMode {
         }else {
             //Intake.setpower(0);
         }
+        //wrist
+        //the strange calculations are because we need to convert (-1 - 1) into (0 - 1)
+        //Wrist.setPosition((gamepad2.left_stick_y*0.5)+0.5);
 
         //Intake
         /*
@@ -70,7 +78,7 @@ public class teleOp_TankDrive47 extends LinearOpMode {
 
         //Note: the encoder values are placeholders
         if(buttonX%2==1){
-            // Climbing1.setTargetPosition(5000);
+            //Climbing1.setTargetPosition(5000);
             //Climbing2.setTargetPosition(5000);
         }else {
             //Climbing1.setTargetPosition(2000);
@@ -88,10 +96,15 @@ public class teleOp_TankDrive47 extends LinearOpMode {
         }
         if (!gamepad2.b && dropping) {
             DropperBottom.setPosition(0);
+            prevtime = getRuntime();
             DropperTop.setPosition(0.5);
-            DropperTop.setPosition(0);
             dropping = false;
-        }*/
+        }
+        //change 5 to however long it takes for the servo to move into place
+        if (getRuntime() - prevtime == 5){
+            DropperTop.setPosition(0);
+        }
+        */
 
         //Reverse right side motors
         motorFL.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -106,34 +119,36 @@ public class teleOp_TankDrive47 extends LinearOpMode {
         while (opModeIsActive()) {
 
             //Driving
-            double leftPower = -gamepad1.left_stick_y;
-            double rightPower = -gamepad1.right_stick_y; // heheheha
+            double y = -gamepad1.left_stick_y; // Remember, this is reversed!
 
-            if(gamepad1.right_stick_x > 0.3){
-                motorFL.setPower(gamepad1.right_stick_x);
-                motorBL.setPower(-gamepad1.right_stick_x);
-                motorFR.setPower(-gamepad1.right_stick_x);
-                motorBR.setPower(gamepad1.right_stick_x);
-            }
-            else if(gamepad1.left_stick_x < -0.3){
-                motorFL.setPower(gamepad1.left_stick_x);
-                motorBL.setPower(-gamepad1.left_stick_x);
-                motorFR.setPower(-gamepad1.left_stick_x);
-                motorBR.setPower(gamepad1.left_stick_x);
-            }else{
-                motorFL.setPower(leftPower);
-                motorBL.setPower(leftPower);
-                motorFR.setPower(rightPower);
-                motorBR.setPower(rightPower);
-            }
+            //STRAFING VARIABLE
+            double x = gamepad1.left_stick_x * 1.1; // Counteract imperfect strafing (moving from side to side)
+
+            //THIS IS THE TURNING VARIABLE
+            double rx = gamepad1.right_stick_x;
+
+            //To prevent stick drift
+            if(Math.abs(y)<0.1)
+                y=0;
+            if(Math.abs(x)<0.1)
+                x=0;
+
+            double denominator = Math.max(Math.abs(y) + Math.abs(x) + Math.abs(rx), 1);
+            double frontLeftPower = (y + x + rx) / denominator;
+            double backLeftPower = (y - x + rx) / denominator;
+            double frontRightPower = (y - x - rx) / denominator;
+            double backRightPower = (y + x - rx) / denominator;
+
+            motorFL.setPower(frontLeftPower);
+            motorBL.setPower(backLeftPower);
+            motorFR.setPower(frontRightPower);
+            motorBR.setPower(backRightPower);
 
             telemetry.addData("LF Power:", motorFL.getPower());
             telemetry.addData("LB Power:", motorBL.getPower());
             telemetry.addData("RF Power:", motorFR.getPower());
             telemetry.addData("RB Power:", motorBR.getPower());
             telemetry.update();
-
         }
     }
 }
-//f
