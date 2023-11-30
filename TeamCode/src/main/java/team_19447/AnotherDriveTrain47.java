@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.Servo;
 
 
 @TeleOp
@@ -44,7 +45,8 @@ public class AnotherDriveTrain47 extends LinearOpMode {
         Servo Wrist =  hardwareMap.get(Servo.class, "Wrist"); --> the thing that rotates the dropper //Servo Port 2
         Servo AirplaneLauncher = hardwareMap.get(Servo.class, "AirplaneLauncher"); --> Still have to work on //Servo Port 3
 
-        Climbing1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        Climbing1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        Climbing1.setDirection(DcMotorSimple.Direction.REVERSE);
         Climbing2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         */
 
@@ -71,19 +73,9 @@ public class AnotherDriveTrain47 extends LinearOpMode {
         }
         */
 
-        //Climbing: if gamepad2 X is pressed, the climbing motors will go at full power and push the linear actuators up to a certain positiion
-        // If the button X is pressed again, then the actuators will descend to [some certain point in terms of encoder reading] at full power and hang the robot
-        if (gamepad2.x)
-            button2X +=1;
-
-        //Note: the encoder values are placeholders
-        if(buttonX%2==1){
-            //Climbing1.setTargetPosition(5000);
-            //Climbing2.setTargetPosition(5000);
-        }else {
-            //Climbing1.setTargetPosition(2000);
-            //Climbing2.setTargetPosition(2000);
-        }
+        //Climbing:  mapped to right joystick power
+        //Climbing1.setPower(gamepad2.right_stick_y);
+        //Climbing2.setPower(gamepad2.right_stick_y);
 
         //dropper
         //drops the bottom slot then waits until button is not pressed
