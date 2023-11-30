@@ -19,6 +19,11 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
     int button2B =0;
     int button2Y =0;
 
+    boolean but2Acheck = false;
+    boolean but2Bcheck = false;
+    boolean but2Xcheck = false;
+    boolean but2Ycheck = false;
+
     boolean dropping = false;
     //change -6 to how long it takes for the servo to change -1
     //- number to prevent the later if statement from being executed at the start
@@ -49,12 +54,19 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
         */
 
         //toggle template, note: its just template, delete after
-        if (gamepad1.a)
-            buttonA +=1;
-        if(buttonX%2==1){
-            //Intake.setPower(1);
-        }else {
-            //Intake.setpower(0);
+        if (gamepad2.a && !but2Acheck) {
+            button2A += 1;
+            but2Acheck = true;
+        }
+        if (!gamepad2.a){
+            but2Acheck = false;
+        }
+        if (!but2Acheck) {
+            if (button2A % 2 == 1) {
+                //Intake.setPower(1);
+            } else {
+                //Intake.setpower(0);
+            }
         }
 
         //wrist
@@ -63,27 +75,39 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
 
         //Intake
         /*
-        if (gamepad1.a)
-            buttonA +=1;
-        if(buttonA%2==1){
-            Intake.setPower(1);
-        }else{
-            Intake.setpower(0);
+        if (gamepad2.a && !but2Acheck){
+            button2A +=1;
+            but2Acheck = true;
+        }
+        if (!gamepad2.a)
+            but2Acheck = false;
+        if (!but2Acheck) {
+            if (button2A % 2 == 1) {
+                //Intake.setPower(1);
+            } else {
+                //Intake.setpower(0);
+            }
         }
         */
 
         //Climbing: if gamepad2 X is pressed, the climbing motors will go at full power and push the linear actuators up to a certain positiion
         // If the button X is pressed again, then the actuators will descend to [some certain point in terms of encoder reading] at full power and hang the robot
-        if (gamepad2.x)
-            button2X +=1;
+        if (gamepad2.x && !but2Xcheck) {
+            button2X += 1;
+            but2Xcheck = true;
+        }
+        if (!gamepad2.x)
+            but2Xcheck = false;
 
         //Note: the encoder values are placeholders
-        if(buttonX%2==1){
-            //Climbing1.setTargetPosition(5000);
-            //Climbing2.setTargetPosition(5000);
-        }else {
-            //Climbing1.setTargetPosition(2000);
-            //Climbing2.setTargetPosition(2000);
+        if (!but2Xcheck) {
+            if (button2X % 2 == 1) {
+                //Climbing1.setTargetPosition(5000);
+                //Climbing2.setTargetPosition(5000);
+            } else {
+                //Climbing1.setTargetPosition(2000);
+                //Climbing2.setTargetPosition(2000);
+            }
         }
 
         //dropper
@@ -106,6 +130,23 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
             DropperTop.setPosition(0);
         }
         */
+
+        /*
+        if (gamepad2.y && !but2Ycheck) {
+            button2Y += 1;
+            but2Ycheck = true;
+        }
+        if (!gamepad2.y){
+            but2Ycheck = false;
+        }
+        if (!but2Ycheck) {
+            if (button2Y % 2 == 1) {
+                AirplaneLauncher.setPosition(0);
+            } else {
+                AirplaneLauncher.setPosition(1);
+            }
+        }
+         */
 
         //Reverse right side motors
         motorFL.setDirection(DcMotorSimple.Direction.REVERSE);
