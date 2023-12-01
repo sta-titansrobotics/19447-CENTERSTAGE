@@ -5,15 +5,14 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 @TeleOp
 public class climbingTEst extends LinearOpMode {
 
     int buttonX = 0;
 
-
-
-
+    ElapsedTime timer = new ElapsedTime();
     @Override
     public void runOpMode() {
 
@@ -25,7 +24,17 @@ public class climbingTEst extends LinearOpMode {
 
         while (opModeIsActive()) {
 
-           DropperTop
+            if(gamepad2.x&&timer.seconds()>0.5) {
+                buttonX += 1;
+                timer.reset();
+            }
+
+            if(buttonX % 2== 1)
+           DropperTop.setPosition(0.25);
+            else{
+                DropperTop.setPosition(0.5);
+            }
+
 
         /*
         if (gamepad2.x)
@@ -38,7 +47,9 @@ public class climbingTEst extends LinearOpMode {
             Climbing1.setTargetPosition(2000);
         }*/
 
-            telemetry.addData("RB Power:", Climbing1.getCurrentPosition());
+            telemetry.addData("Position:", DropperTop.getPosition());
             telemetry.update();
+
+
     }}
 }

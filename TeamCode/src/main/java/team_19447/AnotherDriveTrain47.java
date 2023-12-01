@@ -58,6 +58,8 @@ public class AnotherDriveTrain47 extends LinearOpMode {
         }else {
             //Intake.setpower(0);
         }
+
+
         //wrist
         //the strange calculations are because we need to convert (-1 - 1) into (0 - 1)
         //Wrist.setPosition((gamepad2.left_stick_y*0.5)+0.5);
@@ -95,8 +97,14 @@ public class AnotherDriveTrain47 extends LinearOpMode {
         //change 5 to however long it takes for the servo to move into place
         if (getRuntime() - prevtime == 5){
             DropperTop.setPosition(0);
+        }*/
+
+        if(gamepad1.right_bumper){
+            //Sliders.setPower(1);
         }
-        */
+            else if(gamepad1.right_trigger>0)
+            //Sliders.setPower(-gamepad1.right_trigger);
+
 
         //Reverse right side motors
         motorFL.setDirection(DcMotorSimple.Direction.REVERSE);
