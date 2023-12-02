@@ -109,22 +109,22 @@ public class teleOp_TankDrive47 extends LinearOpMode {
             double leftPower = -gamepad1.left_stick_y;
             double rightPower = -gamepad1.right_stick_y; // heheheha
 
-            motorFL.setPower(leftPower);
-            motorBL.setPower(leftPower);
-            motorFR.setPower(rightPower);
-            motorBR.setPower(rightPower);
-
-            if(gamepad1.right_stick_x > 0.1){
+            if(gamepad1.right_stick_x > 0.3){
                 motorFL.setPower(gamepad1.right_stick_x);
                 motorBL.setPower(-gamepad1.right_stick_x);
                 motorFR.setPower(-gamepad1.right_stick_x);
                 motorBR.setPower(gamepad1.right_stick_x);
             }
-            if(gamepad1.left_stick_x < -0.1){
+            else if(gamepad1.left_stick_x < -0.3){
                 motorFL.setPower(gamepad1.left_stick_x);
                 motorBL.setPower(-gamepad1.left_stick_x);
                 motorFR.setPower(-gamepad1.left_stick_x);
                 motorBR.setPower(gamepad1.left_stick_x);
+            }else{
+                motorFL.setPower(leftPower);
+                motorBL.setPower(leftPower);
+                motorFR.setPower(rightPower);
+                motorBR.setPower(rightPower);
             }
 
             telemetry.addData("LF Power:", motorFL.getPower());
@@ -136,4 +136,3 @@ public class teleOp_TankDrive47 extends LinearOpMode {
         }
     }
 }
-//f

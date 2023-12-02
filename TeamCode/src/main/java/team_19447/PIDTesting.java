@@ -40,9 +40,9 @@ public class PIDTesting extends LinearOpMode {
      * Decrease Ki by a factor of 2-4.
      */
     double integralSum = 0;
-    double Kp = 0.13;
+    double Kp = 0.1;
     double Ki = 0;
-    double Kd = 0.0001;
+    double Kd = 0.01;
     double Kf = 0.2;
 
     ElapsedTime timer = new ElapsedTime();
@@ -50,6 +50,16 @@ public class PIDTesting extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
+
+        //note this part is for testing the values remove later and set these as constants
+        if(gamepad1.a)
+            Kd += 0.01;
+        if(gamepad1.b)
+            Kd -= 0.01;
+        if(gamepad1.x)
+            Kp += 0.05;
+        if(gamepad1.y)
+            Kp -= 0.01;
 
         // Initialize motors
         motorFL = hardwareMap.get(DcMotor.class, "motorFrontLeft");
@@ -88,7 +98,7 @@ public class PIDTesting extends LinearOpMode {
         // https://gm0.org/en/latest/docs/software/tutorials/mecanum-drive.html
 
         // Starting position with robot right side
-        Drive(100, 100, 100, 100);
+        Drive(50, 50, 50, 50);
 
         // PIDDrive(250, 250, 250, 250);
 
@@ -97,18 +107,21 @@ public class PIDTesting extends LinearOpMode {
             telemetry.addData("motorBL Encoder Position: ", motorBL.getCurrentPosition());
             telemetry.addData("motorFR Encoder Position: ", motorFR.getCurrentPosition());
             telemetry.addData("motorBR Encoder Position: ", motorBR.getCurrentPosition());
+            telemetry.addData("Kd: " , Kd);
+            telemetry.addData("Kp: " , Kp);
             telemetry.update();
         }
     }
 
+    // these parameters are distance in CM
     public void Drive(int TargetPositionMotorFL, int TargetPositionMotorBL, int TargetPositionMotorFR,
                       int TargetPositionMotorBR) {
 
         // this is in terms of cm
-        TargetPositionMotorFL = (int) (TICKS_PER_REVOLUTION * TargetPositionMotorFL / (29.92));
-        TargetPositionMotorBL = (int) (TICKS_PER_REVOLUTION * TargetPositionMotorBL / (29.92));
-        TargetPositionMotorFR = (int) (TICKS_PER_REVOLUTION * TargetPositionMotorFR / (29.92));
-        TargetPositionMotorBR = (int) (TICKS_PER_REVOLUTION * TargetPositionMotorBR / (29.92));
+        TargetPositionMotorFL = (int) (47.63 * TargetPositionMotorFL);
+        TargetPositionMotorBL = (int) (47.63 * TargetPositionMotorBL );
+        TargetPositionMotorFR = (int) (47.63 * TargetPositionMotorFR );
+        TargetPositionMotorBR = (int) (47.63 * TargetPositionMotorBR);
 
         motorFL.setTargetPosition(TargetPositionMotorFL);
         motorFR.setTargetPosition(TargetPositionMotorFR);
@@ -154,47 +167,3 @@ public class PIDTesting extends LinearOpMode {
         return (error * Kp) + (derivative * Kd) + (integralSum * Ki) + (setPosition * Kf);
     }
 }
-
-/*
- * public void turnRight(int leftTarget1, int leftTarget2, int rightTarget1, int
- * rightTarget2) {
- * double distance = (angle / 360.0) * (2.0 * Math.PI * RADIUS);
- * int convertedDistance = (int) distance;
- *
- * //Just use as a reference conversion:
- * double forwardTicks = 52.3;
- * double strafeTicks = 54.05;
- *
- * int forwardTicks1 = (int) forwardTicks;
- * int strafeTicks1 = (int) strafeTicks;
- *
- * while (opModeIsActive()) {
- * motorFL.setPower(PIDControl(leftTarget1, motorFL.getCurrentPosition()));
- * motorBL.setPower(PIDControl(leftTarget2, motorBL.getCurrentPosition()));
- * motorFR.setPower(PIDControl(rightTarget1, motorFR.getCurrentPosition()));
- * motorBR.setPower(PIDControl(rightTarget2, motorBR.getCurrentPosition()));
- * }
- * }
- *
- * public void turnLeft(int angle) {
- * double distance = (angle / 360.0) * (2.0 * Math.PI * RADIUS);
- * int convertedDistance = (int) distance;
- *
- * // Reset encoders
- * motorFL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
- * motorFR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
- * motorBL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
- * motorBR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
- *
- * // Set the target position for all motors
- * motorFL.setTargetPosition(-convertedDistance);
- * motorFR.setTargetPosition(convertedDistance);
- * motorBL.setTargetPosition(-convertedDistance);
- * motorBR.setTargetPosition(convertedDistance);
- *
- * // Run to target position
- * motorFL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
- * motorFR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
- * motorBL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
- * motorBR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
- */
