@@ -24,6 +24,8 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
     boolean but2Xcheck = false;
     boolean but2Ycheck = false;
 
+    double sliderpower = 0;
+
     boolean dropping = false;
     //change -6 to how long it takes for the servo to change -1
     //- number to prevent the later if statement from being executed at the start
@@ -65,9 +67,21 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
             if (button2A % 2 == 1) {
                 //Intake.setPower(1);
             } else {
-                //Intake.setpower(0);
+                //Intake.setPower(0);
             }
         }
+
+        //sliders
+        // set the greater than value for get position to max rotation of sliders
+        //increase/decrease the sliderpower increase to make movement faster
+        /*
+        if (gamepad1.right_trigger > 0.9 && Sliders.getCurrentPosition() > 0)
+            sliderpower -= 0.01;
+        if (gamepad1.right_bumper && Sliders.getCurrentPosition() > 500)
+            sliderpower += 0.01;
+
+        Sliders.setPower(sliderpower);
+         */
 
         //wrist
         //the strange calculations are because we need to convert (-1 - 1) into (0 - 1)
