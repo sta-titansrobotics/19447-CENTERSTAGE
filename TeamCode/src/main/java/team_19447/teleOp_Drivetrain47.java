@@ -123,16 +123,16 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
                 //Climbing2.setTargetPosition(2000);
             }
         }
-
-        boolean isRightBumperPressed = gamepad1.right_bumper;
-        if (gamepad1.right_bumper && Sliders.getCurrentPosition() > 500)
-        {
-            sliderpower += 0.01;
-        }
-        if (gamepad1.right_trigger > 0.9 && Sliders.getCurrentPosition() > 0)
-        {
-            sliderpower -= 0.01;
-        }
+//
+//        boolean isRightBumperPressed = gamepad1.right_bumper;
+//        if (gamepad1.right_bumper && Sliders.getCurrentPosition() > 500)
+//        {
+//            sliderpower += 0.01;
+//        }
+//        if (gamepad1.right_trigger > 0.9 && Sliders.getCurrentPosition() > 0)
+//        {
+//            sliderpower -= 0.01;
+//        }
         //dropper
         //drops the bottom slot then waits until button is not pressed
         //when button is not pressed load the top slot into the bottom slot
