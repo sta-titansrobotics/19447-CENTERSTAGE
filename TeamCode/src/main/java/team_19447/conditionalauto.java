@@ -92,7 +92,6 @@ public class conditionalauto extends LinearOpMode {
         FR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         BL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         BR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        
 
         waitForStart();
 
