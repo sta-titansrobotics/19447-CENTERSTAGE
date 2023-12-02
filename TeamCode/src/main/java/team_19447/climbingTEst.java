@@ -13,11 +13,15 @@ public class climbingTEst extends LinearOpMode {
     int buttonX = 0;
 
     ElapsedTime timer = new ElapsedTime();
+
     @Override
     public void runOpMode() {
 
         Servo DropperTop =  hardwareMap.get(Servo.class, "DropperTop");
         Servo DropperBottom =  hardwareMap.get(Servo.class, "DropperBottom");
+
+        DropperTop.setDirection(Servo.Direction.REVERSE);
+        DropperBottom.setDirection(Servo.Direction.REVERSE);
 
         waitForStart();
 
@@ -28,6 +32,7 @@ public class climbingTEst extends LinearOpMode {
             if (gamepad2.x && timer.seconds() > 0.5) {
                 buttonX += 1;
                 timer.reset();
+
             }
 
             if (buttonX % 4 == 1)
@@ -52,7 +57,8 @@ public class climbingTEst extends LinearOpMode {
             Climbing1.setTargetPosition(2000);
         }*/
 
-            telemetry.addData("Position:", DropperTop.getPosition());
+            telemetry.addData("top Position:", DropperTop.getPosition());
+            telemetry.addData("bottom Position:", DropperBottom.getPosition());
             telemetry.update();
 
 
