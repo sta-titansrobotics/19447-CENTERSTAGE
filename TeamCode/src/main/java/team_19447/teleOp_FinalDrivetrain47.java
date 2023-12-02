@@ -3,6 +3,7 @@ package team_19447;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 
@@ -25,11 +26,12 @@ public class teleOp_FinalDrivetrain47 extends LinearOpMode {
     boolean but2Ycheck = false;
 
     double sliderpower = 0;
+    double wristpower = 0;
 
     boolean dropping = false;
     //change -6 to how long it takes for the servo to change -1
     //- number to prevent the later if statement from being executed at the start
-    int prevtime = -2001;
+    double prevtime = -2001;
     @Override
     public void runOpMode() {
 
@@ -45,15 +47,16 @@ public class teleOp_FinalDrivetrain47 extends LinearOpMode {
         DcMotor Climbing1 = hardwareMap.get(DcMotor.class, "Climbing1"); // for the robot to hang --> Done Port:
         DcMotor Climbing2 = hardwareMap.get(DcMotor.class, "Climbing2"); // for the robot to hang --> Done Port:
 
-//        Servo DropperTop =  hardwareMap.get(Servo.class, "DropperTop"); // --> Done Servo Port 0
-//        Servo DropperBottom =  hardwareMap.get(Servo.class, "DropperBottom"); // --> Done Servo Port 1
-//        Servo Wrist =  hardwareMap.get(Servo.class, "Wrist"); // --> the thing that rotates the dropper Servo Port 2
-//        Servo AirplaneLauncher = hardwareMap.get(Servo.class, "AirplaneLauncher"); // --> Still have to work on //Servo Port 3
+        Servo DropperTop =  hardwareMap.get(Servo.class, "DropperTop"); // --> Done Servo Port 0
+        Servo DropperBottom =  hardwareMap.get(Servo.class, "DropperBottom"); // --> Done Servo Port 1
+        Servo Wrist =  hardwareMap.get(Servo.class, "Wrist"); // --> the thing that rotates the dropper Servo Port 2
+        Servo AirplaneLauncher = hardwareMap.get(Servo.class, "AirplaneLauncher"); // --> Still have to work on //Servo Port 3
 
         Climbing1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         Climbing2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         //toggle template, note: its just template, delete after
+        /*
         if (gamepad2.a && !but2Acheck) {
             button2A += 1;
             but2Acheck = true;
@@ -68,6 +71,7 @@ public class teleOp_FinalDrivetrain47 extends LinearOpMode {
                 Intake.setPower(0);
             }
         }
+        */
 
         //sliders
         // set the greater than value for get position to max rotation of sliders
@@ -80,10 +84,6 @@ public class teleOp_FinalDrivetrain47 extends LinearOpMode {
 
         Sliders.setPower(sliderpower);
 
-        //wrist
-        //the strange calculations are because we need to convert (-1 - 1) into (0 - 1)
-        //Wrist.setPosition((gamepad2.left_stick_y*0.5)+0.5);
-
         //Intake
         if (gamepad2.a && !but2Acheck){
             button2A +=1;
@@ -93,9 +93,9 @@ public class teleOp_FinalDrivetrain47 extends LinearOpMode {
             but2Acheck = false;
         if (!but2Acheck) {
             if (button2A % 2 == 1) {
-                //Intake.setPower(1);
+                Intake.setPower(1);
             } else {
-                //Intake.setpower(0);
+                Intake.setPower(0);
             }
         }
 
@@ -119,20 +119,21 @@ public class teleOp_FinalDrivetrain47 extends LinearOpMode {
             }
         }
 
-        boolean isRightBumperPressed = gamepad1.right_bumper;
-        if (gamepad1.right_bumper && Sliders.getCurrentPosition() > 500)
-        {
-            sliderpower += 0.01;
-        }
-        if (gamepad1.right_trigger > 0.9 && Sliders.getCurrentPosition() > 0)
-        {
-            sliderpower -= 0.01;
-        }
+        //new wrist
+        if (gamepad1.left_bumper && Wrist.getPosition() < 1)
+            wristpower += 0.01;
+        if (gamepad1.right_trigger > 0.9 && Wrist.getPosition() > 0)
+            wristpower -= 0.01;
+
         //dropper
         //drops the bottom slot then waits until button is not pressed
         //when button is not pressed load the top slot into the bottom slot
 
-        /*
+        // *****WARNING*****
+        // DELETE THIS DROPPER BC BUILD DOESN'T LIKE
+        // GORDON
+        // MAKE IT THE GOOD DROPPER
+
         if (gamepad2.b){
             DropperBottom.setPosition(0.5);
             dropping = true;
@@ -147,9 +148,8 @@ public class teleOp_FinalDrivetrain47 extends LinearOpMode {
         if (getRuntime() - prevtime == 2000){
             DropperTop.setPosition(0);
         }
-        */
 
-        /*
+        //airplane launcher
         if (gamepad2.y && !but2Ycheck) {
             button2Y += 1;
             but2Ycheck = true;
@@ -164,7 +164,7 @@ public class teleOp_FinalDrivetrain47 extends LinearOpMode {
                 AirplaneLauncher.setPosition(1);
             }
         }
-        */
+
 
         //Reverse right side motors
         motorFL.setDirection(DcMotorSimple.Direction.REVERSE);
