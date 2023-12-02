@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 
 @TeleOp
-public class teleOp_Drivetrain47 extends LinearOpMode {
+public class teleOp_FinalDrivetrain47 extends LinearOpMode {
 
     int buttonA=0;
     int buttonX=0;
@@ -40,20 +40,18 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
         DcMotor motorFR = hardwareMap.get(DcMotor.class, "motorFrontRight"); // Port:2 2nd
         DcMotor motorBR = hardwareMap.get(DcMotor.class, "motorBackRight"); // Port:1 2nd
 
-        /*
         DcMotor Intake = hardwareMap.get(DcMotor.class, "Intake"); // --> Done // Port:
         DcMotor Sliders = hardwareMap.get(DcMotor.class, "Sliders"); // --> Done // Port:
         DcMotor Climbing1 = hardwareMap.get(DcMotor.class, "Climbing1"); // for the robot to hang --> Done Port:
         DcMotor Climbing2 = hardwareMap.get(DcMotor.class, "Climbing2"); // for the robot to hang --> Done Port:
 
-        Servo DropperTop =  hardwareMap.get(Servo.class, "DropperTop"); // --> Done Servo Port 0
-        Servo DropperBottom =  hardwareMap.get(Servo.class, "DropperBottom"); // --> Done Servo Port 1
-        Servo Wrist =  hardwareMap.get(Servo.class, "Wrist"); \\ --> the thing that rotates the dropper Servo Port 2
-        Servo AirplaneLauncher = hardwareMap.get(Servo.class, "AirplaneLauncher"); \\ --> Still have to work on //Servo Port 3
+//        Servo DropperTop =  hardwareMap.get(Servo.class, "DropperTop"); // --> Done Servo Port 0
+//        Servo DropperBottom =  hardwareMap.get(Servo.class, "DropperBottom"); // --> Done Servo Port 1
+//        Servo Wrist =  hardwareMap.get(Servo.class, "Wrist"); // --> the thing that rotates the dropper Servo Port 2
+//        Servo AirplaneLauncher = hardwareMap.get(Servo.class, "AirplaneLauncher"); // --> Still have to work on //Servo Port 3
 
         Climbing1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         Climbing2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        */
 
         //toggle template, note: its just template, delete after
         if (gamepad2.a && !but2Acheck) {
@@ -65,30 +63,28 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
         }
         if (!but2Acheck) {
             if (button2A % 2 == 1) {
-                //Intake.setPower(1);
+                Intake.setPower(1);
             } else {
-                //Intake.setPower(0);
+                Intake.setPower(0);
             }
         }
 
         //sliders
         // set the greater than value for get position to max rotation of sliders
         //increase/decrease the sliderpower increase to make movement faster
-        /*
+
         if (gamepad1.right_trigger > 0.9 && Sliders.getCurrentPosition() > 0)
             sliderpower -= 0.01;
         if (gamepad1.right_bumper && Sliders.getCurrentPosition() > 500)
             sliderpower += 0.01;
 
         Sliders.setPower(sliderpower);
-         */
 
         //wrist
         //the strange calculations are because we need to convert (-1 - 1) into (0 - 1)
         //Wrist.setPosition((gamepad2.left_stick_y*0.5)+0.5);
 
         //Intake
-        /*
         if (gamepad2.a && !but2Acheck){
             button2A +=1;
             but2Acheck = true;
@@ -102,7 +98,6 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
                 //Intake.setpower(0);
             }
         }
-        */
 
         //Climbing: if gamepad2 X is pressed, the climbing motors will go at full power and push the linear actuators up to a certain positiion
         // If the button X is pressed again, then the actuators will descend to [some certain point in terms of encoder reading] at full power and hang the robot
@@ -116,11 +111,11 @@ public class teleOp_Drivetrain47 extends LinearOpMode {
         //Note: the encoder values are placeholders
         if (!but2Xcheck) {
             if (button2X % 2 == 1) {
-                //Climbing1.setTargetPosition(5000);
-                //Climbing2.setTargetPosition(5000);
+                Climbing1.setTargetPosition(5000);
+                Climbing2.setTargetPosition(5000);
             } else {
-                //Climbing1.setTargetPosition(2000);
-                //Climbing2.setTargetPosition(2000);
+                Climbing1.setTargetPosition(2000);
+                Climbing2.setTargetPosition(2000);
             }
         }
 
