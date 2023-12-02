@@ -31,9 +31,9 @@ public class climbingTEst extends LinearOpMode {
             }
 
             if (buttonX % 4 == 1)
-                DropperTop.setPosition(-0.5);
+                DropperTop.setPosition(-0.2);
             else if (buttonX % 4 == 2) {
-                DropperBottom.setPosition(-0.5);
+                DropperBottom.setPosition(-0.2);
             } else if (buttonX % 4 == 3){
                 DropperTop.setPosition(0);
         } else {
