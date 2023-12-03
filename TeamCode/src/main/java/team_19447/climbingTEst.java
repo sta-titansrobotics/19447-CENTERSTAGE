@@ -29,22 +29,6 @@ public class climbingTEst extends LinearOpMode {
 
         while (opModeIsActive()) {
 
-            if (gamepad2.x && timer.seconds() > 0.5) {
-                buttonX += 1;
-                timer.reset();
-
-            }
-
-            if (buttonX % 4 == 1)
-                DropperTop.setPosition(0.2);
-            else if (buttonX % 4 == 2) {
-                DropperBottom.setPosition(0.2);
-            } else if (buttonX % 4 == 3){
-                DropperTop.setPosition(0);
-        } else {
-                DropperBottom.setPosition(0);
-            }
-
 
         /*
         if (gamepad2.x)
