@@ -25,7 +25,6 @@ public class PushandHang extends LinearOpMode {
         DcMotor motorFR = hardwareMap.get(DcMotor.class, "motorFrontRight");
         DcMotor motorBR = hardwareMap.get(DcMotor.class, "motorBackRight");
 
-
         DcMotor Intake = hardwareMap.get(DcMotor.class, "Intake"); //done   expansion hub 0
         DcMotor Sliders = hardwareMap.get(DcMotor.class, "Sliders"); //done     control hub 3
         DcMotor Climbing1 = hardwareMap.get(DcMotor.class, "Climbing1"); // done    expansion hub 3
@@ -36,7 +35,8 @@ public class PushandHang extends LinearOpMode {
         Servo DropperBottom = hardwareMap.get(Servo.class, "DropperBottom"); // control hub servo port 2
         Servo Wrist = hardwareMap.get(Servo.class, "Wrist"); // control hub servo port 0
 
-        /*//Climbing1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        /*
+        Climbing1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         Climbing1.setDirection(DcMotorSimple.Direction.REVERSE);
 
         Climbing1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);

@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
-
+//so far the newest file as of Dec 12
 @TeleOp
 public class AnotherDriveTrain47 extends LinearOpMode {
 
@@ -19,8 +19,6 @@ public class AnotherDriveTrain47 extends LinearOpMode {
     int buttonX=0;
 
     ElapsedTime timer = new ElapsedTime();
-
-
 
     @Override
     public void runOpMode() {
@@ -67,8 +65,12 @@ public class AnotherDriveTrain47 extends LinearOpMode {
                 Intake.setPower(0);
 
             if (gamepad2.right_trigger > 0) {
-                Intake.setPower(-gamepad2.right_trigger);
+                Intake.setPower(-gamepad2.right_trigger/3);
             }
+
+            //Climbing:  mapped to right joystick power
+            Climbing1.setPower(gamepad2.right_stick_y);
+            Climbing2.setPower(gamepad2.right_stick_y);
 
 
             //Slider
@@ -85,12 +87,6 @@ public class AnotherDriveTrain47 extends LinearOpMode {
             } else {
                 Sliders.setPower(0);
             }
-
-
-            //Climbing:  mapped to right joystick power
-
-            Climbing1.setPower(gamepad2.right_stick_y);
-            Climbing2.setPower(gamepad2.right_stick_y);
 
             //dropper
             //drops the bottom slot then waits until button is not pressed
