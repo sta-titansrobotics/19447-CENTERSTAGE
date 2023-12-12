@@ -117,18 +117,11 @@ public class AnotherDriveTrain47 extends LinearOpMode {
             //wrist
             //the strange calculations are because we need to convert (-1 - 1) into (0 - 1)
             if (gamepad1.left_bumper) {
-                wristpower += 0.02;
-                sleep(20);
-            }//fdsa
-
-            if (gamepad1.right_trigger < 0.5){
-                wristpower -= 0.02;
-                sleep(20);
+                Wrist.setPosition(Wrist.getPosition() + 0.05);
             }
-
-            wristpower = Range.clip(wristpower, 0, 1);
-
-            Wrist.setPosition(wristpower);
+            if (gamepad1.right_trigger < 0.5){
+                Wrist.setPosition(Wrist.getPosition() - 0.05);
+            }
 
             //------------------DRIVE TRAIN---------------------------------
             //Driving

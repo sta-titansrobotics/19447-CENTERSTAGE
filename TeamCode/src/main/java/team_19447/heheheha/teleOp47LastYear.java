@@ -1,6 +1,6 @@
 // Copy pasted last year's(2022-2023) FINAL tele-op code //
 
-package team_19447;
+package team_19447.heheheha;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
