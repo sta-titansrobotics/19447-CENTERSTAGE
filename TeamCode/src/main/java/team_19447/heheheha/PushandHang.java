@@ -14,8 +14,6 @@ public class PushandHang extends LinearOpMode {
 
     ElapsedTime timer = new ElapsedTime();
 
-
-
     @Override
     public void runOpMode() {
 
