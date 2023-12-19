@@ -105,7 +105,6 @@ public class AnotherDriveTrain47 extends LinearOpMode {
                 DropperBottom.setPosition(0);
             else if (buttonX % 4 == 2) {
                 DropperTop.setPosition(1);
-
             } else if (buttonX % 4 == 3) {
                 DropperTop.setPosition(0);
             } else {
