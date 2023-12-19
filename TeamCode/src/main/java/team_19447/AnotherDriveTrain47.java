@@ -34,10 +34,10 @@ public class AnotherDriveTrain47 extends LinearOpMode {
         DcMotor Sliders = hardwareMap.get(DcMotor.class, "Sliders"); //done     control hub 3
         DcMotor Climbing1 = hardwareMap.get(DcMotor.class, "Climbing1"); // done    expansion hub 3
         DcMotor Climbing2 = hardwareMap.get(DcMotor.class, "Climbing2");// done     control hub 0
-
+        /*
         Servo DropperTop = hardwareMap.get(Servo.class, "DropperTop"); //  control hub  servo port 1
-
         Servo DropperBottom = hardwareMap.get(Servo.class, "DropperBottom"); // control hub servo port 2
+        */
         Servo Wrist = hardwareMap.get(Servo.class, "Wrist"); // control hub servo port 0
 
         //Climbing1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -88,6 +88,8 @@ public class AnotherDriveTrain47 extends LinearOpMode {
                 Sliders.setPower(0);
             }
 
+            //build removed the servos
+            /*
             //dropper
             //drops the bottom slot then waits until button is not pressed
             //when button is not pressed load the top slot into the bottom slot
@@ -96,7 +98,7 @@ public class AnotherDriveTrain47 extends LinearOpMode {
                 timer.reset();
             }
 
-            //Note: top and bottom servo have wierd ranges as the servo programmer
+            //Note: top and bottom servo have weird ranges as the servo programmer
             // was bugging so range had to be adjusted to whatever range I can set it to
             // update: ignore?
             if (buttonX % 4 == 1)
@@ -109,6 +111,7 @@ public class AnotherDriveTrain47 extends LinearOpMode {
             } else {
                 DropperBottom.setPosition(1);
             }
+            */
 
             //wrist
             //the strange calculations are because we need to convert (-1 - 1) into (0 - 1)
