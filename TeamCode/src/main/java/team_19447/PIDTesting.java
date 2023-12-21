@@ -2,11 +2,12 @@ package team_19447;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@Autonomous
+@TeleOp
 public class PIDTesting extends LinearOpMode {
 
     // Set motor variables
@@ -21,11 +22,13 @@ public class PIDTesting extends LinearOpMode {
     public int rightPos1;
     public int rightPos2;
 
+    /*
+    Ignore
     public static final int TICKS_PER_REVOLUTION = 1440; // Replace with your motor's ticks per revolution
     public static final double WHEEL_DIAMETER_INCHES = 4.0; // Replace with your wheel diameter
     public static final double DRIVE_SPEED = 0.5; // Adjust the speed as needed
     public static final int TARGET_DISTANCE_INCHES = 12; // Replace with your target distance
-    public static final double RADIUS = 1.875;
+    public static final double RADIUS = 1.875;*/
 
     /*
      * HOW TO ADJUST THE CONSTANT VALUES
@@ -49,22 +52,12 @@ public class PIDTesting extends LinearOpMode {
     public static double lastError = 0;
 
     @Override
-    public void runOpMode() throws InterruptedException {
-
-        //note this part is for testing the values remove later and set these as constants
-        if(gamepad1.a)
-            Kd += 0.01;
-        if(gamepad1.b)
-            Kd -= 0.01;
-        if(gamepad1.x)
-            Kp += 0.05;
-        if(gamepad1.y)
-            Kp -= 0.01;
+    public void runOpMode() {
 
         // Initialize motors
         motorFL = hardwareMap.get(DcMotor.class, "motorFrontLeft");
         motorBL = hardwareMap.get(DcMotor.class, "motorBackLeft");
-        motorFR = hardwareMap.get(DcMotor.class, "motorFrontLeft");
+        motorFR = hardwareMap.get(DcMotor.class, "motorFrontRight");
         motorBR = hardwareMap.get(DcMotor.class, "motorBackRight");
 
         // set mode to stop and reset encoders -- resets encoders to the 0 position
@@ -83,14 +76,28 @@ public class PIDTesting extends LinearOpMode {
         rightPos1 = 0;
         rightPos2 = 0;
 
-        motorFL.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        motorBL.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        motorFR.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        motorBR.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        motorFL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        motorFR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        motorBL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        motorBR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
 
         // any code after this command will not be executed until the match has started
         waitForStart();
         timer.reset();
+        if (isStopRequested()) return;
+
+        while (opModeIsActive()) {
+
+        //note this part is for testing the values remove later and set these as constants
+        if(gamepad1.a)
+            Kd += 0.01;
+        if(gamepad1.b)
+            Kd -= 0.01;
+        if(gamepad1.x)
+            Kp += 0.05;
+        if(gamepad1.y)
+            Kp -= 0.01;
 
         // can now set drive distance because of the function below; now we just need to
         // input the distance
@@ -102,13 +109,16 @@ public class PIDTesting extends LinearOpMode {
 
         // PIDDrive(250, 250, 250, 250);
 
-        while (opModeIsActive()) {
+
             telemetry.addData("motorFL Encoder Position: ", motorFL.getCurrentPosition());
             telemetry.addData("motorBL Encoder Position: ", motorBL.getCurrentPosition());
             telemetry.addData("motorFR Encoder Position: ", motorFR.getCurrentPosition());
             telemetry.addData("motorBR Encoder Position: ", motorBR.getCurrentPosition());
             telemetry.addData("Kd: " , Kd);
             telemetry.addData("Kp: " , Kp);
+            telemetry.addData("current power --> BackLeft: " , motorBL.getPower());
+            telemetry.addData("current power --> BackRight: " , motorBR.getPower());
+
             telemetry.update();
         }
     }
@@ -116,6 +126,8 @@ public class PIDTesting extends LinearOpMode {
     // these parameters are distance in CM
     public void Drive(int TargetPositionMotorFL, int TargetPositionMotorBL, int TargetPositionMotorFR,
                       int TargetPositionMotorBR) {
+
+
 
         // this is in terms of cm
         TargetPositionMotorFL = (int) (47.63 * TargetPositionMotorFL);
@@ -128,30 +140,22 @@ public class PIDTesting extends LinearOpMode {
         motorBL.setTargetPosition(TargetPositionMotorBL);
         motorBR.setTargetPosition(TargetPositionMotorBR);
 
-        motorFL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        motorFR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        motorBL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        motorBR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        motorFL.setPower(PIDControl(TargetPositionMotorFL, motorFL.getCurrentPosition()));
-        motorBL.setPower(PIDControl(TargetPositionMotorBL, motorBL.getCurrentPosition()));
-        motorFR.setPower(PIDControl(TargetPositionMotorFR, motorFR.getCurrentPosition()));
-        motorBR.setPower(PIDControl(TargetPositionMotorBR, motorBR.getCurrentPosition()));
 
-        // Run to target position
-        motorFL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        motorFR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        motorBL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        motorBR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motorFL.setPower(PIDControl(TargetPositionMotorFL, motorFL.getCurrentPosition())/5);
+        motorBL.setPower(PIDControl(TargetPositionMotorBL, motorBL.getCurrentPosition())/5);
+        motorFR.setPower(PIDControl(TargetPositionMotorFR, motorFR.getCurrentPosition())/5);
+        motorBR.setPower(PIDControl(TargetPositionMotorBR, motorBR.getCurrentPosition())/5);
+
+
 
         // Wait until all motors reach the target position
-        while (opModeIsActive() && motorFL.isBusy() && motorFR.isBusy() && motorBL.isBusy() && motorBR.isBusy()) {
+        /*while (opModeIsActive() && motorFL.isBusy() && motorFR.isBusy() && motorBL.isBusy() && motorBR.isBusy()) {
         }
-
         motorFL.setPower(0);
         motorFR.setPower(0);
         motorBL.setPower(0);
-        motorBR.setPower(0);
+        motorBR.setPower(0);*/
 
     }
 
@@ -164,6 +168,6 @@ public class PIDTesting extends LinearOpMode {
         lastError = error;
         timer.reset();
 
-        return (error * Kp) + (derivative * Kd) + (integralSum * Ki) + (setPosition * Kf);
+        return (error * Kp) + (derivative * Kd) + (integralSum * Ki) ;
     }
 }
