@@ -43,7 +43,7 @@ public class PIDTesting extends LinearOpMode {
      * Decrease Ki by a factor of 2-4.
      */
     double integralSum = 0;
-    double Kp = 0.1;
+    double Kp = 0.015;
     double Ki = 0;
     double Kd = 0.01;
     double Kf = 0.2;
@@ -85,6 +85,12 @@ public class PIDTesting extends LinearOpMode {
         // any code after this command will not be executed until the match has started
         waitForStart();
         timer.reset();
+
+        // Starting position with robot right side
+        Drive(50, 50, 50, 50);
+        //dec 21: if this still doens't work after testing, implement a
+        //return statment in the pidDrive when targetposition is similar to encoderPosition, then break
+
         if (isStopRequested()) return;
 
         while (opModeIsActive()) {
@@ -104,12 +110,6 @@ public class PIDTesting extends LinearOpMode {
         // can also control the direction using the mecanum drivetrain directions here:
         // https://gm0.org/en/latest/docs/software/tutorials/mecanum-drive.html
 
-        // Starting position with robot right side
-        Drive(50, 50, 50, 50);
-
-        // PIDDrive(250, 250, 250, 250);
-
-
             telemetry.addData("motorFL Encoder Position: ", motorFL.getCurrentPosition());
             telemetry.addData("motorBL Encoder Position: ", motorBL.getCurrentPosition());
             telemetry.addData("motorFR Encoder Position: ", motorFR.getCurrentPosition());
@@ -127,8 +127,6 @@ public class PIDTesting extends LinearOpMode {
     public void Drive(int TargetPositionMotorFL, int TargetPositionMotorBL, int TargetPositionMotorFR,
                       int TargetPositionMotorBR) {
 
-
-
         // this is in terms of cm
         TargetPositionMotorFL = (int) (47.63 * TargetPositionMotorFL);
         TargetPositionMotorBL = (int) (47.63 * TargetPositionMotorBL );
@@ -141,11 +139,12 @@ public class PIDTesting extends LinearOpMode {
         motorBR.setTargetPosition(TargetPositionMotorBR);
 
 
+        motorFL.setPower(PIDControl(TargetPositionMotorFL, motorFL.getCurrentPosition())/3);
+        motorBL.setPower(PIDControl(TargetPositionMotorBL, motorBL.getCurrentPosition())/3);
+        motorFR.setPower(PIDControl(TargetPositionMotorFR, motorFR.getCurrentPosition())/3);
+        motorBR.setPower(PIDControl(TargetPositionMotorBR, motorBR.getCurrentPosition())/3);
 
-        motorFL.setPower(PIDControl(TargetPositionMotorFL, motorFL.getCurrentPosition())/5);
-        motorBL.setPower(PIDControl(TargetPositionMotorBL, motorBL.getCurrentPosition())/5);
-        motorFR.setPower(PIDControl(TargetPositionMotorFR, motorFR.getCurrentPosition())/5);
-        motorBR.setPower(PIDControl(TargetPositionMotorBR, motorBR.getCurrentPosition())/5);
+
 
 
 
