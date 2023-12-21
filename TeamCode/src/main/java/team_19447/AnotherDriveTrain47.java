@@ -18,6 +18,9 @@ public class AnotherDriveTrain47 extends LinearOpMode {
     int isSliding = 0 ;
     int buttonX=0;
 
+    int button2A =0;
+    boolean but2Acheck = false;
+
     ElapsedTime timer = new ElapsedTime();
 
     @Override
@@ -72,6 +75,34 @@ public class AnotherDriveTrain47 extends LinearOpMode {
             Climbing1.setPower(gamepad2.right_stick_y);
             Climbing2.setPower(gamepad2.right_stick_y);
 
+            //better climbing
+            /*
+            if (gamepad2.a && !but2Acheck) {
+                button2A += 1;
+                but2Acheck = true;
+            }
+            if (!gamepad2.a){
+                but2Acheck = false;
+            }
+            if (!but2Acheck) {
+                if (button2A % 2 == 1) {
+                    if (Climbing1.getCurrentPosition() < 1) { //replace 1 with value when fully extended
+                        Climbing1.setPower(1);
+                        Climbing2.setPower(1);
+                    } else {
+                        Climbing1.setPower(0);
+                        Climbing2.setPower(0);
+                    }
+                } else {
+                    if (Climbing1.getCurrentPosition() > 1) {
+                        Climbing1.setPower(-1);
+                        Climbing2.setPower(-1);
+                    } else {
+                        Climbing1.setPower(0);
+                        Climbing2.setPower(0);
+                }
+            }
+            */
 
             //Slider
             if (Sliders.getCurrentPosition() > 7500)
