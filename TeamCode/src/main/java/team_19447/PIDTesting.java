@@ -22,26 +22,6 @@ public class PIDTesting extends LinearOpMode {
     public int rightPos1;
     public int rightPos2;
 
-    /*
-    Ignore
-    public static final int TICKS_PER_REVOLUTION = 1440; // Replace with your motor's ticks per revolution
-    public static final double WHEEL_DIAMETER_INCHES = 4.0; // Replace with your wheel diameter
-    public static final double DRIVE_SPEED = 0.5; // Adjust the speed as needed
-    public static final int TARGET_DISTANCE_INCHES = 12; // Replace with your target distance
-    public static final double RADIUS = 1.875;*/
-
-    /*
-     * HOW TO ADJUST THE CONSTANT VALUES
-     * Set all gains to 0.
-     * Increase Kd until the system oscillates.
-     * Reduce Kd by a factor of 2-4.
-     * Set Kp to about 1% of Kd.
-     * Increase Kp until oscillations start.
-     * Decrease Kp by a factor of 2-4.
-     * Set Ki to about 1% of Kp.
-     * Increase Ki until oscillations start.
-     * Decrease Ki by a factor of 2-4.
-     */
     double integralSum = 0;
     double Kp = 0.015;
     double Ki = 0;
@@ -143,10 +123,6 @@ public class PIDTesting extends LinearOpMode {
         motorBL.setPower(PIDControl(TargetPositionMotorBL, motorBL.getCurrentPosition())/3);
         motorFR.setPower(PIDControl(TargetPositionMotorFR, motorFR.getCurrentPosition())/3);
         motorBR.setPower(PIDControl(TargetPositionMotorBR, motorBR.getCurrentPosition())/3);
-
-
-
-
 
         // Wait until all motors reach the target position
         /*while (opModeIsActive() && motorFL.isBusy() && motorFR.isBusy() && motorBL.isBusy() && motorBR.isBusy()) {

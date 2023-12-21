@@ -1,10 +1,11 @@
 package team_19447;
 
-import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 
 /*The alliances closest to the back board are '1'
@@ -17,22 +18,42 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 @Autonomous
 public class Blue1Auto extends LinearOpMode {
 
-    //counts_per_unit_distance = ticks per revolution / wheel_circumference
-    // 1425.1/29.92 = 47.63 this is the encoder count for every 1cm travelled
     public static final double forwardTicks = 47.63;
-
-    //Counts per Unit Lateral Distance = ticks per revolution / Lateral Distance
-    //note 49.05 is just a guess
     public static final double strafeTicks = 49.05;
     double default_power = 1;
+
+    public DcMotor motorFL;
+    public DcMotor motorBL;
+    public DcMotor motorFR;
+    public DcMotor motorBR;
+
+    public int leftPos1;
+    public int leftPos2;
+    public int rightPos1;
+    public int rightPos2;
+
+    double integralSum = 0;
+    double Kp = 0.015;
+    double Ki = 0;
+    double Kd = 0.01;
+    double Kf = 0.2;
+
+    ElapsedTime timer = new ElapsedTime();
+    public static double lastError = 0;
+
     @Override
     public void runOpMode() {
+        // Initialize motors
+        motorFL = hardwareMap.get(DcMotor.class, "motorFrontLeft");
+        motorBL = hardwareMap.get(DcMotor.class, "motorBackLeft");
+        motorFR = hardwareMap.get(DcMotor.class, "motorFrontRight");
+        motorBR = hardwareMap.get(DcMotor.class, "motorBackRight");
 
-        //HARDWARE MAPPING
-        DcMotor FrontLeft = hardwareMap.get(DcMotor.class, "motorFrontLeft");
-        DcMotor RearLeft = hardwareMap.get(DcMotor.class, "motorBackLeft");
-        DcMotor FrontRight = hardwareMap.get(DcMotor.class, "motorFrontRight");
-        DcMotor RearRight = hardwareMap.get(DcMotor.class, "motorBackRight");
+        // set mode to stop and reset encoders -- resets encoders to the 0 position
+        motorFL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        motorBL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        motorFR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        motorBR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         /*
         DcMotor Intake = hardwareMap.get(DcMotor.class, "Intake");   --> Done
@@ -40,8 +61,6 @@ public class Blue1Auto extends LinearOpMode {
         DcMotor Climbing1 = hardwareMap.get(DcMotor.class, "Climbing1"); for the robot to hang --> Done
         DcMotor Climbing2 = hardwareMap.get(DcMotor.class, "Climbing2"); for the robot to hang --> Done
 
-        Servo DropperTop =  hardwareMap.get(Servo.class, "DropperTop"); --> Done   //Servo Port 0
-        Servo DropperBottom =  hardwareMap.get(Servo.class, "DropperBottom"); --> Done //Servo Port 1
         Servo Wrist =  hardwareMap.get(Servo.class, "Wrist"); --> the thing that rotates the dropper //Servo Port 2
         Servo AirplaneLauncher = hardwareMap.get(Servo.class, "AirplaneLauncher"); --> Still have to work on //Servo Port 3
 
@@ -50,67 +69,90 @@ public class Blue1Auto extends LinearOpMode {
         */
 
         //Reverse left side motors, as they start out reversed
-        FrontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
-        RearLeft.setDirection(DcMotorSimple.Direction.REVERSE);
-
-        autoClass447 robot = new autoClass447(forwardTicks, strafeTicks, FrontLeft, RearLeft, FrontRight, RearRight);
-        robot.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        motorFL.setDirection(DcMotorSimple.Direction.REVERSE);
+        motorBL.setDirection(DcMotorSimple.Direction.REVERSE);
 
         waitForStart();
-
-        //Auto code
+        timer.reset();
+        //-------------Auto code goes here --------------------------------
         //move it forward 60cm
-        robot.Forward(60);
+        Drive(60, 60, 60, 60);
 
         //detect pixel and do whatever
 
 
         // left 50cm
-        robot.StrafeLeft(50);
+        Drive(50, 50, 50 ,50 );//not correct yet
 
         //drop the pixels onto back board
 
-        //move
-        robot.Forward(40);
-        robot.StrafeLeft(35);
+        //move to parking
+      //  robot.Forward(40);
+       // robot.StrafeLeft(35);
 
+
+        //---------------------------------------------------------------------
         if (isStopRequested()) return;
-
-        //movement - remember capitalization
-        robot.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         while (opModeIsActive()) {
 
-            telemetry.addData("encoder-front-left: ", FrontLeft.getCurrentPosition());
-            telemetry.addData("encoder-rear-left: ", RearLeft.getCurrentPosition());
-            telemetry.addData("encoder-front-right: ", FrontRight.getCurrentPosition());
-            telemetry.addData("encoder-rear-right: ", RearRight.getCurrentPosition());
+            telemetry.addData("motorFL Encoder Position: ", motorFL.getCurrentPosition());
+            telemetry.addData("motorBL Encoder Position: ", motorBL.getCurrentPosition());
+            telemetry.addData("motorFR Encoder Position: ", motorFR.getCurrentPosition());
+            telemetry.addData("motorBR Encoder Position: ", motorBR.getCurrentPosition());
+            telemetry.addData("Kd: " , Kd);
+            telemetry.addData("Kp: " , Kp);
+            telemetry.addData("current power --> BackLeft: " , motorBL.getPower());
+            telemetry.addData("current power --> BackRight: " , motorBR.getPower());
+
             telemetry.update();
         }
     }
 
     //---------------------------------------------------------------------------------
 
-     /*Ignore this part, not needed for this year robot
 
-    private void liftPosition(int distanceCM, double Speed, int Tolerance, boolean NextSequence) {
-        // convert encoder ticks to centimetres
-        double tick = distanceCM * forwardTicks;
-        int ticks = (int) tick;
+    public void Drive(int TargetPositionMotorFL, int TargetPositionMotorBL, int TargetPositionMotorFR,
+                      int TargetPositionMotorBR) {
 
-        LiftLeft.setTargetPosition(ticks);
-        LiftRight.setTargetPosition(ticks);
-        LiftLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        LiftRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        LiftLeft.setPower(Speed); //prob best to leave the speed as 1.
-        LiftRight.setPower(Speed);
-        ((DcMotorEx) LiftLeft).setTargetPositionTolerance(Tolerance);
-        ((DcMotorEx) LiftRight).setTargetPositionTolerance(Tolerance);
-        while (LiftLeft.isBusy() && LiftRight.isBusy() && NextSequence) {
+        // this is in terms of cm
+        TargetPositionMotorFL = (int) (47.63 * TargetPositionMotorFL);
+        TargetPositionMotorBL = (int) (47.63 * TargetPositionMotorBL );
+        TargetPositionMotorFR = (int) (47.63 * TargetPositionMotorFR );
+        TargetPositionMotorBR = (int) (47.63 * TargetPositionMotorBR);
+
+        motorFL.setTargetPosition(TargetPositionMotorFL);
+        motorFR.setTargetPosition(TargetPositionMotorFR);
+        motorBL.setTargetPosition(TargetPositionMotorBL);
+        motorBR.setTargetPosition(TargetPositionMotorBR);
+
+
+        motorFL.setPower(PIDControl(TargetPositionMotorFL, motorFL.getCurrentPosition())/3);
+        motorBL.setPower(PIDControl(TargetPositionMotorBL, motorBL.getCurrentPosition())/3);
+        motorFR.setPower(PIDControl(TargetPositionMotorFR, motorFR.getCurrentPosition())/3);
+        motorBR.setPower(PIDControl(TargetPositionMotorBR, motorBR.getCurrentPosition())/3);
+
+        // Wait until all motors reach the target position
+        /*while (opModeIsActive() && motorFL.isBusy() && motorFR.isBusy() && motorBL.isBusy() && motorBR.isBusy()) {
         }
-    }*/
+        motorFL.setPower(0);
+        motorFR.setPower(0);
+        motorBL.setPower(0);
+        motorBR.setPower(0);*/
 
+    }
+
+    // calculates the power which the motor should be set at.
+    public double PIDControl(double setPosition, double currentPosition) {
+        double error = setPosition - currentPosition;
+        integralSum += error * timer.seconds();
+        double derivative = (error - lastError) / timer.seconds();
+
+        lastError = error;
+        timer.reset();
+
+        return (error * Kp) + (derivative * Kd) + (integralSum * Ki) ;
+    }
 
 
 
