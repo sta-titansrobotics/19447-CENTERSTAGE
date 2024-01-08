@@ -76,7 +76,6 @@ public class AnotherDriveTrain47 extends LinearOpMode {
             Climbing2.setPower(gamepad2.right_stick_y);
 
             //better climbing
-            /*
             if (gamepad2.a && !but2Acheck) {
                 button2A += 1;
                 but2Acheck = true;
@@ -102,7 +101,7 @@ public class AnotherDriveTrain47 extends LinearOpMode {
                         Climbing2.setPower(0);
                 }
             }
-            */
+
 
             //Slider
             if (Sliders.getCurrentPosition() > 7500)

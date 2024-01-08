@@ -34,7 +34,7 @@ public class Blue1Auto extends LinearOpMode {
     public boolean canContinue = false;
 
     double integralSum = 0;
-    double Kp = 0.015;
+    double Kp = 0.05;
     double Ki = 0;
     double Kd = 0.01;
     double Kf = 0.2;
@@ -135,10 +135,10 @@ public class Blue1Auto extends LinearOpMode {
         motorBR.setTargetPosition(TargetPositionMotorBR);
 
 
-        motorFL.setPower(PIDControl(TargetPositionMotorFL, motorFL.getCurrentPosition())/3);
-        motorBL.setPower(PIDControl(TargetPositionMotorBL, motorBL.getCurrentPosition())/3);
-        motorFR.setPower(PIDControl(TargetPositionMotorFR, motorFR.getCurrentPosition())/3);
-        motorBR.setPower(PIDControl(TargetPositionMotorBR, motorBR.getCurrentPosition())/3);
+        motorFL.setPower(PIDControl(TargetPositionMotorFL, motorFL.getCurrentPosition())/10);
+        motorBL.setPower(PIDControl(TargetPositionMotorBL, motorBL.getCurrentPosition())/10);
+        motorFR.setPower(PIDControl(TargetPositionMotorFR, motorFR.getCurrentPosition())/10);
+        motorBR.setPower(PIDControl(TargetPositionMotorBR, motorBR.getCurrentPosition())/10);
 
         // Wait until all motors reach the target position
         /*while (opModeIsActive() && motorFL.isBusy() && motorFR.isBusy() && motorBL.isBusy() && motorBR.isBusy()) {
