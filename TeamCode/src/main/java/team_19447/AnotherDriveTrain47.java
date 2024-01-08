@@ -182,9 +182,6 @@ public class AnotherDriveTrain47 extends LinearOpMode {
             telemetry.addData("Climbing1",    Climbing1.getPower());
             telemetry.addData("Climbing2",    Climbing2.getPower());
 
-            telemetry.addData("top Position:", DropperTop.getPosition());
-            telemetry.addData("bottom Position:", DropperBottom.getPosition());
-
             telemetry.update();
         }
     }

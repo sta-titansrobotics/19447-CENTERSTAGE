@@ -31,6 +31,7 @@ public class Blue1Auto extends LinearOpMode {
     public int leftPos2;
     public int rightPos1;
     public int rightPos2;
+    public boolean canContinue = false;
 
     double integralSum = 0;
     double Kp = 0.015;
@@ -76,14 +77,17 @@ public class Blue1Auto extends LinearOpMode {
         timer.reset();
         //-------------Auto code goes here --------------------------------
         //move it forward 60cm
-        Drive(60, 60, 60, 60);
+        while(!canContinue)
+            Drive(60, 60, 60, 60);
+        canContinue = false;
 
         //detect pixel and do whatever
 
 
         // left 50cm
-        Drive(50, 50, 50 ,50 );//not correct yet
-
+        while(!canContinue)
+            Drive(50, 50, 50 ,50 );//not correct yet
+        canContinue = false;
         //drop the pixels onto back board
 
         //move to parking
@@ -114,6 +118,10 @@ public class Blue1Auto extends LinearOpMode {
 
     public void Drive(int TargetPositionMotorFL, int TargetPositionMotorBL, int TargetPositionMotorFR,
                       int TargetPositionMotorBR) {
+
+        if(motorFL.getCurrentPosition()>TargetPositionMotorFL-0.5){
+            canContinue = true;
+        }
 
         // this is in terms of cm
         TargetPositionMotorFL = (int) (47.63 * TargetPositionMotorFL);

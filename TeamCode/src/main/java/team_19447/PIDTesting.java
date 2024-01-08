@@ -90,16 +90,16 @@ public class PIDTesting extends LinearOpMode {
         // can also control the direction using the mecanum drivetrain directions here:
         // https://gm0.org/en/latest/docs/software/tutorials/mecanum-drive.html
 
-            telemetry.addData("motorFL Encoder Position: ", motorFL.getCurrentPosition());
-            telemetry.addData("motorBL Encoder Position: ", motorBL.getCurrentPosition());
-            telemetry.addData("motorFR Encoder Position: ", motorFR.getCurrentPosition());
-            telemetry.addData("motorBR Encoder Position: ", motorBR.getCurrentPosition());
-            telemetry.addData("Kd: " , Kd);
-            telemetry.addData("Kp: " , Kp);
-            telemetry.addData("current power --> BackLeft: " , motorBL.getPower());
-            telemetry.addData("current power --> BackRight: " , motorBR.getPower());
+        telemetry.addData("motorFL Encoder Position: ", motorFL.getCurrentPosition());
+        telemetry.addData("motorBL Encoder Position: ", motorBL.getCurrentPosition());
+        telemetry.addData("motorFR Encoder Position: ", motorFR.getCurrentPosition());
+        telemetry.addData("motorBR Encoder Position: ", motorBR.getCurrentPosition());
+        telemetry.addData("Kd: " , Kd);
+        telemetry.addData("Kp: " , Kp);
+        telemetry.addData("current power --> BackLeft: " , motorBL.getPower());
+        telemetry.addData("current power --> BackRight: " , motorBR.getPower());
 
-            telemetry.update();
+        telemetry.update();
         }
     }
 
