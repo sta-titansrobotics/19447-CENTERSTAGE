@@ -37,10 +37,7 @@ public class AnotherDriveTrain47 extends LinearOpMode {
         DcMotor Sliders = hardwareMap.get(DcMotor.class, "Sliders"); //done     control hub 3
         DcMotor Climbing1 = hardwareMap.get(DcMotor.class, "Climbing1"); // done    expansion hub 3
         DcMotor Climbing2 = hardwareMap.get(DcMotor.class, "Climbing2");// done     control hub 0
-        /*
-        Servo DropperTop = hardwareMap.get(Servo.class, "DropperTop"); //  control hub  servo port 1
-        Servo DropperBottom = hardwareMap.get(Servo.class, "DropperBottom"); // control hub servo port 2
-        */
+
         Servo Wrist = hardwareMap.get(Servo.class, "Wrist"); // control hub servo port 0
 
         //Climbing1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -71,9 +68,9 @@ public class AnotherDriveTrain47 extends LinearOpMode {
                 Intake.setPower(-gamepad2.right_trigger/3);
             }
 
-            //Climbing:  mapped to right joystick power
+            /*Climbing:  mapped to right joystick power
             Climbing1.setPower(gamepad2.right_stick_y);
-            Climbing2.setPower(gamepad2.right_stick_y);
+            Climbing2.setPower(gamepad2.right_stick_y);*/
 
             //better climbing
             if (gamepad2.a && !but2Acheck) {
@@ -85,7 +82,7 @@ public class AnotherDriveTrain47 extends LinearOpMode {
             }
             if (!but2Acheck) {
                 if (button2A % 2 == 1) {
-                    if (Climbing1.getCurrentPosition() < 1) { //replace 1 with value when fully extended
+                    if (Climbing1.getCurrentPosition() < 5000) { //replace 5000 with value when fully extended
                         Climbing1.setPower(1);
                         Climbing2.setPower(1);
                     } else {
@@ -93,12 +90,13 @@ public class AnotherDriveTrain47 extends LinearOpMode {
                         Climbing2.setPower(0);
                     }
                 } else {
-                    if (Climbing1.getCurrentPosition() > 1) {
+                    if (Climbing1.getCurrentPosition() > 5000) {
                         Climbing1.setPower(-1);
                         Climbing2.setPower(-1);
                     } else {
                         Climbing1.setPower(0);
                         Climbing2.setPower(0);
+                    }
                 }
             }
 
@@ -117,30 +115,6 @@ public class AnotherDriveTrain47 extends LinearOpMode {
             } else {
                 Sliders.setPower(0);
             }
-
-            //build removed the servos
-            /*
-            //dropper
-            //drops the bottom slot then waits until button is not pressed
-            //when button is not pressed load the top slot into the bottom slot
-            if (gamepad2.x && timer.seconds() > 0.5) {
-                buttonX += 1;
-                timer.reset();
-            }
-
-            //Note: top and bottom servo have weird ranges as the servo programmer
-            // was bugging so range had to be adjusted to whatever range I can set it to
-            // update: ignore?
-            if (buttonX % 4 == 1)
-                DropperBottom.setPosition(0);
-            else if (buttonX % 4 == 2) {
-                DropperTop.setPosition(1);
-            } else if (buttonX % 4 == 3) {
-                DropperTop.setPosition(0);
-            } else {
-                DropperBottom.setPosition(1);
-            }
-            */
 
             //wrist
             //the strange calculations are because we need to convert (-1 - 1) into (0 - 1)
