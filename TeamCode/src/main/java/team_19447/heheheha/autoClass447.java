@@ -1,10 +1,12 @@
-package team_19447;
+package team_19447.heheheha;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.util.Range;
 
 public class autoClass447{
+
+    //Note: This code doesn't make sense
 
     DcMotor FrontLeft;
     DcMotor RearLeft;

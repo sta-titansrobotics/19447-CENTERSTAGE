@@ -3,9 +3,10 @@ package team_19447;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.hardware.Servo;
+
+import team_19447.heheheha.autoClass447;
+
 @Autonomous
 public class autonomous_Encoder47 extends LinearOpMode {
 
