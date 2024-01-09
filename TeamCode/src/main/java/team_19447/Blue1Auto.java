@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 
@@ -45,10 +46,20 @@ public class Blue1Auto extends LinearOpMode {
     @Override
     public void runOpMode() {
         // Initialize motors
-        motorFL = hardwareMap.get(DcMotor.class, "motorFrontLeft");
-        motorBL = hardwareMap.get(DcMotor.class, "motorBackLeft");
-        motorFR = hardwareMap.get(DcMotor.class, "motorFrontRight");
-        motorBR = hardwareMap.get(DcMotor.class, "motorBackRight");
+        //Moving
+        DcMotor motorFL = hardwareMap.get(DcMotor.class, "motorFrontLeft"); //Expansion hub 3
+        DcMotor motorBL = hardwareMap.get(DcMotor.class, "motorBackLeft");  //Expansion hub 2
+        DcMotor motorFR = hardwareMap.get(DcMotor.class, "motorFrontRight");  //Control hub 3
+        DcMotor motorBR = hardwareMap.get(DcMotor.class, "motorBackRight"); //Control hub 2
+
+
+        DcMotor Intake = hardwareMap.get(DcMotor.class, "Intake"); //  Expansion hub 1
+        DcMotor Sliders = hardwareMap.get(DcMotor.class, "Sliders");   // Control hub 0
+        DcMotor Climbing1 = hardwareMap.get(DcMotor.class, "Climbing1"); // left    Control hub 1
+        DcMotor Climbing2 = hardwareMap.get(DcMotor.class, "Climbing2");// right     Expansion hub 0
+
+        Servo Wrist = hardwareMap.get(Servo.class, "Wrist"); // control hub servo port 5
+        Servo Launcher = hardwareMap.get(Servo.class, "Launcher"); // control hub servo port 4
 
         // set mode to stop and reset encoders -- resets encoders to the 0 position
         motorFL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
