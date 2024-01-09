@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
-//so far the newest file as of Dec 12
+//so far the newest file as of Jan 9 2024
 @TeleOp
 public class AnotherDriveTrain47 extends LinearOpMode {
 
@@ -27,18 +27,19 @@ public class AnotherDriveTrain47 extends LinearOpMode {
     public void runOpMode() {
 
         //Moving
-        DcMotor motorFL = hardwareMap.get(DcMotor.class, "motorFrontLeft");
-        DcMotor motorBL = hardwareMap.get(DcMotor.class, "motorBackLeft");
-        DcMotor motorFR = hardwareMap.get(DcMotor.class, "motorFrontRight");
-        DcMotor motorBR = hardwareMap.get(DcMotor.class, "motorBackRight");
+        DcMotor motorFL = hardwareMap.get(DcMotor.class, "motorFrontLeft"); //Expansion hub 3
+        DcMotor motorBL = hardwareMap.get(DcMotor.class, "motorBackLeft");  //Expansion hub 2
+        DcMotor motorFR = hardwareMap.get(DcMotor.class, "motorFrontRight");  //Control hub 3
+        DcMotor motorBR = hardwareMap.get(DcMotor.class, "motorBackRight"); //Control hub 2
 
 
-        DcMotor Intake = hardwareMap.get(DcMotor.class, "Intake"); //done   expansion hub 0
-        DcMotor Sliders = hardwareMap.get(DcMotor.class, "Sliders"); //done     control hub 3
-        DcMotor Climbing1 = hardwareMap.get(DcMotor.class, "Climbing1"); // done    expansion hub 3
-        DcMotor Climbing2 = hardwareMap.get(DcMotor.class, "Climbing2");// done     control hub 0
+        DcMotor Intake = hardwareMap.get(DcMotor.class, "Intake"); //  Expansion hub 1
+        DcMotor Sliders = hardwareMap.get(DcMotor.class, "Sliders");   // Control hub 0
+        DcMotor Climbing1 = hardwareMap.get(DcMotor.class, "Climbing1"); // left    Control hub 1
+        DcMotor Climbing2 = hardwareMap.get(DcMotor.class, "Climbing2");// right     Expansion hub 0
 
-        Servo Wrist = hardwareMap.get(Servo.class, "Wrist"); // control hub servo port 0
+        Servo Wrist = hardwareMap.get(Servo.class, "Wrist"); // control hub servo port 5
+        Servo Launcher = hardwareMap.get(Servo.class, "Launcher"); // control hub servo port 4
 
         //Climbing1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         Climbing1.setDirection(DcMotorSimple.Direction.REVERSE);
