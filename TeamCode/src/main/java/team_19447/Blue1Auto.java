@@ -43,23 +43,16 @@ public class Blue1Auto extends LinearOpMode {
     ElapsedTime timer = new ElapsedTime();
     public static double lastError = 0;
 
+    //Moving
+
+
     @Override
     public void runOpMode() {
         // Initialize motors
-        //Moving
-        DcMotor motorFL = hardwareMap.get(DcMotor.class, "motorFrontLeft"); //Expansion hub 3
-        DcMotor motorBL = hardwareMap.get(DcMotor.class, "motorBackLeft");  //Expansion hub 2
-        DcMotor motorFR = hardwareMap.get(DcMotor.class, "motorFrontRight");  //Control hub 3
-        DcMotor motorBR = hardwareMap.get(DcMotor.class, "motorBackRight"); //Control hub 2
-
-
-        DcMotor Intake = hardwareMap.get(DcMotor.class, "Intake"); //  Expansion hub 1
-        DcMotor Sliders = hardwareMap.get(DcMotor.class, "Sliders");   // Control hub 0
-        DcMotor Climbing1 = hardwareMap.get(DcMotor.class, "Climbing1"); // left    Control hub 1
-        DcMotor Climbing2 = hardwareMap.get(DcMotor.class, "Climbing2");// right     Expansion hub 0
-
-        Servo Wrist = hardwareMap.get(Servo.class, "Wrist"); // control hub servo port 5
-        Servo Launcher = hardwareMap.get(Servo.class, "Launcher"); // control hub servo port 4
+        motorFL = hardwareMap.get(DcMotor.class, "motorFrontLeft"); //Expansion hub 3
+        motorBL = hardwareMap.get(DcMotor.class, "motorBackLeft");  //Expansion hub 2
+       motorFR = hardwareMap.get(DcMotor.class, "motorFrontRight");  //Control hub 3
+         motorBR = hardwareMap.get(DcMotor.class, "motorBackRight"); //Control hub 2
 
         // set mode to stop and reset encoders -- resets encoders to the 0 position
         motorFL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -115,10 +108,6 @@ public class Blue1Auto extends LinearOpMode {
             telemetry.addData("motorBL Encoder Position: ", motorBL.getCurrentPosition());
             telemetry.addData("motorFR Encoder Position: ", motorFR.getCurrentPosition());
             telemetry.addData("motorBR Encoder Position: ", motorBR.getCurrentPosition());
-            telemetry.addData("Kd: " , Kd);
-            telemetry.addData("Kp: " , Kp);
-            telemetry.addData("current power --> BackLeft: " , motorBL.getPower());
-            telemetry.addData("current power --> BackRight: " , motorBR.getPower());
 
             telemetry.update();
         }
@@ -133,6 +122,7 @@ public class Blue1Auto extends LinearOpMode {
         if(motorFL.getCurrentPosition()>TargetPositionMotorFL-0.5){
             canContinue = true;
         }
+
 
         // this is in terms of cm
         TargetPositionMotorFL = (int) (47.63 * TargetPositionMotorFL);

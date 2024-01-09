@@ -61,12 +61,12 @@ public class AnotherDriveTrain47 extends LinearOpMode {
         while (opModeIsActive()) {
             //Intake
             if (gamepad2.right_bumper)
-                Intake.setPower(0.6);
+                Intake.setPower(0.8);
             else
                 Intake.setPower(0);
 
             if (gamepad2.right_trigger > 0) {
-                Intake.setPower(-gamepad2.right_trigger/3);
+                Intake.setPower(-gamepad2.right_trigger/2);
             }
 
             /*Climbing:  mapped to right joystick power
@@ -74,14 +74,8 @@ public class AnotherDriveTrain47 extends LinearOpMode {
             Climbing2.setPower(gamepad2.right_stick_y);*/
 
             //better climbing
-            if (gamepad2.a && !but2Acheck) {
-                button2A += 1;
-                but2Acheck = true;
-            }
-            if (!gamepad2.a){
-                but2Acheck = false;
-            }
-            if (!but2Acheck) {
+            if (!but2Acheck && gamepad2.a) {
+                button2A ++;
                 if (button2A % 2 == 1) {
                     if (Climbing1.getCurrentPosition() < 5000) { //replace 5000 with value when fully extended
                         Climbing1.setPower(1);
@@ -99,6 +93,9 @@ public class AnotherDriveTrain47 extends LinearOpMode {
                         Climbing2.setPower(0);
                     }
                 }
+                but2Acheck = true;
+            } else if (!gamepad2.a)
+                but2Acheck = false;
 
             //Slider
             if (Sliders.getCurrentPosition() > 7500)
