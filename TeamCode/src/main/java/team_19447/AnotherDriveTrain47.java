@@ -5,106 +5,50 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.util.ElapsedTime;
+import com.qualcomm.robotcore.util.Range;
 
-
+//so far the newest file as of Jan 9 2024
 @TeleOp
 public class AnotherDriveTrain47 extends LinearOpMode {
 
     int buttonA=0;
+    int isClimbing=0;
+    double wristpower = 0;
+    int isSliding = 0 ;
     int buttonX=0;
-    int buttonY=0;
-    int buttonB=0;
 
     int button2A =0;
-    int button2X =0;
-    int button2B =0;
-    int button2Y =0;
+    boolean but2Acheck = false;
 
-    boolean dropping = false;
-    //change -6 to how long it takes for the servo to change -1
-    //- number to prevent the later if statement from being executed at the start
-    int prevtime = -6;
+    ElapsedTime timer = new ElapsedTime();
+
     @Override
     public void runOpMode() {
 
-
         //Moving
-        DcMotor motorFL = hardwareMap.get(DcMotor.class, "motorFrontLeft");
-        DcMotor motorBL = hardwareMap.get(DcMotor.class, "motorBackLeft");
-        DcMotor motorFR = hardwareMap.get(DcMotor.class, "motorFrontRight");
-        DcMotor motorBR = hardwareMap.get(DcMotor.class, "motorBackRight");
+        DcMotor motorFL = hardwareMap.get(DcMotor.class, "motorFrontLeft"); //Expansion hub 3
+        DcMotor motorBL = hardwareMap.get(DcMotor.class, "motorBackLeft");  //Expansion hub 2
+        DcMotor motorFR = hardwareMap.get(DcMotor.class, "motorFrontRight");  //Control hub 3
+        DcMotor motorBR = hardwareMap.get(DcMotor.class, "motorBackRight"); //Control hub 2
 
-        /*
-        DcMotor Intake = hardwareMap.get(DcMotor.class, "Intake"); --> Done
-        DcMotor Sliders = hardwareMap.get(DcMotor.class, "Sliders"); --> Done
-        DcMotor Climbing1 = hardwareMap.get(DcMotor.class, "Climbing1"); for the robot to hang --> Done
-        DcMotor Climbing2 = hardwareMap.get(DcMotor.class, "Climbing2"); for the robot to hang --> Done
 
-        Servo DropperTop =  hardwareMap.get(Servo.class, "DropperTop"); --> Done   //Servo Port 0
-        Servo DropperBottom =  hardwareMap.get(Servo.class, "DropperBottom"); --> Done //Servo Port 1
-        Servo Wrist =  hardwareMap.get(Servo.class, "Wrist"); --> the thing that rotates the dropper //Servo Port 2
-        Servo AirplaneLauncher = hardwareMap.get(Servo.class, "AirplaneLauncher"); --> Still have to work on //Servo Port 3
+        DcMotor Intake = hardwareMap.get(DcMotor.class, "Intake"); //  Expansion hub 1
+        DcMotor Sliders = hardwareMap.get(DcMotor.class, "Sliders");   // Control hub 0
+        DcMotor Climbing1 = hardwareMap.get(DcMotor.class, "Climbing1"); // left    Control hub 1
+        DcMotor Climbing2 = hardwareMap.get(DcMotor.class, "Climbing2");// right     Expansion hub 0
 
-        Climbing1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        Servo Wrist = hardwareMap.get(Servo.class, "Wrist"); // control hub servo port 5
+        Servo Launcher = hardwareMap.get(Servo.class, "Launcher"); // control hub servo port 4
+
+        //Climbing1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         Climbing1.setDirection(DcMotorSimple.Direction.REVERSE);
-        Climbing2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        */
 
-        //toggle template, note: its just template, delete after
-        if (gamepad1.a)
-            buttonA +=1;
-        if(buttonX%2==1){
-            //Intake.setPower(1);
-        }else {
-            //Intake.setpower(0);
-        }
-
-
-        //wrist
-        //the strange calculations are because we need to convert (-1 - 1) into (0 - 1)
-        //Wrist.setPosition((gamepad2.left_stick_y*0.5)+0.5);
-
-        //Intake
-        /*
-        if (gamepad1.a)
-            buttonA +=1;
-        if(buttonA%2==1){
-            Intake.setPower(1);
-        }else{
-            Intake.setpower(0);
-        }
-        */
-
-        //Climbing:  mapped to right joystick power
-        //Climbing1.setPower(gamepad2.right_stick_y);
-        //Climbing2.setPower(gamepad2.right_stick_y);
-
-        //dropper
-        //drops the bottom slot then waits until button is not pressed
-        //when button is not pressed load the top slot into the bottom slot
-
-        /*
-        if (gamepad2.b){
-            DropperBottom.setPosition(0.5);
-            dropping = true;
-        }
-        if (!gamepad2.b && dropping) {
-            DropperBottom.setPosition(0);
-            prevtime = getRuntime();
-            DropperTop.setPosition(0.5);
-            dropping = false;
-        }
-        //change 5 to however long it takes for the servo to move into place
-        if (getRuntime() - prevtime == 5){
-            DropperTop.setPosition(0);
-        }*/
-
-        if(gamepad1.right_bumper){
-            //Sliders.setPower(1);
-        }
-            else if(gamepad1.right_trigger>0)
-            //Sliders.setPower(-gamepad1.right_trigger);
-
+        Climbing1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        Climbing2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        Sliders.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        //Climbing2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        Climbing2.setDirection(DcMotorSimple.Direction.REVERSE);
 
         //Reverse right side motors
         motorFL.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -114,43 +58,98 @@ public class AnotherDriveTrain47 extends LinearOpMode {
 
         if (isStopRequested()) return;
 
-        //First link is game manual zero, second link is FTC java syntax documentation
-        //https://gm0.org/en/latest/docs/software/tutorials/mecanum-drive.html
-        //ftc documentation https://ftctechnh.github.io/ftc_app/doc/javadoc/com/qualcomm/robotcore/hardware/Gamepad.html
-
         while (opModeIsActive()) {
+            //Intake
+            if (gamepad2.right_bumper)
+                Intake.setPower(0.6);
+            else
+                Intake.setPower(0);
 
+            if (gamepad2.right_trigger > 0) {
+                Intake.setPower(-gamepad2.right_trigger/3);
+            }
+
+            /*Climbing:  mapped to right joystick power
+            Climbing1.setPower(gamepad2.right_stick_y);
+            Climbing2.setPower(gamepad2.right_stick_y);*/
+
+            //better climbing
+            if (!but2Acheck && gamepad2.a) {
+                button2A ++;
+                if (button2A % 2 == 1) {
+                    if (Climbing1.getCurrentPosition() < 5000) { //replace 5000 with value when fully extended
+                        Climbing1.setPower(1);
+                        Climbing2.setPower(1);
+                    } else {
+                        Climbing1.setPower(0);
+                        Climbing2.setPower(0);
+                    }
+                } else {
+                    if (Climbing1.getCurrentPosition() > 5000) {
+                        Climbing1.setPower(-1);
+                        Climbing2.setPower(-1);
+                    } else {
+                        Climbing1.setPower(0);
+                        Climbing2.setPower(0);
+                    }
+                }
+                but2Acheck = true;
+            } else if (!gamepad2.a)
+                but2Acheck = false;
+
+            //Slider
+            if (Sliders.getCurrentPosition() > 7500)
+                isSliding = 0;
+            if (gamepad1.right_bumper) {
+                isSliding = 1;
+            }
+
+            if (isSliding==1 && Sliders.getCurrentPosition() < 7500) {
+                Sliders.setPower(1);
+            } else if (gamepad1.right_trigger > 0 && Sliders.getCurrentPosition() > 100) {
+                Sliders.setPower(-gamepad1.right_trigger);
+            } else {
+                Sliders.setPower(0);
+            }
+
+            //wrist
+            if (gamepad1.left_bumper) {
+                Wrist.setPosition(Wrist.getPosition() + 0.0005);
+            }
+            if (gamepad1.left_trigger > 0.5){
+                Wrist.setPosition(Wrist.getPosition() - 0.0005);
+            }
+            //------------------DRIVE TRAIN---------------------------------
             //Driving
-            double y = -gamepad1.left_stick_y; // Remember, this is reversed!
+            double leftPower = -gamepad1.left_stick_y;
+            double rightPower = -gamepad1.right_stick_y; // heheheha
 
-            //STRAFING VARIABLE
-            double x = gamepad1.left_stick_x * 1.1; // Counteract imperfect strafing (moving from side to side)
-
-            //THIS IS THE TURNING VARIABLE
-            double rx = gamepad1.right_stick_x;
-
-            //To prevent stick drift
-            if(Math.abs(y)<0.1)
-                y=0;
-            if(Math.abs(x)<0.1)
-                x=0;
-
-            double denominator = Math.max(Math.abs(y) + Math.abs(x) + Math.abs(rx), 1);
-            denominator *= 1.2; //complaints of motors being too sensitive so turning down the speed.
-            double frontLeftPower = (y + x + rx) / denominator;
-            double backLeftPower = (y - x + rx) / denominator;
-            double frontRightPower = (y - x - rx) / denominator;
-            double backRightPower = (y + x - rx) / denominator;
-
-            motorFL.setPower(frontLeftPower);
-            motorBL.setPower(backLeftPower);
-            motorFR.setPower(frontRightPower);
-            motorBR.setPower(backRightPower);
+            if (gamepad1.right_stick_x > 0.7) {
+                motorFL.setPower(gamepad1.right_stick_x);
+                motorBL.setPower(-gamepad1.right_stick_x);
+                motorFR.setPower(-gamepad1.right_stick_x);
+                motorBR.setPower(gamepad1.right_stick_x);
+            } else if (gamepad1.left_stick_x < -0.7) {
+                motorFL.setPower(gamepad1.left_stick_x);
+                motorBL.setPower(-gamepad1.left_stick_x);
+                motorFR.setPower(-gamepad1.left_stick_x);
+                motorBR.setPower(gamepad1.left_stick_x);
+            } else {
+                motorFL.setPower(leftPower);
+                motorBL.setPower(leftPower);
+                motorFR.setPower(rightPower);
+                motorBR.setPower(rightPower);
+            }
 
             telemetry.addData("LF Power:", motorFL.getPower());
             telemetry.addData("LB Power:", motorBL.getPower());
             telemetry.addData("RF Power:", motorFR.getPower());
             telemetry.addData("RB Power:", motorBR.getPower());
+
+            telemetry.addData("Slider position",    Sliders.getPower());
+            telemetry.addData("Climbing1",    Climbing1.getPower());
+            telemetry.addData("Climbing2",    Climbing2.getPower());
+
             telemetry.update();
         }
     }
