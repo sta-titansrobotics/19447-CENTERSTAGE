@@ -32,7 +32,6 @@ public class AnotherDriveTrain47 extends LinearOpMode {
         DcMotor motorFR = hardwareMap.get(DcMotor.class, "motorFrontRight");  //Control hub 3
         DcMotor motorBR = hardwareMap.get(DcMotor.class, "motorBackRight"); //Control hub 2
 
-
         DcMotor Intake = hardwareMap.get(DcMotor.class, "Intake"); //  Expansion hub 1
         DcMotor Sliders = hardwareMap.get(DcMotor.class, "Sliders");   // Control hub 0
         DcMotor Climbing1 = hardwareMap.get(DcMotor.class, "Climbing1"); // left    Control hub 1
@@ -41,9 +40,7 @@ public class AnotherDriveTrain47 extends LinearOpMode {
         Servo Wrist = hardwareMap.get(Servo.class, "Wrist"); // control hub servo port 5
         Servo Launcher = hardwareMap.get(Servo.class, "Launcher"); // control hub servo port 4
 
-        Wrist.setPosition(0);
-
-        //Climbing1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        Wrist.setPosition(0.5);
 
 
         Climbing1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -62,7 +59,6 @@ public class AnotherDriveTrain47 extends LinearOpMode {
         motorBL.setDirection(DcMotorSimple.Direction.REVERSE);
 
         waitForStart();
-
 
         if (isStopRequested()) return;
 
@@ -126,11 +122,12 @@ public class AnotherDriveTrain47 extends LinearOpMode {
 
             //wrist
             if (gamepad1.left_bumper) {
-                Wrist.setPosition(Wrist.getPosition() + 0.0005);
+                Wrist.setPosition(Range.clip(Wrist.getPosition() + 0.0005, 0, 1));
             }
             if (gamepad1.left_trigger > 0.5){
-                Wrist.setPosition(Wrist.getPosition() - 0.0005);
+                Wrist.setPosition(Range.clip(Wrist.getPosition() - 0.0005, 0, 1));
             }
+
             //------------------DRIVE TRAIN---------------------------------
             //Driving
             double leftPower = -gamepad1.left_stick_y;
@@ -162,6 +159,9 @@ public class AnotherDriveTrain47 extends LinearOpMode {
             telemetry.addData("Slider power",    Sliders.getPower());
             telemetry.addData("Climbing1",    Climbing1.getPower());
             telemetry.addData("Climbing2",    Climbing2.getPower());
+
+            telemetry.addData("Wrist Position",    Wrist.getController().getServoPosition(5));
+            telemetry.addData("Wrist Position",    Wrist.getPosition());   //whichever one of these 2 works better
 
             telemetry.update();
         }
