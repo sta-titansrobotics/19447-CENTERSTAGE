@@ -57,6 +57,7 @@ public class AnotherDriveTrain47 extends LinearOpMode {
         //Reverse right side motors
         motorFL.setDirection(DcMotorSimple.Direction.REVERSE);
         motorBL.setDirection(DcMotorSimple.Direction.REVERSE);
+        Sliders.setDirection(DcMotorSimple.Direction.REVERSE);
 
         waitForStart();
 
@@ -75,7 +76,7 @@ public class AnotherDriveTrain47 extends LinearOpMode {
 
             //Climbing:  mapped to right joystick power
             Climbing1.setPower(gamepad2.right_stick_y);
-            Climbing2.setPower(gamepad2.right_stick_y);
+            Climbing2.setPower(gamepad2.right_stick_y); //ticks to 10,000
 
             /*//better climbing
             if (gamepad2.a && !but2Acheck) {
