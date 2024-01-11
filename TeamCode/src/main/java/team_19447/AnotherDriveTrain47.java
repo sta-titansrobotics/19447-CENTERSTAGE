@@ -46,6 +46,8 @@ public class AnotherDriveTrain47 extends LinearOpMode {
         Climbing1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         Climbing2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         Sliders.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        Climbing1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        Climbing2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         Sliders.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
@@ -82,14 +84,25 @@ public class AnotherDriveTrain47 extends LinearOpMode {
             }
 
             if(button2A%2==1){
-                Climbing1.setTargetPosition(10000);
-                Climbing2.setTargetPosition(10000);
+                Climbing1.setPower(1);
+                Climbing2.setPower(1);
+                if(Climbing1.getCurrentPosition()>100000){
+                    Climbing1.setPower(0);
+                    Climbing2.setPower(0);
+                    button2A += 1;
+                    break;
+                }
             }else{
-                Climbing1.setTargetPosition(10);
-                Climbing2.setTargetPosition(10);
+                Climbing1.setPower(-1);
+                Climbing2.setPower(-1);
+                if(Climbing1.getCurrentPosition()<10){
+                    Climbing1.setPower(0);
+                    Climbing2.setPower(0);
+                    button2A += 1;
+                    break;
+                }
             }
-            Climbing1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            Climbing2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
 
             /*//better climbing
             if (gamepad2.a && !but2Acheck) {
