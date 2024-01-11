@@ -40,7 +40,7 @@ public class AnotherDriveTrain47 extends LinearOpMode {
         Servo Wrist = hardwareMap.get(Servo.class, "Wrist"); // control hub servo port 5
         Servo Launcher = hardwareMap.get(Servo.class, "Launcher"); // control hub servo port 4
 
-        Wrist.setPosition(0.75);
+        Wrist.setPosition(0.6);
 
 
         Climbing1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
