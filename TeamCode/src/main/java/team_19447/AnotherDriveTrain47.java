@@ -78,23 +78,22 @@ public class AnotherDriveTrain47 extends LinearOpMode {
            // Climbing1.setPower(gamepad2.right_stick_y);
             //Climbing2.setPower(gamepad2.right_stick_y); //ticks to 10,000
 
-            //better hang
+            /*//better hang
             if(gamepad2.a){
                 button2A+=1;
             }
 
-            if(button2A%2==1&&Climbing1.getCurrentPosition()<100000){
+            if(button2A%2==1&&Climbing1.getCurrentPosition()<9990){
                 Climbing1.setPower(1);
                 Climbing2.setPower(1);
-            }else if (button2A%2==0&&Climbing1.getCurrentPosition()>10){
+            }else if (button2A%2==0&&Climbing1.getCurrentPosition()>100){
                 Climbing1.setPower(-1);
-                Climbing2.setPower(-1);
-
+                Climbing2.setPower(-1);//upwards
             }else{Climbing1.setPower(-1);
-                Climbing2.setPower(-1);}
+                Climbing2.setPower(-1);}*/
 
 
-            /*//better climbing
+            //better climbing
             if (gamepad2.a && !but2Acheck) {
                 button2A += 1;
                 but2Acheck = true;
@@ -104,23 +103,23 @@ public class AnotherDriveTrain47 extends LinearOpMode {
             }
             if (!but2Acheck) {
                 if (button2A % 2 == 1) {
-                    if (Climbing1.getCurrentPosition() < 1) { //replace 1 with value when fully extended
-                        Climbing1.setPower(1);
-                        Climbing2.setPower(1);
-                    } else {
-                        Climbing1.setPower(0);
-                        Climbing2.setPower(0);
-                    }
-                } else {
-                    if (Climbing1.getCurrentPosition() > 1) {
+                    if (Climbing1.getCurrentPosition() < 10000) { //replace 1 with value when fully extended
                         Climbing1.setPower(-1);
                         Climbing2.setPower(-1);
                     } else {
                         Climbing1.setPower(0);
                         Climbing2.setPower(0);
                     }
+                } else {
+                    if (Climbing1.getCurrentPosition() > 20) {
+                        Climbing1.setPower(1);
+                        Climbing2.setPower(1);
+                    } else {
+                        Climbing1.setPower(0);
+                        Climbing2.setPower(0);
+                    }
                 }
-            }*/
+            }
 
             //Slider
             if (Sliders.getCurrentPosition() > 7500)
