@@ -23,10 +23,10 @@ public class Blue1Auto extends LinearOpMode {
     public static final double strafeTicks = 49.05;
     double default_power = 1;
 
-    public DcMotor motorFL;
-    public DcMotor motorBL;
-    public DcMotor motorFR;
-    public DcMotor motorBR;
+    DcMotor motorFL;
+    DcMotor motorBL;
+    DcMotor motorFR;
+    DcMotor motorBR;
 
     public int leftPos1;
     public int leftPos2;
@@ -43,9 +43,6 @@ public class Blue1Auto extends LinearOpMode {
     ElapsedTime timer = new ElapsedTime();
     public static double lastError = 0;
 
-    //Moving
-
-
     @Override
     public void runOpMode() {
         // Initialize motors
@@ -59,6 +56,10 @@ public class Blue1Auto extends LinearOpMode {
         motorBL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         motorFR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         motorBR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        motorFL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        motorBL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        motorFR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        motorBR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         /*
         DcMotor Intake = hardwareMap.get(DcMotor.class, "Intake");   --> Done

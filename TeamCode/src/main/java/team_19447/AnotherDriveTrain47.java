@@ -41,13 +41,20 @@ public class AnotherDriveTrain47 extends LinearOpMode {
         Servo Wrist = hardwareMap.get(Servo.class, "Wrist"); // control hub servo port 5
         Servo Launcher = hardwareMap.get(Servo.class, "Launcher"); // control hub servo port 4
 
+        Wrist.setPosition(0);
+
         //Climbing1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        Climbing1.setDirection(DcMotorSimple.Direction.REVERSE);
+
 
         Climbing1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         Climbing2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         Sliders.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        //Climbing2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        Sliders.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        Climbing1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        Climbing2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        Climbing1.setDirection(DcMotorSimple.Direction.REVERSE);
         Climbing2.setDirection(DcMotorSimple.Direction.REVERSE);
 
         //Reverse right side motors
@@ -55,6 +62,7 @@ public class AnotherDriveTrain47 extends LinearOpMode {
         motorBL.setDirection(DcMotorSimple.Direction.REVERSE);
 
         waitForStart();
+
 
         if (isStopRequested()) return;
 
@@ -69,11 +77,11 @@ public class AnotherDriveTrain47 extends LinearOpMode {
                 Intake.setPower(-gamepad2.right_trigger/2);
             }
 
-            /*Climbing:  mapped to right joystick power
+            //Climbing:  mapped to right joystick power
             Climbing1.setPower(gamepad2.right_stick_y);
-            Climbing2.setPower(gamepad2.right_stick_y);*/
+            Climbing2.setPower(gamepad2.right_stick_y);
 
-            //better climbing
+            /*//better climbing
             if (gamepad2.a && !but2Acheck) {
                 button2A += 1;
                 but2Acheck = true;
@@ -99,7 +107,7 @@ public class AnotherDriveTrain47 extends LinearOpMode {
                         Climbing2.setPower(0);
                     }
                 }
-            }
+            }*/
 
             //Slider
             if (Sliders.getCurrentPosition() > 7500)
@@ -150,7 +158,8 @@ public class AnotherDriveTrain47 extends LinearOpMode {
             telemetry.addData("RF Power:", motorFR.getPower());
             telemetry.addData("RB Power:", motorBR.getPower());
 
-            telemetry.addData("Slider position",    Sliders.getPower());
+            telemetry.addData("Slider position",    Sliders.getCurrentPosition());
+            telemetry.addData("Slider power",    Sliders.getPower());
             telemetry.addData("Climbing1",    Climbing1.getPower());
             telemetry.addData("Climbing2",    Climbing2.getPower());
 
