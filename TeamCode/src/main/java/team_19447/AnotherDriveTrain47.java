@@ -12,13 +12,13 @@ import com.qualcomm.robotcore.util.Range;
 @TeleOp
 public class AnotherDriveTrain47 extends LinearOpMode {
 
-    int buttonA=0;
+    int button2A=0;
     int isClimbing=0;
     double wristpower = 0;
     int isSliding = 0 ;
     int buttonX=0;
 
-    int button2A =0;
+    int buttonA =0;
     boolean but2Acheck = false;
 
     ElapsedTime timer = new ElapsedTime();
@@ -40,7 +40,7 @@ public class AnotherDriveTrain47 extends LinearOpMode {
         Servo Wrist = hardwareMap.get(Servo.class, "Wrist"); // control hub servo port 5
         Servo Launcher = hardwareMap.get(Servo.class, "Launcher"); // control hub servo port 4
 
-        Wrist.setPosition(0.5);
+        Wrist.setPosition(0.1);
 
 
         Climbing1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -74,9 +74,23 @@ public class AnotherDriveTrain47 extends LinearOpMode {
                 Intake.setPower(-gamepad2.right_trigger/2);
             }
 
-            //Climbing:  mapped to right joystick power
+            //hang:  mapped to right joystick power
             Climbing1.setPower(gamepad2.right_stick_y);
             Climbing2.setPower(gamepad2.right_stick_y); //ticks to 10,000
+
+            //better hang
+            if(gamepad2.a){
+                button2A+=1;
+                sleep(10);
+            }
+
+            if(button2A%2==1){
+                Climbing1.setTargetPosition(10000);
+                Climbing2.setTargetPosition(10000);
+            }else{
+                Climbing1.setTargetPosition(10);
+                Climbing2.setTargetPosition(10);
+            }
 
             /*//better climbing
             if (gamepad2.a && !but2Acheck) {
