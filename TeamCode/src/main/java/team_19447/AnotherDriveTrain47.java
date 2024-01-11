@@ -48,8 +48,6 @@ public class AnotherDriveTrain47 extends LinearOpMode {
         Sliders.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         Sliders.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        Climbing1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        Climbing2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         Climbing1.setDirection(DcMotorSimple.Direction.REVERSE);
         Climbing2.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -75,8 +73,8 @@ public class AnotherDriveTrain47 extends LinearOpMode {
             }
 
             //hang:  mapped to right joystick power
-            Climbing1.setPower(gamepad2.right_stick_y);
-            Climbing2.setPower(gamepad2.right_stick_y); //ticks to 10,000
+           // Climbing1.setPower(gamepad2.right_stick_y);
+            //Climbing2.setPower(gamepad2.right_stick_y); //ticks to 10,000
 
             //better hang
             if(gamepad2.a){
@@ -90,6 +88,8 @@ public class AnotherDriveTrain47 extends LinearOpMode {
                 Climbing1.setTargetPosition(10);
                 Climbing2.setTargetPosition(10);
             }
+            Climbing1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            Climbing2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
             /*//better climbing
             if (gamepad2.a && !but2Acheck) {
@@ -124,6 +124,8 @@ public class AnotherDriveTrain47 extends LinearOpMode {
                 isSliding = 0;
             if (gamepad1.right_bumper) {
                 isSliding = 1;
+            }else{
+                isSliding = 0 ;
             }
 
             if (isSliding==1 && Sliders.getCurrentPosition() < 7500) {
@@ -136,10 +138,10 @@ public class AnotherDriveTrain47 extends LinearOpMode {
 
             //wrist
             if (gamepad1.left_bumper) {
-                Wrist.setPosition(Range.clip(Wrist.getPosition() + 0.0005, 0, 1));
+                Wrist.setPosition(Range.clip(Wrist.getPosition() + 0.0015, 0, 1));
             }
             if (gamepad1.left_trigger > 0.5){
-                Wrist.setPosition(Range.clip(Wrist.getPosition() - 0.0005, 0, 1));
+                Wrist.setPosition(Range.clip(Wrist.getPosition() - 0.0015, 0, 1));
             }
 
             //------------------DRIVE TRAIN---------------------------------
