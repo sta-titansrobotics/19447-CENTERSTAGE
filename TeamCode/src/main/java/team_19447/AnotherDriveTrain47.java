@@ -98,7 +98,7 @@ public class AnotherDriveTrain47 extends LinearOpMode {
             if (!gamepad2.a){
                 but2Acheck = false;
             }
-            if (but2Acheck) {
+            if (!but2Acheck) {
                 if (button2A % 2 == 1) {
                     if (Climbing1.getCurrentPosition() < 10000) { //replace 1 with value when fully extended
                         Climbing1.setPower(1);
