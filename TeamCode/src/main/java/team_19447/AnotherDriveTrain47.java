@@ -40,7 +40,7 @@ public class AnotherDriveTrain47 extends LinearOpMode {
         Servo Wrist = hardwareMap.get(Servo.class, "Wrist"); // control hub servo port 5
         Servo Launcher = hardwareMap.get(Servo.class, "Launcher"); // control hub servo port 4
 
-        Wrist.setPosition(0.1);
+        Wrist.setPosition(0.75);
 
 
         Climbing1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -48,8 +48,8 @@ public class AnotherDriveTrain47 extends LinearOpMode {
         Sliders.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         Sliders.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        Climbing1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        Climbing2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        Climbing1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        Climbing2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         Climbing1.setDirection(DcMotorSimple.Direction.REVERSE);
         Climbing2.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -81,7 +81,6 @@ public class AnotherDriveTrain47 extends LinearOpMode {
             //better hang
             if(gamepad2.a){
                 button2A+=1;
-                sleep(10);
             }
 
             if(button2A%2==1){
