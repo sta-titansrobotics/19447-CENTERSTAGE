@@ -83,25 +83,15 @@ public class AnotherDriveTrain47 extends LinearOpMode {
                 button2A+=1;
             }
 
-            if(button2A%2==1){
+            if(button2A%2==1&&Climbing1.getCurrentPosition()<100000){
                 Climbing1.setPower(1);
                 Climbing2.setPower(1);
-                if(Climbing1.getCurrentPosition()>100000){
-                    Climbing1.setPower(0);
-                    Climbing2.setPower(0);
-                    button2A += 1;
-                    break;
-                }
-            }else{
+            }else if (button2A%2==0&&Climbing1.getCurrentPosition()>10){
                 Climbing1.setPower(-1);
                 Climbing2.setPower(-1);
-                if(Climbing1.getCurrentPosition()<10){
-                    Climbing1.setPower(0);
-                    Climbing2.setPower(0);
-                    button2A += 1;
-                    break;
-                }
-            }
+
+            }else{Climbing1.setPower(-1);
+                Climbing2.setPower(-1);}
 
 
             /*//better climbing
