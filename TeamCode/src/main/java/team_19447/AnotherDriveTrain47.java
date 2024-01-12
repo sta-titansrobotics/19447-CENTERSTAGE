@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
-//so far the newest file as of Jan 9 2024
+//so far the newest file as of Jan 12 2024
 @TeleOp
 public class AnotherDriveTrain47 extends LinearOpMode {
 
@@ -48,7 +48,6 @@ public class AnotherDriveTrain47 extends LinearOpMode {
         Sliders.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         Climbing1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         Climbing2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
         Sliders.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         //Reverse right side motors
@@ -117,6 +116,11 @@ public class AnotherDriveTrain47 extends LinearOpMode {
                         Climbing2.setPower(0);
                     }
                 }
+            }
+
+            //Paper Launcher
+            if(gamepad2.x){
+                Launcher.setPosition(0.8);
             }
 
             //Slider
