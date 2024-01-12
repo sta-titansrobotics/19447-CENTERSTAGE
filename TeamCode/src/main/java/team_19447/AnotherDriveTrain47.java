@@ -123,25 +123,16 @@ public class AnotherDriveTrain47 extends LinearOpMode {
                 Launcher.setPosition(0.8);
             }
 
-            //Slider
-            if (Sliders.getCurrentPosition() > 7500)
-                isSliding = 0;
-            if (gamepad1.right_bumper) {
-                isSliding = 1;
-            }else{
-                isSliding = 0 ;
-            }
-
             //macro for the sliders + wrist
             if(gamepad2.x){
                 Wrist.setPosition(0.8);
-                while(Sliders.getCurrentPosition()>100)
+                while(Sliders.getCurrentPosition()>100)// change the while to an if otherwise you cant move the robot while it's active
                     Sliders.setPower(-1);
             }
             // normal slider code
-            else if (isSliding==1 && Sliders.getCurrentPosition() < 7500) {
+            else if (gamepad1.right_bumper && Sliders.getCurrentPosition() < 7500) {
                 Sliders.setPower(1);
-            } else if (gamepad1.right_trigger > 0 && Sliders.getCurrentPosition() > 100) {
+            } else if (gamepad1.right_trigger > 0.1 && Sliders.getCurrentPosition() > 100) {
                 Sliders.setPower(-gamepad1.right_trigger);
             } else {
                 Sliders.setPower(0);
