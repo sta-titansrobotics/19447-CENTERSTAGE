@@ -12,14 +12,16 @@ import com.qualcomm.robotcore.util.Range;
 @TeleOp
 public class AnotherDriveTrain47 extends LinearOpMode {
 
+    int buttonA = 0;
+    int buttonX=0;
     int button2A=0;
+    int button2Y = 0;
     int isClimbing=0;
     double wristpower = 0;
     int isSliding = 0 ;
-    int buttonX=0;
-
-    int buttonA =0;
     boolean but2Acheck = false;
+    boolean but2Ycheck = false;
+
 
     ElapsedTime timer = new ElapsedTime();
 
@@ -124,13 +126,15 @@ public class AnotherDriveTrain47 extends LinearOpMode {
             }
 
             //macro for the sliders + wrist
-            if(gamepad2.x){
+            /*
+            if(gamepad2.y){
                 Wrist.setPosition(0.8);
                 while(Sliders.getCurrentPosition()>100)// change the while to an if otherwise you cant move the robot while it's active
                     Sliders.setPower(-1);
             }
+            */
             // normal slider code
-            else if (gamepad1.right_bumper && Sliders.getCurrentPosition() < 7500) {
+            if (gamepad1.right_bumper && Sliders.getCurrentPosition() < 7500) {
                 Sliders.setPower(1);
             } else if (gamepad1.right_trigger > 0.1 && Sliders.getCurrentPosition() > 100) {
                 Sliders.setPower(-gamepad1.right_trigger);
@@ -139,12 +143,28 @@ public class AnotherDriveTrain47 extends LinearOpMode {
             }
 
             //wrist
-            if (gamepad1.left_bumper) {
-                Wrist.setPosition(Range.clip(Wrist.getPosition() + 0.0015, 0, 1));
-            }
-            if (gamepad1.left_trigger > 0.5){
+            if (gamepad2.left_bumper) {
                 Wrist.setPosition(Range.clip(Wrist.getPosition() - 0.0015, 0, 1));
             }
+            if (gamepad2.left_trigger > 0.5){
+                Wrist.setPosition(Range.clip(Wrist.getPosition() + 0.0015, 0, 1));
+            }
+
+            //heheheha
+            if (gamepad2.y && !but2Ycheck) {
+                but2Ycheck = true;
+            }
+            if (!gamepad2.y){
+                but2Ycheck = false;
+            }
+
+            if (but2Ycheck) {
+                Wrist.setPosition(0.8);
+                if (Sliders.getCurrentPosition()>100) {
+                    Sliders.setPower(-1);
+                }
+            }
+
 
             //------------------DRIVE TRAIN---------------------------------
             //Driving
