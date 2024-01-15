@@ -12,13 +12,8 @@ import com.qualcomm.robotcore.util.Range;
 @TeleOp
 public class AnotherDriveTrain47 extends LinearOpMode {
 
-    int buttonA = 0;
     int button2X=0;
     int button2A=0;
-    int button2Y = 0;
-    int isClimbing=0;
-    double wristpower = 0;
-    int isSliding = 0 ;
     boolean but2Acheck = false;
     boolean but2Ycheck = false;
     boolean but2Xcheck = false;
@@ -31,6 +26,7 @@ public class AnotherDriveTrain47 extends LinearOpMode {
     @Override
     public void runOpMode() {
 
+        //----------------------Set Up------------------------------------------------
         //Moving
         DcMotor motorFL = hardwareMap.get(DcMotor.class, "motorFrontLeft"); //Expansion hub 3
         DcMotor motorBL = hardwareMap.get(DcMotor.class, "motorBackLeft");  //Expansion hub 2
@@ -52,7 +48,6 @@ public class AnotherDriveTrain47 extends LinearOpMode {
         if (getRuntime() - prevtime > 5000)
          */
 
-
         Climbing1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         Climbing2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         Sliders.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -69,6 +64,7 @@ public class AnotherDriveTrain47 extends LinearOpMode {
 
         if (isStopRequested()) return;
 
+        //------------------------------------Op Mode------------------------------------------------------
         while (opModeIsActive()) {
             //Intake
             if (gamepad2.right_bumper)
@@ -84,20 +80,6 @@ public class AnotherDriveTrain47 extends LinearOpMode {
             //Climbing1.setPower(gamepad2.right_stick_y);
             //Climbing2.setPower(gamepad2.right_stick_y); //ticks to 10,000
 
-            /*//better hang
-            if(gamepad2.a){
-                button2A+=1;
-            }
-
-            if(button2A%2==1&&Climbing1.getCurrentPosition()<9990){
-                Climbing1.setPower(1);
-                Climbing2.setPower(1);
-            }else if (button2A%2==0&&Climbing1.getCurrentPosition()>100){
-                Climbing1.setPower(-1);
-                Climbing2.setPower(-1);//upwards
-            }else{Climbing1.setPower(-1);
-                Climbing2.setPower(-1);}*/
-
 
             //better hanging
             if (gamepad2.a && !but2Acheck) {
@@ -110,7 +92,7 @@ public class AnotherDriveTrain47 extends LinearOpMode {
 
             if (!but2Acheck) {
                 if (button2A % 2 == 1) {
-                    if (Climbing1.getCurrentPosition() < 10000) { //replace 1 with value when fully extended
+                    if (Climbing1.getCurrentPosition() < 10000) {
                         Climbing1.setPower(1);
                         Climbing2.setPower(1);
                     } else {
@@ -149,14 +131,6 @@ public class AnotherDriveTrain47 extends LinearOpMode {
                 }
             }
 
-            //macro for the sliders + wrist
-            /*
-            if(gamepad2.y){
-                Wrist.setPosition(0.8);
-                while(Sliders.getCurrentPosition()>100)// change the while to an if otherwise you cant move the robot while it's active
-                    Sliders.setPower(-1);
-            }
-            */
             // normal slider code
             if (gamepad1.right_bumper && Sliders.getCurrentPosition() < 7500) {
                 Sliders.setPower(1);
@@ -166,6 +140,9 @@ public class AnotherDriveTrain47 extends LinearOpMode {
                 Sliders.setPower(0);
             }
 
+            if(Sliders.getCurrentPosition()<=100)
+                Sliders.setPower(0);
+
             //wrist
             if (gamepad2.left_bumper) {
                 Wrist.setPosition(Range.clip(Wrist.getPosition() - 0.0015, 0, 1));
@@ -174,7 +151,7 @@ public class AnotherDriveTrain47 extends LinearOpMode {
                 Wrist.setPosition(Range.clip(Wrist.getPosition() + 0.0015, 0, 1));
             }
 
-            //heheheha
+            //Macro for slider and wrist
             if (gamepad2.y && !but2Ycheck) {
                 but2Ycheck = true;
             }
@@ -191,7 +168,7 @@ public class AnotherDriveTrain47 extends LinearOpMode {
             //------------------DRIVE TRAIN---------------------------------
             //Driving
             double leftPower = -gamepad1.left_stick_y;
-            double rightPower = -gamepad1.right_stick_y; // heheheha
+            double rightPower = -gamepad1.right_stick_y;
 
             if (gamepad1.right_stick_x > 0.7) {
                 motorFL.setPower(gamepad1.right_stick_x);
