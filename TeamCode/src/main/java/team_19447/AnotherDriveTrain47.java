@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
-//so far the newest file as of Jan 12 2024
+//so far the newest file as of Jan 15 2024
 @TeleOp
 public class AnotherDriveTrain47 extends LinearOpMode {
 
@@ -22,6 +22,8 @@ public class AnotherDriveTrain47 extends LinearOpMode {
     boolean but2Acheck = false;
     boolean but2Ycheck = false;
     boolean but2Xcheck = false;
+
+    double prevtime;
 
 
     ElapsedTime timer = new ElapsedTime();
@@ -45,6 +47,11 @@ public class AnotherDriveTrain47 extends LinearOpMode {
 
         Wrist.setPosition(0.8);
 
+        /*
+        prevtime = getRuntime();
+        if (getRuntime() - prevtime > 5000)
+         */
+
 
         Climbing1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         Climbing2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -57,7 +64,6 @@ public class AnotherDriveTrain47 extends LinearOpMode {
         motorFL.setDirection(DcMotorSimple.Direction.REVERSE);
         motorBL.setDirection(DcMotorSimple.Direction.REVERSE);
         Sliders.setDirection(DcMotorSimple.Direction.REVERSE);
-        //Climbing1.setDirection(DcMotorSimple.Direction.REVERSE);
 
         waitForStart();
 
@@ -134,7 +140,7 @@ public class AnotherDriveTrain47 extends LinearOpMode {
             if (!gamepad2.x){
                 but2Xcheck = false;
             }
- 
+
             if (!but2Xcheck) {
                 if (button2X % 2 == 1) {
                     Launcher.setPosition(0);
