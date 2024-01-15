@@ -13,7 +13,7 @@ import com.qualcomm.robotcore.util.Range;
 public class AnotherDriveTrain47 extends LinearOpMode {
 
     int buttonA = 0;
-    int buttonX=0;
+    int button2X=0;
     int button2A=0;
     int button2Y = 0;
     int isClimbing=0;
@@ -21,6 +21,7 @@ public class AnotherDriveTrain47 extends LinearOpMode {
     int isSliding = 0 ;
     boolean but2Acheck = false;
     boolean but2Ycheck = false;
+    boolean but2Xcheck = false;
 
 
     ElapsedTime timer = new ElapsedTime();
@@ -56,6 +57,7 @@ public class AnotherDriveTrain47 extends LinearOpMode {
         motorFL.setDirection(DcMotorSimple.Direction.REVERSE);
         motorBL.setDirection(DcMotorSimple.Direction.REVERSE);
         Sliders.setDirection(DcMotorSimple.Direction.REVERSE);
+        //Climbing1.setDirection(DcMotorSimple.Direction.REVERSE);
 
         waitForStart();
 
@@ -73,8 +75,8 @@ public class AnotherDriveTrain47 extends LinearOpMode {
             }
 
             //hang:  mapped to right joystick power
-           Climbing1.setPower(gamepad2.right_stick_y);
-            Climbing2.setPower(gamepad2.right_stick_y); //ticks to 10,000
+            //Climbing1.setPower(gamepad2.right_stick_y);
+            //Climbing2.setPower(gamepad2.right_stick_y); //ticks to 10,000
 
             /*//better hang
             if(gamepad2.a){
@@ -110,7 +112,7 @@ public class AnotherDriveTrain47 extends LinearOpMode {
                         Climbing2.setPower(0);
                     }
                 } else {
-                    if (Climbing1.getCurrentPosition() > 20) {
+                    if (Climbing1.getCurrentPosition() > 40) {
                         Climbing1.setPower(-1);
                         Climbing2.setPower(-1);
                     } else {
@@ -122,7 +124,23 @@ public class AnotherDriveTrain47 extends LinearOpMode {
 
             //Paper Launcher
             if(gamepad2.x){
-                Launcher.setPosition(0.8);
+                Launcher.setPosition(-1);
+            }
+
+            if (gamepad2.x && !but2Xcheck) {
+                button2X += 1;
+                but2Xcheck = true;
+            }
+            if (!gamepad2.x){
+                but2Xcheck = false;
+            }
+ 
+            if (!but2Xcheck) {
+                if (button2X % 2 == 1) {
+                    Launcher.setPosition(0);
+                } else {
+                    Launcher.setPosition(1);
+                }
             }
 
             //macro for the sliders + wrist
@@ -154,14 +172,13 @@ public class AnotherDriveTrain47 extends LinearOpMode {
             if (gamepad2.y && !but2Ycheck) {
                 but2Ycheck = true;
             }
-            if (!gamepad2.y){
-                but2Ycheck = false;
-            }
 
             if (but2Ycheck) {
                 Wrist.setPosition(0.8);
                 if (Sliders.getCurrentPosition()>100) {
                     Sliders.setPower(-1);
+                } else {
+                    but2Ycheck = false;
                 }
             }
 
@@ -199,6 +216,8 @@ public class AnotherDriveTrain47 extends LinearOpMode {
 
             telemetry.addData("Wrist Position",    Wrist.getController().getServoPosition(5));
             telemetry.addData("Wrist Position",    Wrist.getPosition());   //whichever one of these 2 works better
+            telemetry.addData("launcher Position",    Launcher.getController().getServoPosition(5));
+            telemetry.addData("launcher Position",    Launcher.getPosition());
 
             telemetry.update();
         }
