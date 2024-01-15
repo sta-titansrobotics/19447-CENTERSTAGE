@@ -12,31 +12,30 @@ import com.qualcomm.robotcore.util.Range;
 @TeleOp
 public class AnotherDriveTrain47 extends LinearOpMode {
 
-    int button2X=0;
-    int button2A=0;
+    int button2X = 0;
+    int button2A = 0;
     boolean but2Acheck = false;
     boolean but2Ycheck = false;
     boolean but2Xcheck = false;
 
     double prevtime;
 
-
     ElapsedTime timer = new ElapsedTime();
 
     @Override
     public void runOpMode() {
 
-        //----------------------Set Up------------------------------------------------
-        //Moving
-        DcMotor motorFL = hardwareMap.get(DcMotor.class, "motorFrontLeft"); //Expansion hub 3
-        DcMotor motorBL = hardwareMap.get(DcMotor.class, "motorBackLeft");  //Expansion hub 2
-        DcMotor motorFR = hardwareMap.get(DcMotor.class, "motorFrontRight");  //Control hub 3
-        DcMotor motorBR = hardwareMap.get(DcMotor.class, "motorBackRight"); //Control hub 2
+        // ----------------------Set Up------------------------------------------------
+        // Moving
+        DcMotor motorFL = hardwareMap.get(DcMotor.class, "motorFrontLeft"); // Expansion hub 3
+        DcMotor motorBL = hardwareMap.get(DcMotor.class, "motorBackLeft"); // Expansion hub 2
+        DcMotor motorFR = hardwareMap.get(DcMotor.class, "motorFrontRight"); // Control hub 3
+        DcMotor motorBR = hardwareMap.get(DcMotor.class, "motorBackRight"); // Control hub 2
 
-        DcMotor Intake = hardwareMap.get(DcMotor.class, "Intake"); //  Expansion hub 1
-        DcMotor Sliders = hardwareMap.get(DcMotor.class, "Sliders");   // Control hub 0
-        DcMotor Climbing1 = hardwareMap.get(DcMotor.class, "Climbing1"); // left    Control hub 1
-        DcMotor Climbing2 = hardwareMap.get(DcMotor.class, "Climbing2");// right     Expansion hub 0
+        DcMotor Intake = hardwareMap.get(DcMotor.class, "Intake"); // Expansion hub 1
+        DcMotor Sliders = hardwareMap.get(DcMotor.class, "Sliders"); // Control hub 0
+        DcMotor Climbing1 = hardwareMap.get(DcMotor.class, "Climbing1"); // left Control hub 1
+        DcMotor Climbing2 = hardwareMap.get(DcMotor.class, "Climbing2");// right Expansion hub 0
 
         Servo Wrist = hardwareMap.get(Servo.class, "Wrist"); // control hub servo port 5
         Servo Launcher = hardwareMap.get(Servo.class, "Launcher"); // control hub servo port 4
@@ -44,8 +43,8 @@ public class AnotherDriveTrain47 extends LinearOpMode {
         Wrist.setPosition(0.8);
 
         /*
-        prevtime = getRuntime();
-        if (getRuntime() - prevtime > 5000)
+         * prevtime = getRuntime();
+         * if (getRuntime() - prevtime > 5000)
          */
 
         Climbing1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -55,38 +54,38 @@ public class AnotherDriveTrain47 extends LinearOpMode {
         Climbing2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         Sliders.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        //Reverse right side motors
+        // Reverse right side motors
         motorFL.setDirection(DcMotorSimple.Direction.REVERSE);
         motorBL.setDirection(DcMotorSimple.Direction.REVERSE);
         Sliders.setDirection(DcMotorSimple.Direction.REVERSE);
 
         waitForStart();
 
-        if (isStopRequested()) return;
+        if (isStopRequested())
+            return;
 
-        //------------------------------------Op Mode------------------------------------------------------
+        // --------------------------------Mode------------------------------------------------------
         while (opModeIsActive()) {
-            //Intake
+            // Intake
             if (gamepad2.right_bumper)
                 Intake.setPower(0.8);
             else
                 Intake.setPower(0);
 
             if (gamepad2.right_trigger > 0) {
-                Intake.setPower(-gamepad2.right_trigger/2);
+                Intake.setPower(-gamepad2.right_trigger / 2);
             }
 
-            //hang:  mapped to right joystick power
-            //Climbing1.setPower(gamepad2.right_stick_y);
-            //Climbing2.setPower(gamepad2.right_stick_y); //ticks to 10,000
+            // hang: mapped to right joystick power
+            // Climbing1.setPower(gamepad2.right_stick_y);
+            // Climbing2.setPower(gamepad2.right_stick_y); //ticks to 10,000
 
-
-            //better hanging
+            // better hanging
             if (gamepad2.a && !but2Acheck) {
                 button2A += 1;
                 but2Acheck = true;
             }
-            if (!gamepad2.a){
+            if (!gamepad2.a) {
                 but2Acheck = false;
             }
 
@@ -110,8 +109,8 @@ public class AnotherDriveTrain47 extends LinearOpMode {
                 }
             }
 
-            //Paper Launcher
-            if(gamepad2.x){
+            // Paper Launcher
+            if (gamepad2.x) {
                 Launcher.setPosition(-1);
             }
 
@@ -119,7 +118,7 @@ public class AnotherDriveTrain47 extends LinearOpMode {
                 button2X += 1;
                 but2Xcheck = true;
             }
-            if (!gamepad2.x){
+            if (!gamepad2.x) {
                 but2Xcheck = false;
             }
 
@@ -140,33 +139,33 @@ public class AnotherDriveTrain47 extends LinearOpMode {
                 Sliders.setPower(0);
             }
 
-            if(Sliders.getCurrentPosition()<=100)
+            if (Sliders.getCurrentPosition() <= 100)
                 Sliders.setPower(0);
 
-            //wrist
+            // wrist
             if (gamepad2.left_bumper) {
                 Wrist.setPosition(Range.clip(Wrist.getPosition() - 0.0015, 0, 1));
             }
-            if (gamepad2.left_trigger > 0.5){
+            if (gamepad2.left_trigger > 0.5) {
                 Wrist.setPosition(Range.clip(Wrist.getPosition() + 0.0015, 0, 1));
             }
 
-            //Macro for slider and wrist heheheha
-            if (gamepad2.y &&  !but2Ycheck) {
+            // Macro for slider and wrist heheheha
+            if (gamepad2.y && !but2Ycheck) {
                 but2Ycheck = true;
             }
 
             if (but2Ycheck) {
                 Wrist.setPosition(0.8);
-                if (Sliders.getCurrentPosition()>100) {
+                if (Sliders.getCurrentPosition() > 100) {
                     Sliders.setPower(-1);
                 } else {
                     but2Ycheck = false;
                 }
             }
 
-            //------------------DRIVE TRAIN---------------------------------
-            //Driving
+            // ------------------DRIVE TRAIN---------------------------------
+            // Driving
             double leftPower = -gamepad1.left_stick_y;
             double rightPower = -gamepad1.right_stick_y;
 
@@ -192,15 +191,15 @@ public class AnotherDriveTrain47 extends LinearOpMode {
             telemetry.addData("RF Power:", motorFR.getPower());
             telemetry.addData("RB Power:", motorBR.getPower());
 
-            telemetry.addData("Slider position",    Sliders.getCurrentPosition());
-            telemetry.addData("Slider power",    Sliders.getPower());
-            telemetry.addData("Climbing1",    Climbing1.getPower());
-            telemetry.addData("Climbing2",    Climbing2.getPower());
+            telemetry.addData("Slider position", Sliders.getCurrentPosition());
+            telemetry.addData("Slider power", Sliders.getPower());
+            telemetry.addData("Climbing1", Climbing1.getPower());
+            telemetry.addData("Climbing2", Climbing2.getPower());
 
-            telemetry.addData("Wrist Position",    Wrist.getController().getServoPosition(5));
-            telemetry.addData("Wrist Position",    Wrist.getPosition());   //whichever one of these 2 works better
-            telemetry.addData("launcher Position",    Launcher.getController().getServoPosition(5));
-            telemetry.addData("launcher Position",    Launcher.getPosition());
+            telemetry.addData("Wrist Position", Wrist.getController().getServoPosition(5));
+            telemetry.addData("Wrist Position", Wrist.getPosition()); // whichever one of these 2 works better
+            telemetry.addData("launcher Position", Launcher.getController().getServoPosition(5));
+            telemetry.addData("launcher Position", Launcher.getPosition());
 
             telemetry.update();
         }
