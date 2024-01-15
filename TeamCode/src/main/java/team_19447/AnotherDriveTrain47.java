@@ -152,7 +152,7 @@ public class AnotherDriveTrain47 extends LinearOpMode {
             }
 
             //Macro for slider and wrist heheheha
-            if (gamepad2.y && !but2Ycheck) {
+            if (gamepad2.y &&  !but2Ycheck) {
                 but2Ycheck = true;
             }
 
