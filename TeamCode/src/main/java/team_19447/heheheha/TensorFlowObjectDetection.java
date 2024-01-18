@@ -20,6 +20,12 @@ import java.util.List;
 @TeleOp
 public class TensorFlowObjectDetection extends LinearOpMode {
 
+    private static final String TFOD_MODEL_ASSET = "DefaultDetection.tflite";
+
+    private static final String[] LABELS = {
+            "Pixel",
+    };
+
     private static final boolean USE_WEBCAM = true;  // true for webcam, false for phone camera
 
     /**
@@ -75,6 +81,11 @@ public class TensorFlowObjectDetection extends LinearOpMode {
 
         // Create the TensorFlow processor the easy way.
         tfod = TfodProcessor.easyCreateWithDefaults();
+
+        tfod = new TfodProcessor.Builder()
+            .setModelFileName(TFOD_MODEL_ASSET)
+            .setModelLabels(LABELS)
+            .build();
 
         // Create the vision portal the easy way.
         if (USE_WEBCAM) {
