@@ -150,7 +150,7 @@ public class AnotherDriveTrain47 extends LinearOpMode {
                 Wrist.setPosition(Range.clip(Wrist.getPosition() + 0.0015, 0, 1));
             }
 
-            // Macro for slider and wrist heheheha
+            // Macro for slider and wrist
             if (gamepad2.y && !but2Ycheck) {
                 but2Ycheck = true;
             }
