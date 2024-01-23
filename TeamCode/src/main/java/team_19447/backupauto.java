@@ -51,3 +51,20 @@ public class backupauto extends LinearOpMode {
         telemetry.update();
         }
     }
+    {
+if (Motor1.getCurrentPosition() < 1) {
+        Motor1.setPower(1);
+        Motor2.setPower(1);
+} else {
+        Motor1.setPower(0);
+        Motor2.setPower(0)
+}
+        } else{
+        if(Motor1.getCurrentPosition() > 1) {
+        Motor1.setPower(-1);
+        Motor2.setPower(-1);
+        }else{
+        Motor1.setPower(0);
+        Motor2.setPower(0);
+        }
+        }
