@@ -20,7 +20,7 @@ import java.util.List;
 @TeleOp
 public class TensorFlowObjectDetection extends LinearOpMode {
 
-    private static final String TFOD_MODEL_ASSET = "DefaultDetection.tflite";
+    private static final String TFOD_MODEL_ASSET = "testing.tflite";
 
     private static final String[] LABELS = {
             "Pixel",
@@ -83,7 +83,7 @@ public class TensorFlowObjectDetection extends LinearOpMode {
         tfod = TfodProcessor.easyCreateWithDefaults();
 
         tfod = new TfodProcessor.Builder()
-            .setModelFileName(TFOD_MODEL_ASSET)
+            .setModelAssetName(TFOD_MODEL_ASSET)
             .setModelLabels(LABELS)
             .build();
 
