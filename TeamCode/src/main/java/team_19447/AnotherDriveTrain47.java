@@ -138,7 +138,7 @@ public class AnotherDriveTrain47 extends LinearOpMode {
             // normal slider code
             if (gamepad1.right_bumper && Sliders.getCurrentPosition() < 8500) {
                 Sliders.setPower(1);
-            } else if (gamepad1.right_trigger > 0.1 /*&& Sliders.getCurrentPosition() > 100*/) {
+            } else if (gamepad1.right_trigger > 0.1 && Sliders.getCurrentPosition() > 100) {
                 Sliders.setPower(-gamepad1.right_trigger);
             } else {
                 Sliders.setPower(0);
