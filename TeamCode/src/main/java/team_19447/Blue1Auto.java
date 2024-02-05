@@ -21,17 +21,12 @@ public class Blue1Auto extends LinearOpMode {
 
     public static final double forwardTicks = 47.63;
     public static final double strafeTicks = 49.05;
-    double default_power = 1;
 
     DcMotor motorFL;
     DcMotor motorBL;
     DcMotor motorFR;
     DcMotor motorBR;
 
-    public int leftPos1;
-    public int leftPos2;
-    public int rightPos1;
-    public int rightPos2;
     public boolean canContinue = false;
 
     double integralSum = 0;
@@ -61,13 +56,15 @@ public class Blue1Auto extends LinearOpMode {
         motorFR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motorBR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
+
+        Servo Wrist =  hardwareMap.get(Servo.class, "Wrist"); //--> the thing that rotates the dropper //Servo Port 2
+        Wrist.setPosition(0.8);
         /*
         DcMotor Intake = hardwareMap.get(DcMotor.class, "Intake");   --> Done
         DcMotor Sliders = hardwareMap.get(DcMotor.class, "Sliders"); --> Done
         DcMotor Climbing1 = hardwareMap.get(DcMotor.class, "Climbing1"); for the robot to hang --> Done
         DcMotor Climbing2 = hardwareMap.get(DcMotor.class, "Climbing2"); for the robot to hang --> Done
 
-        Servo Wrist =  hardwareMap.get(Servo.class, "Wrist"); --> the thing that rotates the dropper //Servo Port 2
         Servo AirplaneLauncher = hardwareMap.get(Servo.class, "AirplaneLauncher"); --> Still have to work on //Servo Port 3
 
         Climbing1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -78,21 +75,22 @@ public class Blue1Auto extends LinearOpMode {
         motorFL.setDirection(DcMotorSimple.Direction.REVERSE);
         motorBL.setDirection(DcMotorSimple.Direction.REVERSE);
 
-        waitForStart();
+                                                                              waitForStart();
         timer.reset();
         //-------------Auto code goes here --------------------------------
         //move it forward 60cm
         while(!canContinue)
             Drive(60, 60, 60, 60);
         canContinue = false;
-
+    motorBL.setPower(0);
+        motorFL.setPower(0);
+        motorFR.setPower(0);
+        motorBR.setPower(0);
         //detect pixel and do whatever
 
 
         // left 50cm
-        while(!canContinue)
-            Drive(50, 50, 50 ,50 );//not correct yet
-        canContinue = false;
+
         //drop the pixels onto back board
 
         //move to parking
@@ -109,6 +107,8 @@ public class Blue1Auto extends LinearOpMode {
             telemetry.addData("motorBL Encoder Position: ", motorBL.getCurrentPosition());
             telemetry.addData("motorFR Encoder Position: ", motorFR.getCurrentPosition());
             telemetry.addData("motorBR Encoder Position: ", motorBR.getCurrentPosition());
+            telemetry.addData("fasf", motorFL.getPower());
+            telemetry.addData("Wrist Position", Wrist.getController().getServoPosition(5));
 
             telemetry.update();
         }
@@ -119,17 +119,19 @@ public class Blue1Auto extends LinearOpMode {
 
     public void Drive(int TargetPositionMotorFL, int TargetPositionMotorBL, int TargetPositionMotorFR,
                       int TargetPositionMotorBR) {
-
-        if(motorFL.getCurrentPosition()>TargetPositionMotorFL-0.5){
-            canContinue = true;
-        }
-
-
-        // this is in terms of cm
         TargetPositionMotorFL = (int) (47.63 * TargetPositionMotorFL);
         TargetPositionMotorBL = (int) (47.63 * TargetPositionMotorBL );
         TargetPositionMotorFR = (int) (47.63 * TargetPositionMotorFR );
         TargetPositionMotorBR = (int) (47.63 * TargetPositionMotorBR);
+
+        if(motorFL.getCurrentPosition()>TargetPositionMotorFL-0.5){
+            canContinue = true;
+            telemetry.addData("broke out of loop", TargetPositionMotorFL);
+        }
+
+
+        // this is in terms of cm
+
 
         motorFL.setTargetPosition(TargetPositionMotorFL);
         motorFR.setTargetPosition(TargetPositionMotorFR);

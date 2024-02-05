@@ -1,5 +1,6 @@
 package team_19447.heheheha;
 
+import com.google.blocks.ftcrobotcontroller.runtime.obsolete.VuforiaLocalizerAccess;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.BuiltinCameraDirection;
@@ -7,6 +8,9 @@ import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
 import org.firstinspires.ftc.vision.VisionPortal;
 import org.firstinspires.ftc.vision.tfod.TfodProcessor;
+
+import org.firstinspires.ftc.robotcore.external.ClassFactory;
+import org.firstinspires.ftc.robotcore.external.ClassFactory;
 
 import java.util.List;
 
@@ -28,8 +32,9 @@ public class TensorFlowObjectDetection extends LinearOpMode {
 
     private static final boolean USE_WEBCAM = true;  // true for webcam, false for phone camera
 
-    /**
-     * The variable to store our instance of the TensorFlow Object Detection processor.
+
+
+     /* The variable to store our instance of the TensorFlow Object Detection processor.
      */
     private TfodProcessor tfod;
 
@@ -56,13 +61,6 @@ public class TensorFlowObjectDetection extends LinearOpMode {
 
                 // Push telemetry to the Driver Station.
                 telemetry.update();
-
-                // Save CPU resources; can resume streaming when needed.
-                if (gamepad1.dpad_down) {
-                    visionPortal.stopStreaming();
-                } else if (gamepad1.dpad_up) {
-                    visionPortal.resumeStreaming();
-                }
 
                 // Share the CPU.
                 sleep(20);

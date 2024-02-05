@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
-//so far the newest file as of Jan 15 2024
+//so far the newest file as of Feb 5 2024
 @TeleOp
 public class AnotherDriveTrain47 extends LinearOpMode {
 
@@ -40,7 +40,7 @@ public class AnotherDriveTrain47 extends LinearOpMode {
         Servo Wrist = hardwareMap.get(Servo.class, "Wrist"); // control hub servo port 5
         Servo Launcher = hardwareMap.get(Servo.class, "Launcher"); // control hub servo port 4
 
-        Wrist.setPosition(0.8);
+        Wrist.setPosition(0.77);
 
         /*
          * prevtime = getRuntime();
@@ -73,7 +73,7 @@ public class AnotherDriveTrain47 extends LinearOpMode {
                 Intake.setPower(0);
 
             if (gamepad2.right_trigger > 0) {
-                Intake.setPower(-gamepad2.right_trigger / 2);
+                Intake.setPower(-gamepad2.right_trigger / 1.5);
             }
 
             // hang: mapped to right joystick power
@@ -91,7 +91,7 @@ public class AnotherDriveTrain47 extends LinearOpMode {
 
             if (!but2Acheck) {
                 if (button2A % 2 == 1) {
-                    if (Climbing1.getCurrentPosition() < 10000) {
+                    if (Climbing1.getCurrentPosition() < 12000) {
                         Climbing1.setPower(1);
                         Climbing2.setPower(1);
                     } else {
