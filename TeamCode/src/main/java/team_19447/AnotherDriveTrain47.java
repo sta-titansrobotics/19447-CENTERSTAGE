@@ -14,6 +14,8 @@ public class AnotherDriveTrain47 extends LinearOpMode {
 
     int button2X = 0;
     int button2A = 0;
+    int button2B = 0;
+    boolean but2Bcheck = false;
     boolean but2Acheck = false;
     boolean but2Ycheck = false;
     boolean but2Xcheck = false;
@@ -158,7 +160,7 @@ public class AnotherDriveTrain47 extends LinearOpMode {
             }
 
             if (but2Ycheck) {
-                Wrist.setPosition(0.8);
+                Wrist.setPosition(0.77);
 
                 if (Sliders.getCurrentPosition() > 100) {
                     Sliders.setPower(-1);
@@ -167,16 +169,16 @@ public class AnotherDriveTrain47 extends LinearOpMode {
                 }
             }
 
-            if (gamepad2.a && !but2Acheck) {
-                button2A += 1;
-                but2Acheck = true;
+            if (gamepad2.b && !but2Bcheck) {
+                button2B += 1;
+                but2Bcheck = true;
             }
             if (!gamepad2.a) {
-                but2Acheck = false;
+                but2Bcheck = false;
             }
 
-            if (!but2Acheck) {
-                if (button2A % 2 == 1) {
+            if (!but2Bcheck) {
+                if (button2B % 2 == 1) {
                     Pinball1.setPosition(0.5);
                     Pinball2.setPosition(0.5);
                 } else {
