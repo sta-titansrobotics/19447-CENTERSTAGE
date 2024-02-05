@@ -177,15 +177,17 @@ public class AnotherDriveTrain47 extends LinearOpMode {
                 but2Bcheck = false;
             }
 
-            if (!but2Bcheck) {
+            /*if (!but2Bcheck) {
                 if (button2B % 2 == 1) {
                     Pinball1.setPosition(0.5);
                     Pinball2.setPosition(0.5);
                 } else {
-                    Pinball1.setPosition(0);
-                    Pinball2.setPosition(0);
+                    Pinball1.setPosition(0.7);
+                    Pinball2.setPosition(0.7);
                 }
             }
+
+             */
 
             // ------------------DRIVE TRAIN---------------------------------
             // Driving
@@ -223,6 +225,8 @@ public class AnotherDriveTrain47 extends LinearOpMode {
             telemetry.addData("Wrist Position", Wrist.getPosition()); // whichever one of these 2 works better
             telemetry.addData("launcher Position", Launcher.getController().getServoPosition(5));
             telemetry.addData("launcher Position", Launcher.getPosition());
+            telemetry.addData("pinball1 Position", Pinball1.getPosition());
+            telemetry.addData("pinball2 Position", Pinball2.getPosition());
 
             telemetry.update();
         }
