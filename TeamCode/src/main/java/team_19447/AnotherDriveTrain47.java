@@ -16,7 +16,7 @@ public class AnotherDriveTrain47 extends LinearOpMode {
     int button2X = 0;
     int button2A = 0;
     int button2B = 0;
-    boolean but2Bcheck = false;
+    boolean directionChange= false;
     boolean but2Acheck = false;
     boolean but2Ycheck = false;
     boolean but2Xcheck = false;
@@ -170,23 +170,22 @@ public class AnotherDriveTrain47 extends LinearOpMode {
                 }
             }
 
-            if (gamepad2.b && !but2Bcheck) {
-                button2B += 1;
-                but2Bcheck = true;
-            }
-            if (!gamepad2.b) {
-                but2Bcheck = false;
-            }
-
-            if (!but2Bcheck) {
+            if (gamepad2.b){
+                directionChange = true;
                 if (button2B % 2 == 1) {
                     Pinball1.setPower(1);
-                    Pinball2.setPower(1);
+                    Pinball2.setPower(-1); //opposite since the servos itself is mounted in opposite directions
                 } else {
-                    Pinball1.setPower(0);
-                    Pinball2.setPower(0);
+                    Pinball1.setPower(-1);
+                    Pinball2.setPower(1);
                 }
             }
+            if (!gamepad2.b&&directionChange) {
+                button2B += 1;
+                directionChange = false;
+            }
+
+
 
             // ------------------DRIVE TRAIN---------------------------------
             // Driving
