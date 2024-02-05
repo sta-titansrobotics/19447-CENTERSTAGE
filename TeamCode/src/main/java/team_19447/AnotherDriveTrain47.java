@@ -173,21 +173,19 @@ public class AnotherDriveTrain47 extends LinearOpMode {
                 button2B += 1;
                 but2Bcheck = true;
             }
-            if (!gamepad2.a) {
+            if (!gamepad2.b) {
                 but2Bcheck = false;
             }
 
-            /*if (!but2Bcheck) {
+            if (!but2Bcheck) {
                 if (button2B % 2 == 1) {
-                    Pinball1.setPosition(0.5);
-                    Pinball2.setPosition(0.5);
+                    Pinball1.setPosition(0.2);
+                    Pinball2.setPosition(0.2);
                 } else {
-                    Pinball1.setPosition(0.7);
-                    Pinball2.setPosition(0.7);
+                    Pinball1.setPosition(0);
+                    Pinball2.setPosition(0);
                 }
             }
-
-             */
 
             // ------------------DRIVE TRAIN---------------------------------
             // Driving
