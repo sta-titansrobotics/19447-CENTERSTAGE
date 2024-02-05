@@ -37,6 +37,8 @@ public class AnotherDriveTrain47 extends LinearOpMode {
         DcMotor Climbing1 = hardwareMap.get(DcMotor.class, "Climbing1"); // left Control hub 1
         DcMotor Climbing2 = hardwareMap.get(DcMotor.class, "Climbing2");// right Expansion hub 0
 
+        Servo Pinball1 = hardwareMap.get(Servo.class, "pinball1"); // left Control hub 1
+        Servo Pinball2 = hardwareMap.get(Servo.class, "pinball2");// right Expansion hub 0
         Servo Wrist = hardwareMap.get(Servo.class, "Wrist"); // control hub servo port 5
         Servo Launcher = hardwareMap.get(Servo.class, "Launcher"); // control hub servo port 4
 
@@ -157,10 +159,29 @@ public class AnotherDriveTrain47 extends LinearOpMode {
 
             if (but2Ycheck) {
                 Wrist.setPosition(0.8);
+
                 if (Sliders.getCurrentPosition() > 100) {
                     Sliders.setPower(-1);
                 } else {
                     but2Ycheck = false;
+                }
+            }
+
+            if (gamepad2.a && !but2Acheck) {
+                button2A += 1;
+                but2Acheck = true;
+            }
+            if (!gamepad2.a) {
+                but2Acheck = false;
+            }
+
+            if (!but2Acheck) {
+                if (button2A % 2 == 1) {
+                    Pinball1.setPosition(0.5);
+                    Pinball2.setPosition(0.5);
+                } else {
+                    Pinball1.setPosition(0);
+                    Pinball2.setPosition(0);
                 }
             }
 
