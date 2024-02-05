@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
@@ -39,8 +40,8 @@ public class AnotherDriveTrain47 extends LinearOpMode {
         DcMotor Climbing1 = hardwareMap.get(DcMotor.class, "Climbing1"); // left Control hub 1
         DcMotor Climbing2 = hardwareMap.get(DcMotor.class, "Climbing2");// right Expansion hub 0
 
-        Servo Pinball1 = hardwareMap.get(Servo.class, "pinball1"); // left Control hub 1
-        Servo Pinball2 = hardwareMap.get(Servo.class, "pinball2");// right Expansion hub 0
+        CRServo Pinball1 = hardwareMap.get(CRServo.class, "pinball1"); // left Control hub 1
+        CRServo Pinball2 = hardwareMap.get(CRServo.class, "pinball2");// right Expansion hub 0
         Servo Wrist = hardwareMap.get(Servo.class, "Wrist"); // control hub servo port 5
         Servo Launcher = hardwareMap.get(Servo.class, "Launcher"); // control hub servo port 4
 
@@ -179,11 +180,11 @@ public class AnotherDriveTrain47 extends LinearOpMode {
 
             if (!but2Bcheck) {
                 if (button2B % 2 == 1) {
-                    Pinball1.setPosition(0.2);
-                    Pinball2.setPosition(0.2);
+                    Pinball1.setPower(1);
+                    Pinball2.setPower(1);
                 } else {
-                    Pinball1.setPosition(0);
-                    Pinball2.setPosition(0);
+                    Pinball1.setPower(0);
+                    Pinball2.setPower(0);
                 }
             }
 
@@ -223,8 +224,8 @@ public class AnotherDriveTrain47 extends LinearOpMode {
             telemetry.addData("Wrist Position", Wrist.getPosition()); // whichever one of these 2 works better
             telemetry.addData("launcher Position", Launcher.getController().getServoPosition(5));
             telemetry.addData("launcher Position", Launcher.getPosition());
-            telemetry.addData("pinball1 Position", Pinball1.getPosition());
-            telemetry.addData("pinball2 Position", Pinball2.getPosition());
+            telemetry.addData("pinball1 Position", Pinball1.getController());
+            telemetry.addData("pinball2 Position", Pinball2.getController());
 
             telemetry.update();
         }
