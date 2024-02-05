@@ -95,7 +95,7 @@ public class AnotherDriveTrain47 extends LinearOpMode {
 
             if (!but2Acheck) {
                 if (button2A % 2 == 1) {
-                    if (Climbing1.getCurrentPosition() < 12000) {
+                    if (Climbing1.getCurrentPosition() < 10000) {
                         Climbing1.setPower(1);
                         Climbing2.setPower(1);
                     } else {
@@ -135,7 +135,7 @@ public class AnotherDriveTrain47 extends LinearOpMode {
             }
 
             // normal slider code
-            if (gamepad1.right_bumper && Sliders.getCurrentPosition() < 7500) {
+            if (gamepad1.right_bumper && Sliders.getCurrentPosition() < 8500) {
                 Sliders.setPower(1);
             } else if (gamepad1.right_trigger > 0.1 /*&& Sliders.getCurrentPosition() > 100*/) {
                 Sliders.setPower(-gamepad1.right_trigger);
