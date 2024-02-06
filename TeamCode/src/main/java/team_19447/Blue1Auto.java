@@ -60,10 +60,8 @@ public class Blue1Auto extends LinearOpMode {
         motorFR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         motorFL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-
-
         Servo Wrist =  hardwareMap.get(Servo.class, "Wrist"); //--> the thing that rotates the dropper //Servo Port 2
-        Wrist.setPosition(0.8);
+        Wrist.setPosition(0.77);
         /*
         DcMotor Intake = hardwareMap.get(DcMotor.class, "Intake");   --> Done
         DcMotor Sliders = hardwareMap.get(DcMotor.class, "Sliders"); --> Done
@@ -80,33 +78,35 @@ public class Blue1Auto extends LinearOpMode {
         motorFL.setDirection(DcMotorSimple.Direction.REVERSE);
         motorBL.setDirection(DcMotorSimple.Direction.REVERSE);
 
-                                                                              waitForStart();
+        waitForStart();
         timer.reset();
-        //-------------Auto code goes here --------------------------------
-        //move it forward 60cm
 
-            Drive(60, 60, 60, 60);
-
-    motorBL.setPower(0);
-        motorFL.setPower(0);
-        motorFR.setPower(0);
-        motorBR.setPower(0);
-        //detect pixel and do whatever
-
-
-        // left 50cm
-
-        //drop the pixels onto back board
-
-        //move to parking
-      //  robot.Forward(40);
-       // robot.StrafeLeft(35);
-
-
-        //---------------------------------------------------------------------
         if (isStopRequested()) return;
 
         while (opModeIsActive()) {
+
+            //-------------Auto code goes here --------------------------------
+            //move it forward 60cm
+
+            Drive(60, 60, 60, 60);
+
+            motorBL.setPower(0);
+            motorFL.setPower(0);
+            motorFR.setPower(0);
+            motorBR.setPower(0);
+            //detect pixel and do whatever
+
+
+            // left 50cm
+
+            //drop the pixels onto back board
+
+            //move to parking
+            //  robot.Forward(40);
+            // robot.StrafeLeft(35);
+
+
+            //---------------------------------------------------------------------
 
             telemetry.addData("motorFL Encoder Position: ", motorFL.getCurrentPosition());
             telemetry.addData("motorBL Encoder Position: ", motorBL.getCurrentPosition());
@@ -126,37 +126,28 @@ public class Blue1Auto extends LinearOpMode {
 
     public void Drive(int TargetPositionMotorFL, int TargetPositionMotorBL, int TargetPositionMotorFR,
                       int TargetPositionMotorBR) {
-        TargetPositionMotorFL = (int) (47.63 * TargetPositionMotorFL);
-        TargetPositionMotorBL = (int) (47.63 * TargetPositionMotorBL );
-        TargetPositionMotorFR = (int) (47.63 * TargetPositionMotorFR );
-        TargetPositionMotorBR = (int) (47.63 * TargetPositionMotorBR);
-
-        if(motorFL.getCurrentPosition()>TargetPositionMotorFL-0.5){
+        if(motorFL.getCurrentPosition()>TargetPositionMotorFL-1) {
             return;
         }
+            TargetPositionMotorFL = (int) (47.63 * TargetPositionMotorFL);
+            TargetPositionMotorBL = (int) (47.63 * TargetPositionMotorBL);
+            TargetPositionMotorFR = (int) (47.63 * TargetPositionMotorFR);
+            TargetPositionMotorBR = (int) (47.63 * TargetPositionMotorBR);
 
 
-        // this is in terms of cm
+            // this is in terms of cm
 
-
-        motorFL.setTargetPosition(TargetPositionMotorFL);
-        motorFR.setTargetPosition(TargetPositionMotorFR);
-        motorBL.setTargetPosition(TargetPositionMotorBL);
-        motorBR.setTargetPosition(TargetPositionMotorBR);
-
-
-        motorFL.setPower(PIDControl(TargetPositionMotorFL, motorFL.getCurrentPosition())/10);
-        motorBL.setPower(PIDControl(TargetPositionMotorBL, motorBL.getCurrentPosition())/10);
-        motorFR.setPower(PIDControl(TargetPositionMotorFR, motorFR.getCurrentPosition())/10);
-        motorBR.setPower(PIDControl(TargetPositionMotorBR, motorBR.getCurrentPosition())/10);
+            motorFL.setPower(PIDControl(TargetPositionMotorFL, motorFL.getCurrentPosition()) / 10);
+            motorBL.setPower(PIDControl(TargetPositionMotorBL, motorBL.getCurrentPosition()) / 10);
+            motorFR.setPower(PIDControl(TargetPositionMotorFR, motorFR.getCurrentPosition()) / 10);
+            motorBR.setPower(PIDControl(TargetPositionMotorBR, motorBR.getCurrentPosition()) / 10);
 
         // Wait until all motors reach the target position
-        /*while (opModeIsActive() && motorFL.isBusy() && motorFR.isBusy() && motorBL.isBusy() && motorBR.isBusy()) {
-        }
+
         motorFL.setPower(0);
         motorFR.setPower(0);
         motorBL.setPower(0);
-        motorBR.setPower(0);*/
+        motorBR.setPower(0);
 
     }
 
