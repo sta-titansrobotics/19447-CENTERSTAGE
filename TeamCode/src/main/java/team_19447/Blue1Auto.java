@@ -55,6 +55,11 @@ public class Blue1Auto extends LinearOpMode {
         motorBL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motorFR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motorBR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        motorBR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        motorBL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        motorFR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        motorFL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
 
 
         Servo Wrist =  hardwareMap.get(Servo.class, "Wrist"); //--> the thing that rotates the dropper //Servo Port 2
@@ -79,9 +84,9 @@ public class Blue1Auto extends LinearOpMode {
         timer.reset();
         //-------------Auto code goes here --------------------------------
         //move it forward 60cm
-        while(!canContinue)
+
             Drive(60, 60, 60, 60);
-        canContinue = false;
+
     motorBL.setPower(0);
         motorFL.setPower(0);
         motorFR.setPower(0);
@@ -109,6 +114,8 @@ public class Blue1Auto extends LinearOpMode {
             telemetry.addData("motorBR Encoder Position: ", motorBR.getCurrentPosition());
             telemetry.addData("fasf", motorFL.getPower());
             telemetry.addData("Wrist Position", Wrist.getController().getServoPosition(5));
+            if(!canContinue)
+                telemetry.addData("still in the loop", 1);
 
             telemetry.update();
         }
@@ -125,8 +132,7 @@ public class Blue1Auto extends LinearOpMode {
         TargetPositionMotorBR = (int) (47.63 * TargetPositionMotorBR);
 
         if(motorFL.getCurrentPosition()>TargetPositionMotorFL-0.5){
-            canContinue = true;
-            telemetry.addData("broke out of loop", TargetPositionMotorFL);
+            return;
         }
 
 
