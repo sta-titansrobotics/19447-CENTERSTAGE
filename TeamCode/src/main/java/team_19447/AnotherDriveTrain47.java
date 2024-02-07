@@ -16,10 +16,23 @@ public class AnotherDriveTrain47 extends LinearOpMode {
     int button2X = 0;
     int button2A = 0;
     int button2B = 0;
-    boolean directionChange= false;
+    int button2Y = 0;
+    int buttonA = 0;
+    int buttonB = 0;
+    int buttonX = 0;
+    int buttonY = 0;
+
     boolean but2Acheck = false;
     boolean but2Ycheck = false;
     boolean but2Xcheck = false;
+    boolean but2Bcheck = false;
+
+    boolean butAcheck = false;
+    boolean butYcheck = false;
+    boolean butXcheck = false;
+    boolean butBcheck = false;
+
+    boolean directionChange= false;
 
     double prevtime;
 
