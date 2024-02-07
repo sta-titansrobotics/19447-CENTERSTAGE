@@ -15,6 +15,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  *   Blue2Auto - furtherest to back board
  *    Red1Auto -  closest to backboard
  *    Red2 Auto - furthurest to backboard
+ * test
  * */
 @Autonomous
 public class Blue2AUto extends LinearOpMode {
