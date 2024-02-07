@@ -83,60 +83,76 @@ public class Blue1Auto extends LinearOpMode {
 
 
 
-            //-------------Auto code goes here --------------------------------
-            //move it forward 60cm
+        //-------------Auto code goes here --------------------------------
+        //move it forward 80cm
+        Drive(80, 80, 80, 80);
+        stopRobot();
 
-            Drive(60, 60, 60, 60);
-            motorBL.setPower(0);
-            motorFL.setPower(0);
-            motorBR.setPower(0);
-            motorFR.setPower(0);
+        Drive(62, 62, -62, -62);
+        stopRobot();
 
-            //detect pixel and do whatever
-
-
-            // left 50cm
-
-            //drop the pixels onto back board
-
-            //move to parking
-            //  robot.Forward(40);
-            // robot.StrafeLeft(35);
+        //detect pixel and do whatever
 
 
-            //---------------------------------------------------------------------
+        // left 50cm
+
+        //drop the pixels onto back board
+
+        //move to parking
+        //robot.Forward(40);
+        //robot.StrafeLeft(35);
 
 
-stopRobot();
+        //---------------------------------------------------------------------
+
+        stopRobot();
     }
-
-    //---------------------------------------------------------------------------------
 
 
     public void Drive(int TargetPositionMotorFL, int TargetPositionMotorBL, int TargetPositionMotorFR,
                       int TargetPositionMotorBR) {
 
-        TargetPositionMotorFL = (int) (17.63 * TargetPositionMotorFL);
-        TargetPositionMotorBL = (int) (17.63 * TargetPositionMotorBL);
-        TargetPositionMotorFR = (int) (17.63 * TargetPositionMotorFR);
-        TargetPositionMotorBR = (int) (17.63 * TargetPositionMotorBR);
-
-
+        TargetPositionMotorFL = (int) (16.67 * TargetPositionMotorFL);
+        TargetPositionMotorBL = (int) (16.67 * TargetPositionMotorBL);
+        TargetPositionMotorFR = (int) (16.67 * TargetPositionMotorFR);
+        TargetPositionMotorBR = (int) (16.67 * TargetPositionMotorBR);
 
         // this is in terms of cm
+        motorFL.setTargetPosition(TargetPositionMotorFL);
+        motorBL.setTargetPosition(TargetPositionMotorBL);
+        motorFR.setTargetPosition(TargetPositionMotorFR);
+        motorBR.setTargetPosition(TargetPositionMotorBR);
+        motorFL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motorFR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motorBL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motorBR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-        motorFL.setPower(0.8);
-        motorBL.setPower(0.8);
-        motorFR.setPower(0.8);
-        motorBR.setPower(0.8);
+
+        while(motorFL.getCurrentPosition()<TargetPositionMotorFL-1){
+
+            if(Math.abs(TargetPositionMotorFL - motorFL.getCurrentPosition())>300){
+                motorBL.setPower(0.6);
+                motorFL.setPower(0.6);
+                motorBR.setPower(0.6);
+                motorFR.setPower(0.6);
+            }else{
+                motorBL.setPower(0.2);
+                motorFL.setPower(0.2);
+                motorBR.setPower(0.2);
+                motorFR.setPower(0.2);
+            }
 
             telemetry.addData("motorFL Encoder Position: ", motorFL.getCurrentPosition());
             telemetry.addData("motorBL Encoder Position: ", motorBL.getCurrentPosition());
             telemetry.addData("motorFR Encoder Position: ", motorFR.getCurrentPosition());
             telemetry.addData("motorBR Encoder Position: ", motorBR.getCurrentPosition());
-            telemetry.addData("fasf", motorFL.getPower());
+            telemetry.addData("motor power", motorFL.getPower());
             //telemetry.addData("Wrist Position", Wrist.getController().getServoPosition(5));
             telemetry.update();
+        }
+
+
+
 
 
 

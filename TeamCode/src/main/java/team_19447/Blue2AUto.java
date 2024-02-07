@@ -127,10 +127,11 @@ public class Blue2AUto extends LinearOpMode {
 
     public void Drive(int TargetPositionMotorFL, int TargetPositionMotorBL, int TargetPositionMotorFR,
                       int TargetPositionMotorBR) {
-        TargetPositionMotorFL = (int) (47.63 * TargetPositionMotorFL);
-        TargetPositionMotorBL = (int) (47.63 * TargetPositionMotorBL );
-        TargetPositionMotorFR = (int) (47.63 * TargetPositionMotorFR );
-        TargetPositionMotorBR = (int) (47.63 * TargetPositionMotorBR);
+        while(true){
+        TargetPositionMotorFL = (int) (27.63 * TargetPositionMotorFL);
+        TargetPositionMotorBL = (int) (27.63 * TargetPositionMotorBL );
+        TargetPositionMotorFR = (int) (27.63 * TargetPositionMotorFR );
+        TargetPositionMotorBR = (int) (27.63 * TargetPositionMotorBR);
 
         if(motorFL.getCurrentPosition()>TargetPositionMotorFL-0.5){
             return;
@@ -159,7 +160,7 @@ public class Blue2AUto extends LinearOpMode {
         motorBL.setPower(0);
         motorBR.setPower(0);*/
 
-    }
+    }}
 
     // calculates the power which the motor should be set at.
     public double PIDControl(double setPosition, double currentPosition) {
