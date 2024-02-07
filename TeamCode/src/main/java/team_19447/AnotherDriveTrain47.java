@@ -198,8 +198,6 @@ public class AnotherDriveTrain47 extends LinearOpMode {
                 directionChange = false;
             }
 
-
-
             // ------------------DRIVE TRAIN---------------------------------
             // Driving
             double leftPower = -gamepad1.left_stick_y;
