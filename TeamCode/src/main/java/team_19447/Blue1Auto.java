@@ -51,10 +51,10 @@ public class Blue1Auto extends LinearOpMode {
         motorBL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         motorFR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         motorBR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        motorFL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        motorBL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        motorFR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        motorBR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        motorFL.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        motorFR.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        motorBL.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        motorBR.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         motorBR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         motorBL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         motorFR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -81,19 +81,17 @@ public class Blue1Auto extends LinearOpMode {
         waitForStart();
         timer.reset();
 
-        if (isStopRequested()) return;
 
-        while (opModeIsActive()) {
 
             //-------------Auto code goes here --------------------------------
             //move it forward 60cm
 
             Drive(60, 60, 60, 60);
-
             motorBL.setPower(0);
             motorFL.setPower(0);
-            motorFR.setPower(0);
             motorBR.setPower(0);
+            motorFR.setPower(0);
+
             //detect pixel and do whatever
 
 
@@ -108,17 +106,8 @@ public class Blue1Auto extends LinearOpMode {
 
             //---------------------------------------------------------------------
 
-            telemetry.addData("motorFL Encoder Position: ", motorFL.getCurrentPosition());
-            telemetry.addData("motorBL Encoder Position: ", motorBL.getCurrentPosition());
-            telemetry.addData("motorFR Encoder Position: ", motorFR.getCurrentPosition());
-            telemetry.addData("motorBR Encoder Position: ", motorBR.getCurrentPosition());
-            telemetry.addData("fasf", motorFL.getPower());
-            telemetry.addData("Wrist Position", Wrist.getController().getServoPosition(5));
-            if(!canContinue)
-                telemetry.addData("still in the loop", 1);
 
-            telemetry.update();
-        }
+stopRobot();
     }
 
     //---------------------------------------------------------------------------------
@@ -126,28 +115,31 @@ public class Blue1Auto extends LinearOpMode {
 
     public void Drive(int TargetPositionMotorFL, int TargetPositionMotorBL, int TargetPositionMotorFR,
                       int TargetPositionMotorBR) {
-        if(motorFL.getCurrentPosition()>TargetPositionMotorFL-1) {
-            return;
-        }
-            TargetPositionMotorFL = (int) (47.63 * TargetPositionMotorFL);
-            TargetPositionMotorBL = (int) (47.63 * TargetPositionMotorBL);
-            TargetPositionMotorFR = (int) (47.63 * TargetPositionMotorFR);
-            TargetPositionMotorBR = (int) (47.63 * TargetPositionMotorBR);
+
+        TargetPositionMotorFL = (int) (17.63 * TargetPositionMotorFL);
+        TargetPositionMotorBL = (int) (17.63 * TargetPositionMotorBL);
+        TargetPositionMotorFR = (int) (17.63 * TargetPositionMotorFR);
+        TargetPositionMotorBR = (int) (17.63 * TargetPositionMotorBR);
 
 
-            // this is in terms of cm
 
-            motorFL.setPower(PIDControl(TargetPositionMotorFL, motorFL.getCurrentPosition()) / 10);
-            motorBL.setPower(PIDControl(TargetPositionMotorBL, motorBL.getCurrentPosition()) / 10);
-            motorFR.setPower(PIDControl(TargetPositionMotorFR, motorFR.getCurrentPosition()) / 10);
-            motorBR.setPower(PIDControl(TargetPositionMotorBR, motorBR.getCurrentPosition()) / 10);
+        // this is in terms of cm
 
-        // Wait until all motors reach the target position
+        motorFL.setPower(0.8);
+        motorBL.setPower(0.8);
+        motorFR.setPower(0.8);
+        motorBR.setPower(0.8);
 
-        motorFL.setPower(0);
-        motorFR.setPower(0);
-        motorBL.setPower(0);
-        motorBR.setPower(0);
+            telemetry.addData("motorFL Encoder Position: ", motorFL.getCurrentPosition());
+            telemetry.addData("motorBL Encoder Position: ", motorBL.getCurrentPosition());
+            telemetry.addData("motorFR Encoder Position: ", motorFR.getCurrentPosition());
+            telemetry.addData("motorBR Encoder Position: ", motorBR.getCurrentPosition());
+            telemetry.addData("fasf", motorFL.getPower());
+            //telemetry.addData("Wrist Position", Wrist.getController().getServoPosition(5));
+            telemetry.update();
+
+
+
 
     }
 
@@ -161,6 +153,22 @@ public class Blue1Auto extends LinearOpMode {
         timer.reset();
 
         return (error * Kp) + (derivative * Kd) + (integralSum * Ki) ;
+    }
+
+    public void stopRobot() {
+        // Stop the motors
+        motorFL.setPower(0);
+        motorFR.setPower(0);
+        motorBR.setPower(0);
+        motorBL.setPower(0);
+        motorFL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        motorBL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        motorFR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        motorBR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        motorFL.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        motorFR.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        motorBL.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        motorBR.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
 
 
