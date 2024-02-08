@@ -73,7 +73,7 @@ public class Red1Auto extends LinearOpMode {
         Sliders.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
 
-        Wrist.setPosition(0.75);
+        Wrist.setPosition(0.79);
         /*
         DcMotor Intake = hardwareMap.get(DcMotor.class, "Intake");   --> Done
         DcMotor Sliders = hardwareMap.get(DcMotor.class, "Sliders"); --> Done
@@ -132,7 +132,7 @@ public class Red1Auto extends LinearOpMode {
         //////////////-----------end if statement
 
         //drop the pixel
-        Wrist.setPosition(0.5);
+        Wrist.setPosition(0.6);
 
         //kudge the robot forward a bit to ensure the pixel drops
         Drive(10, 10, 10, 10);
@@ -141,10 +141,10 @@ public class Red1Auto extends LinearOpMode {
         sleep(2000);
 
         //reset wrist
-        Wrist.setPosition(0.75);
+        Wrist.setPosition(0.79);
 
         //pull down the sliders
-        Sliders.setTargetPosition(-8000);
+        Sliders.setTargetPosition(-7990);
         Sliders.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         Sliders.setPower(0.8);
         while(Sliders.getCurrentPosition()>1){
