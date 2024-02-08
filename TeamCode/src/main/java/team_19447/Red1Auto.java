@@ -155,7 +155,7 @@ public class Red1Auto extends LinearOpMode {
         Drive(-60, 60, 60, -60);
         stopRobot();
 
-        Drive(40, 40, 40, 40);
+        Drive(30, 30, 30, 30);
         stopRobot();
         //robot.Forward(40);
         //robot.StrafeLeft(35);
