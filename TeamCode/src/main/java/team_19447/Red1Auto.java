@@ -97,8 +97,8 @@ public class Red1Auto extends LinearOpMode {
 
 
         //-------------Auto code goes here --------------------------------
-        //move it forward 80cm
-        Drive(80, 80, 80, 80);
+        //move it forward 70cm
+        Drive(70, 70, 70, 70);
         stopRobot();
 
         //detect where pixel is
@@ -114,10 +114,10 @@ public class Red1Auto extends LinearOpMode {
         stopRobot();
 
         //raise sliders
-        Sliders.setTargetPosition(8000);
+        Sliders.setTargetPosition(5000);
         Sliders.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        Sliders.setPower(0.8);
-        while(Sliders.getCurrentPosition()<7999){
+        Sliders.setPower(0.5);
+        while(Sliders.getCurrentPosition()<4999){
 
         }
         Sliders.setPower(0);
@@ -138,15 +138,18 @@ public class Red1Auto extends LinearOpMode {
         Drive(-10, -10, -10, -10);
         stopRobot();
 
-        sleep(2000);
+        sleep(1000);
+
+        Drive(10, 10, 10, 10);
+        stopRobot();
 
         //reset wrist
         Wrist.setPosition(0.79);
 
         //pull down the sliders
-        Sliders.setTargetPosition(-7990);
+        Sliders.setTargetPosition(-4990);
         Sliders.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        Sliders.setPower(0.8);
+        Sliders.setPower(0.4);
         while(Sliders.getCurrentPosition()>1){
 
         }
