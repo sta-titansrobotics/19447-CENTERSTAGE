@@ -101,9 +101,7 @@ public class Red1Auto extends LinearOpMode {
         Drive(80, 80, 80, 80);
         stopRobot();
 
-
         //detect where pixel is
-
 
 
         //////////////-----------chain if statements
@@ -139,6 +137,8 @@ public class Red1Auto extends LinearOpMode {
         //kudge the robot forward a bit to ensure the pixel drops
         Drive(10, 10, 10, 10);
         stopRobot();
+
+        sleep(2000);
 
         //reset wrist
         Wrist.setPosition(0.75);
@@ -187,7 +187,7 @@ public class Red1Auto extends LinearOpMode {
         motorBR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
 
-        while(motorFL.getCurrentPosition()<TargetPositionMotorFL-1){
+        while(Math.abs(motorFL.getCurrentPosition()-TargetPositionMotorFL)>1){
 
             if(Math.abs(TargetPositionMotorFL - motorFL.getCurrentPosition())>300){
                 motorBL.setPower(0.6);
