@@ -61,7 +61,7 @@ public class Blue1Auto extends LinearOpMode {
         motorFL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         Servo Wrist =  hardwareMap.get(Servo.class, "Wrist"); //--> the thing that rotates the dropper //Servo Port 2
-        Wrist.setPosition(0.77);
+        Wrist.setPosition(0.75);
         /*
         DcMotor Intake = hardwareMap.get(DcMotor.class, "Intake");   --> Done
         DcMotor Sliders = hardwareMap.get(DcMotor.class, "Sliders"); --> Done
