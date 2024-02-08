@@ -150,13 +150,6 @@ public class Blue1Auto extends LinearOpMode {
             //telemetry.addData("Wrist Position", Wrist.getController().getServoPosition(5));
             telemetry.update();
         }
-
-
-
-
-
-
-
     }
 
     // calculates the power which the motor should be set at.
