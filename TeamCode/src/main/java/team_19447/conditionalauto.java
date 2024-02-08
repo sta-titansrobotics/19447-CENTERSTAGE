@@ -69,10 +69,10 @@ public class conditionalauto extends LinearOpMode {
     public void runOpMode() {
 
         //HARDWARE MAPPING
-        DcMotor FL = hardwareMap.get(DcMotor.class, "motorFL");
-        DcMotor BL = hardwareMap.get(DcMotor.class, "motorBL");
-        DcMotor FR = hardwareMap.get(DcMotor.class, "motorFR");
-        DcMotor BR = hardwareMap.get(DcMotor.class, "motorBR");
+        DcMotor FL = hardwareMap.get(DcMotor.class, "motorFrontLeft"); // Expansion hub 3
+        DcMotor BL = hardwareMap.get(DcMotor.class, "motorBackLeft"); // Expansion hub 2
+        DcMotor FR = hardwareMap.get(DcMotor.class, "motorFrontRight"); // Control hub 3
+        DcMotor BR = hardwareMap.get(DcMotor.class, "motorBackRight");
 
         /*
         DcMotor Intake = hardwareMap.get(DcMotor.class, "Intake");   --> Done

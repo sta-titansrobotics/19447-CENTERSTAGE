@@ -77,6 +77,11 @@ public class AnotherDriveTrain47 extends LinearOpMode {
         motorBL.setDirection(DcMotorSimple.Direction.REVERSE);
         Sliders.setDirection(DcMotorSimple.Direction.REVERSE);
 
+        motorBR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        motorBL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        motorFR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        motorFL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
         waitForStart();
 
         if (isStopRequested())
