@@ -125,17 +125,17 @@ public class Red1Auto extends LinearOpMode {
 
 
         //approach the board
-        Drive(60, 60, 60, 60);
+        Drive(-90, -90, -90, -90);
         stopRobot();
 
 
         //////////////-----------end if statement
 
         //drop the pixel
-        Wrist.setPosition(0.6);
+        Wrist.setPosition(0.55);
 
         //kudge the robot forward a bit to ensure the pixel drops
-        Drive(10, 10, 10, 10);
+        Drive(-10, -10, -10, -10);
         stopRobot();
 
         sleep(2000);
@@ -153,10 +153,10 @@ public class Red1Auto extends LinearOpMode {
         Sliders.setPower(0);
 
         //move to parking
-        Drive(-60, 60, 60, -60);
+        Drive(50, -50, -50, 50);
         stopRobot();
 
-        Drive(30, 30, 30, 30);
+        Drive(-20, -20, -20, -20);
         stopRobot();
         //robot.Forward(40);
         //robot.StrafeLeft(35);
