@@ -2,7 +2,6 @@ package team_19447;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -17,7 +16,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 *    Red2 Auto - furthurest to backboard
 * */
 @Autonomous
-public class Blue1Auto extends LinearOpMode {
+public class Red1Auto extends LinearOpMode {
 
     public static final double forwardTicks = 47.63;
     public static final double strafeTicks = 49.05;
