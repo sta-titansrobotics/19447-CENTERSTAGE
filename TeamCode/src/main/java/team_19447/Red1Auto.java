@@ -101,25 +101,62 @@ public class Red1Auto extends LinearOpMode {
         stopRobot();
 
 
-        //detect pixel and do whatever
+        //detect where pixel is
 
+
+
+        //////////////-----------chain if statements
+        //drop the pixel
+
+
+
+        //turn
         Drive(62, 62, -62, -62);
         stopRobot();
 
         //raise sliders
-        Sliders
+        Sliders.setTargetPosition(8000);
+        Sliders.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        Sliders.setPower(0.8);
+        while(Sliders.getCurrentPosition()<7999){
+
+        }
+        Sliders.setPower(0);
+
+
 
         //approach the board
         Drive(100, 100, 100, 100);
         stopRobot();
 
 
+        //////////////-----------end if statement
 
-        // left 50cm
+        //drop the pixel
+        Wrist.setPosition(0.5);
 
-        //drop the pixels onto back board
+        //kudge the robot forward a bit to ensure the pixel drops
+        Drive(10, 10, 10, 10);
+        stopRobot();
+
+        //reset wrist
+        Wrist.setPosition(0.75);
+
+        //pull down the sliders
+        Sliders.setTargetPosition(-8000);
+        Sliders.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        Sliders.setPower(0.8);
+        while(Sliders.getCurrentPosition()>1){
+
+        }
+        Sliders.setPower(0);
 
         //move to parking
+        Drive(-60, 60, 60, -60);
+        stopRobot();
+
+        Drive(40, 40, 40, 40);
+        stopRobot();
         //robot.Forward(40);
         //robot.StrafeLeft(35);
 
