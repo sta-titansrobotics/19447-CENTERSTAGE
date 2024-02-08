@@ -153,7 +153,7 @@ public class Red1Auto extends LinearOpMode {
         Sliders.setPower(0);
 
         //move to parking
-        Drive(50, -50, -50, 50);
+        Drive(65, -65, -65, 65);
         stopRobot();
 
         Drive(-20, -20, -20, -20);
