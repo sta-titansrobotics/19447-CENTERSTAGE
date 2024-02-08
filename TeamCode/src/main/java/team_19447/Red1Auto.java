@@ -89,6 +89,7 @@ public class Red1Auto extends LinearOpMode {
         //Reverse left side motors, as they start out reversed
         motorFL.setDirection(DcMotorSimple.Direction.REVERSE);
         motorBL.setDirection(DcMotorSimple.Direction.REVERSE);
+        Sliders.setDirection(DcMotorSimple.Direction.REVERSE);
 
         waitForStart();
         timer.reset();
@@ -110,8 +111,8 @@ public class Red1Auto extends LinearOpMode {
 
 
 
-        //turn
-        Drive(62, 62, -62, -62);
+        //turn left here to face sliders towards board
+        Drive(-62, -62, 62, 62);
         stopRobot();
 
         //raise sliders
@@ -126,7 +127,7 @@ public class Red1Auto extends LinearOpMode {
 
 
         //approach the board
-        Drive(100, 100, 100, 100);
+        Drive(60, 60, 60, 60);
         stopRobot();
 
 
