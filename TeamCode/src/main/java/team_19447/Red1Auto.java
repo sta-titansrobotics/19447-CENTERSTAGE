@@ -45,6 +45,11 @@ public class Red1Auto extends LinearOpMode {
        motorFR = hardwareMap.get(DcMotor.class, "motorFrontRight");  //Control hub 3
          motorBR = hardwareMap.get(DcMotor.class, "motorBackRight"); //Control hub 2
 
+
+        DcMotor Intake = hardwareMap.get(DcMotor.class, "Intake"); // Expansion hub 1
+        DcMotor Sliders = hardwareMap.get(DcMotor.class, "Sliders"); // Control hub 0
+        Servo Wrist = hardwareMap.get(Servo.class, "Wrist"); // control hub servo port 2
+
         // set mode to stop and reset encoders -- resets encoders to the 0 position
         motorFL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         motorBL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -59,7 +64,15 @@ public class Red1Auto extends LinearOpMode {
         motorFR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         motorFL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        Servo Wrist =  hardwareMap.get(Servo.class, "Wrist"); //--> the thing that rotates the dropper //Servo Port 2
+        Intake.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        Intake.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        Intake.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        Sliders.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        Sliders.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        Sliders.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+
         Wrist.setPosition(0.75);
         /*
         DcMotor Intake = hardwareMap.get(DcMotor.class, "Intake");   --> Done
@@ -87,10 +100,19 @@ public class Red1Auto extends LinearOpMode {
         Drive(80, 80, 80, 80);
         stopRobot();
 
+
+        //detect pixel and do whatever
+
         Drive(62, 62, -62, -62);
         stopRobot();
 
-        //detect pixel and do whatever
+        //raise sliders
+        Sliders
+
+        //approach the board
+        Drive(100, 100, 100, 100);
+        stopRobot();
+
 
 
         // left 50cm
