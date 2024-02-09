@@ -18,14 +18,14 @@ SECOND CAMERA CODE IS WITH 3 SLASHES ///
  */
 
 /*The alliances closest to the back board are '1'
-* The rest of the two are '2'
-*   Blue1Auto - closest to back board
-*   Blue2Auto - furtherest to back board
-*    Red1Auto -  closest to backboard
-*    Red2 Auto - furthurest to backboard
-* */
+ * The rest of the two are '2'
+ *   Blue1Auto - closest to back board
+ *   Blue2Auto - furtherest to back board
+ *    Red1Auto -  closest to backboard
+ *    Red2 Auto - furthurest to backboard
+ * */
 @Autonomous
-public class Red1Autotfod extends LinearOpMode {
+public class Blue1Autotfod extends LinearOpMode {
     int gameobjpos = 0;
     // guide to ^^^ gameobjpos
     // if camera1 then = 1 if camera2 then = 2 if none then = 0
@@ -354,8 +354,8 @@ public class Red1Autotfod extends LinearOpMode {
         ///        .build();
 
         // Create the vision portal the easy way.
-            visionPortal = VisionPortal.easyCreateWithDefaults(hardwareMap.get(WebcamName.class, "Webcam 1"), tfod);
-            ///visionPortal2 = VisionPortal.easyCreateWithDefaults(hardwareMap.get(WebcamName.class, "Webcam 2"), tfod);
+        visionPortal = VisionPortal.easyCreateWithDefaults(hardwareMap.get(WebcamName.class, "Webcam 1"), tfod);
+        ///visionPortal2 = VisionPortal.easyCreateWithDefaults(hardwareMap.get(WebcamName.class, "Webcam 2"), tfod);
 
     }   // end method initTfod()
 
