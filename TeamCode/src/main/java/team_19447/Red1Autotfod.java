@@ -48,45 +48,6 @@ public class Red1Autotfod extends LinearOpMode {
     private VisionPortal visionPortal;
     ///private VisionPortal visionPortal2;
 
-    private void telemetryTfod() {
-
-        List<Recognition> currentRecognitions = tfod.getRecognitions();
-        telemetry.addData("# Objects Detected", currentRecognitions.size());
-
-        ///List<Recognition> currentRecognitions2 = tfod2.getRecognitions();
-        ///telemetry.addData("# Objects Detected 2", currentRecognitions2.size());
-
-        ///if (currentRecognitions.size() > 0) {
-        ///    gameobjpos = 1;
-        ///} else if (currentRecognitions2.size() > 0) {
-        ///    gameobjpos = 2;
-        ///} else {
-        ///    gameobjpos = 0;
-        ///}
-
-        // Step through the list of recognitions and display info for each one.
-        for (Recognition recognition : currentRecognitions) {
-            double imagecentreX = (recognition.getLeft() + recognition.getRight()) / 2 ;
-            double imagecentreY = (recognition.getTop()  + recognition.getBottom()) / 2 ;
-
-            telemetry.addData("Camera 1"," ");
-            telemetry.addData("Image", "%s (%.0f %% Conf.)", recognition.getLabel(), recognition.getConfidence() * 100);
-            telemetry.addData("- Position", "%.0f / %.0f", imagecentreX, imagecentreY);
-            telemetry.addData("- Size", "%.0f x %.0f", recognition.getWidth(), recognition.getHeight());
-        }   // end for() loop
-
-        ///for (Recognition recognition2 : currentRecognitions2) {
-        ///    double imagecentreX = (recognition2.getLeft() + recognition2.getRight()) / 2 ;
-        ///    double imagecentreY = (recognition2.getTop()  + recognition2.getBottom()) / 2 ;
-
-        ///    telemetry.addData("Camera 2"," ");
-        ///    telemetry.addData("Image", "%s (%.0f %% Conf.)", recognition2.getLabel(), recognition2.getConfidence() * 100);
-        ///    telemetry.addData("- Position", "%.0f / %.0f", imagecentreX, imagecentreY);
-        ///    telemetry.addData("- Size", "%.0f x %.0f", recognition2.getWidth(), recognition2.getHeight());
-        ///}   // end for() loop
-
-    }   // end method telemetryTfod()
-
     public static final double forwardTicks = 47.63;
     public static final double strafeTicks = 49.05;
 
@@ -155,6 +116,8 @@ public class Red1Autotfod extends LinearOpMode {
         Climbing2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         */
 
+        int visiontimer = 120;
+
         //Reverse left side motors, as they start out reversed
         motorFL.setDirection(DcMotorSimple.Direction.REVERSE);
         motorBL.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -169,17 +132,16 @@ public class Red1Autotfod extends LinearOpMode {
 
         initTfod();
 
-        if (opModeIsActive()) {
-            while (opModeIsActive()) {
+        while (visiontimer < 0) {
 
-                telemetryTfod();
+            telemetryTfod();
 
-                // Push telemetry to the Driver Station.
-                telemetry.update();
+            // Push telemetry to the Driver Station.
+            telemetry.update();
 
-                // Share the CPU.
-                sleep(20);
-            }
+            visiontimer --;
+            // Share the CPU.
+            sleep(20);
         }
 
         // Save more CPU resources when camera is no longer needed.
@@ -331,6 +293,45 @@ public class Red1Autotfod extends LinearOpMode {
         motorBL.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         motorBR.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
+
+    private void telemetryTfod() {
+
+        List<Recognition> currentRecognitions = tfod.getRecognitions();
+        telemetry.addData("# Objects Detected", currentRecognitions.size());
+
+        ///List<Recognition> currentRecognitions2 = tfod2.getRecognitions();
+        ///telemetry.addData("# Objects Detected 2", currentRecognitions2.size());
+
+        ///if (currentRecognitions.size() > 0) {
+        ///    gameobjpos = 1;
+        ///} else if (currentRecognitions2.size() > 0) {
+        ///    gameobjpos = 2;
+        ///} else {
+        ///    gameobjpos = 0;
+        ///}
+
+        // Step through the list of recognitions and display info for each one.
+        for (Recognition recognition : currentRecognitions) {
+            double imagecentreX = (recognition.getLeft() + recognition.getRight()) / 2 ;
+            double imagecentreY = (recognition.getTop()  + recognition.getBottom()) / 2 ;
+
+            telemetry.addData("Camera 1"," ");
+            telemetry.addData("Image", "%s (%.0f %% Conf.)", recognition.getLabel(), recognition.getConfidence() * 100);
+            telemetry.addData("- Position", "%.0f / %.0f", imagecentreX, imagecentreY);
+            telemetry.addData("- Size", "%.0f x %.0f", recognition.getWidth(), recognition.getHeight());
+        }   // end for() loop
+
+        ///for (Recognition recognition2 : currentRecognitions2) {
+        ///    double imagecentreX = (recognition2.getLeft() + recognition2.getRight()) / 2 ;
+        ///    double imagecentreY = (recognition2.getTop()  + recognition2.getBottom()) / 2 ;
+
+        ///    telemetry.addData("Camera 2"," ");
+        ///    telemetry.addData("Image", "%s (%.0f %% Conf.)", recognition2.getLabel(), recognition2.getConfidence() * 100);
+        ///    telemetry.addData("- Position", "%.0f / %.0f", imagecentreX, imagecentreY);
+        ///    telemetry.addData("- Size", "%.0f x %.0f", recognition2.getWidth(), recognition2.getHeight());
+        ///}   // end for() loop
+
+    }   // end method telemetryTfod()
 
     private void initTfod() {
 

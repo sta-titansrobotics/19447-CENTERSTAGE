@@ -24,24 +24,27 @@ import java.util.List;
 @TeleOp
 public class TensorFlowObjectDetection extends LinearOpMode {
 
-    private static final String TFOD_MODEL_ASSET = "converted_model.tflite";
+    int gameobjpos = 0;
+    // guide to ^^^ gameobjpos
+    // if camera1 then = 1 if camera2 then = 2 if none then = 0
+
+    private static final String TFOD_MODEL_ASSET = "WORKING.tflite";
 
     private static final String[] LABELS = {
-            "can",
+            "redobject",
+            "blueobject",
     };
 
-    private static final boolean USE_WEBCAM = true;  // true for webcam, false for phone camera
-
-
-
-     /* The variable to store our instance of the TensorFlow Object Detection processor.
+    /* The variable to store our instance of the TensorFlow Object Detection processor.
      */
     private TfodProcessor tfod;
+    ///private TfodProcessor tfod2;
 
     /**
      * The variable to store our instance of the vision portal.
      */
     private VisionPortal visionPortal;
+    ///private VisionPortal visionPortal2;
 
     @Override
     public void runOpMode() {
@@ -72,6 +75,48 @@ public class TensorFlowObjectDetection extends LinearOpMode {
 
     }   // end runOpMode()
 
+    private void telemetryTfod() {
+
+        List<Recognition> currentRecognitions = tfod.getRecognitions();
+        telemetry.addData("# Objects Detected", currentRecognitions.size());
+
+        ///List<Recognition> currentRecognitions2 = tfod2.getRecognitions();
+        ///telemetry.addData("# Objects Detected 2", currentRecognitions2.size());
+
+        ///if (currentRecognitions.size() > 0) {
+        ///    gameobjpos = 1;
+        ///    telemetry.addData("game object position", "");
+        ///} else if (currentRecognitions2.size() > 0) {
+        ///    gameobjpos = 2;
+        ///    telemetry.addData("game object position", "");
+        ///} else {
+        ///    gameobjpos = 0;
+        ///    telemetry.addData("game object position", "");
+        ///}
+
+        // Step through the list of recognitions and display info for each one.
+        for (Recognition recognition : currentRecognitions) {
+            double imagecentreX = (recognition.getLeft() + recognition.getRight()) / 2 ;
+            double imagecentreY = (recognition.getTop()  + recognition.getBottom()) / 2 ;
+
+            telemetry.addData("Camera 1"," ");
+            telemetry.addData("Image", "%s (%.0f %% Conf.)", recognition.getLabel(), recognition.getConfidence() * 100);
+            telemetry.addData("- Position", "%.0f / %.0f", imagecentreX, imagecentreY);
+            telemetry.addData("- Size", "%.0f x %.0f", recognition.getWidth(), recognition.getHeight());
+        }   // end for() loop
+
+        ///for (Recognition recognition2 : currentRecognitions2) {
+        ///    double imagecentreX2 = (recognition2.getLeft() + recognition2.getRight()) / 2 ;
+        ///    double imagecentreY2 = (recognition2.getTop()  + recognition2.getBottom()) / 2 ;
+
+        ///    telemetry.addData("Camera 2"," ");
+        ///    telemetry.addData("Image", "%s (%.0f %% Conf.)", recognition2.getLabel(), recognition2.getConfidence() * 100);
+        ///    telemetry.addData("- Position", "%.0f / %.0f", imagecentreX2, imagecentreY2);
+        ///    telemetry.addData("- Size", "%.0f x %.0f", recognition2.getWidth(), recognition2.getHeight());
+        ///}   // end for() loop
+
+    }   // end method telemetryTfod()
+
     /**
      * Initialize the TensorFlow Object Detection processor.
      */
@@ -81,42 +126,20 @@ public class TensorFlowObjectDetection extends LinearOpMode {
         tfod = TfodProcessor.easyCreateWithDefaults();
 
         tfod = new TfodProcessor.Builder()
-            .setModelAssetName(TFOD_MODEL_ASSET)
-            .setModelLabels(LABELS)
-            .build();
+                .setModelAssetName(TFOD_MODEL_ASSET)
+                .setModelLabels(LABELS)
+                .build();
+
+        ///tfod2 = TfodProcessor.easyCreateWithDefaults();
+
+        ///tfod2 = new TfodProcessor.Builder()
+        ///        .setModelAssetName(TFOD_MODEL_ASSET)
+        ///        .setModelLabels(LABELS)
+        ///        .build();
 
         // Create the vision portal the easy way.
-        if (USE_WEBCAM) {
-            visionPortal = VisionPortal.easyCreateWithDefaults(
-                    hardwareMap.get(WebcamName.class, "Webcam 1"), tfod);
-        } else {
-            visionPortal = VisionPortal.easyCreateWithDefaults(
-                    BuiltinCameraDirection.BACK, tfod);
-        }
+        visionPortal = VisionPortal.easyCreateWithDefaults(hardwareMap.get(WebcamName.class, "Webcam 1"), tfod);
+        ///visionPortal2 = VisionPortal.easyCreateWithDefaults(hardwareMap.get(WebcamName.class, "Webcam 2"), tfod);
 
     }   // end method initTfod()
-
-    /**
-     * Add telemetry about TensorFlow Object Detection (TFOD) recognitions.
-     */
-    private void telemetryTfod() {
-
-        List<Recognition> currentRecognitions = tfod.getRecognitions();
-        telemetry.addData("# Objects Detected", currentRecognitions.size());
-
-        // Step through the list of recognitions and display info for each one.
-        for (Recognition recognition : currentRecognitions) {
-            double x = (recognition.getLeft() + recognition.getRight()) / 2 ;
-            double y = (recognition.getTop()  + recognition.getBottom()) / 2 ;
-
-            telemetry.addData(""," ");
-            telemetry.addData("Image", "%s (%.0f %% Conf.)", recognition.getLabel(), recognition.getConfidence() * 100);
-            telemetry.addData("- Position", "%.0f / %.0f", x, y);
-            telemetry.addData("- Size", "%.0f x %.0f", recognition.getWidth(), recognition.getHeight());
-        }   // end for() loop
-
-    }   // end method telemetryTfod()
-
-
-
 }   // end class
