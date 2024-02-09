@@ -13,6 +13,9 @@ import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
 import org.firstinspires.ftc.vision.VisionPortal;
 import org.firstinspires.ftc.vision.tfod.TfodProcessor;
 
+/*
+SECOND CAMERA CODE IS WITH 3 SLASHES ///
+ */
 
 /*The alliances closest to the back board are '1'
 * The rest of the two are '2'
