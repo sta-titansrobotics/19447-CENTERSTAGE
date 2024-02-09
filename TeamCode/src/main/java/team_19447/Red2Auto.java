@@ -1,6 +1,5 @@
 package team_19447;
 
-
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -30,8 +29,10 @@ import java.util.Locale;
  *    Red2 Auto - furthurest to backboard
  * */
 @Autonomous
-public class Red1Auto extends LinearOpMode {
+public class Red2Auto extends LinearOpMode {
     BNO055IMU imu;
+    public static final double forwardTicks = 47.63;
+    public static final double strafeTicks = 49.05;
 
     DcMotor motorFL;
     DcMotor motorBL;
@@ -119,6 +120,8 @@ public class Red1Auto extends LinearOpMode {
             Drive(-5, -5, -5, -5);
             stopRobot();
             //detect where pixel is
+
+
 
             //////////////-----------chain if statements
             //drop the pixel

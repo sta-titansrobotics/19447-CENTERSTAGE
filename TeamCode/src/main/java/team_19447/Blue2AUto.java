@@ -128,31 +128,31 @@ public class Blue2AUto extends LinearOpMode {
     public void Drive(int TargetPositionMotorFL, int TargetPositionMotorBL, int TargetPositionMotorFR,
                       int TargetPositionMotorBR) {
         while(true){
-        TargetPositionMotorFL = (int) (27.63 * TargetPositionMotorFL);
-        TargetPositionMotorBL = (int) (27.63 * TargetPositionMotorBL );
-        TargetPositionMotorFR = (int) (27.63 * TargetPositionMotorFR );
-        TargetPositionMotorBR = (int) (27.63 * TargetPositionMotorBR);
+            TargetPositionMotorFL = (int) (27.63 * TargetPositionMotorFL);
+            TargetPositionMotorBL = (int) (27.63 * TargetPositionMotorBL );
+            TargetPositionMotorFR = (int) (27.63 * TargetPositionMotorFR );
+            TargetPositionMotorBR = (int) (27.63 * TargetPositionMotorBR);
 
-        if(motorFL.getCurrentPosition()>TargetPositionMotorFL-0.5){
-            return;
-        }
-
-
-        // this is in terms of cm
+            if(motorFL.getCurrentPosition()>TargetPositionMotorFL-0.5){
+                return;
+            }
 
 
-        motorFL.setTargetPosition(TargetPositionMotorFL);
-        motorFR.setTargetPosition(TargetPositionMotorFR);
-        motorBL.setTargetPosition(TargetPositionMotorBL);
-        motorBR.setTargetPosition(TargetPositionMotorBR);
+            // this is in terms of cm
 
 
-        motorFL.setPower(PIDControl(TargetPositionMotorFL, motorFL.getCurrentPosition())/10);
-        motorBL.setPower(PIDControl(TargetPositionMotorBL, motorBL.getCurrentPosition())/10);
-        motorFR.setPower(PIDControl(TargetPositionMotorFR, motorFR.getCurrentPosition())/10);
-        motorBR.setPower(PIDControl(TargetPositionMotorBR, motorBR.getCurrentPosition())/10);
+            motorFL.setTargetPosition(TargetPositionMotorFL);
+            motorFR.setTargetPosition(TargetPositionMotorFR);
+            motorBL.setTargetPosition(TargetPositionMotorBL);
+            motorBR.setTargetPosition(TargetPositionMotorBR);
 
-        // Wait until all motors reach the target position
+
+            motorFL.setPower(PIDControl(TargetPositionMotorFL, motorFL.getCurrentPosition())/10);
+            motorBL.setPower(PIDControl(TargetPositionMotorBL, motorBL.getCurrentPosition())/10);
+            motorFR.setPower(PIDControl(TargetPositionMotorFR, motorFR.getCurrentPosition())/10);
+            motorBR.setPower(PIDControl(TargetPositionMotorBR, motorBR.getCurrentPosition())/10);
+
+            // Wait until all motors reach the target position
         /*while (opModeIsActive() && motorFL.isBusy() && motorFR.isBusy() && motorBL.isBusy() && motorBR.isBusy()) {
         }
         motorFL.setPower(0);
@@ -160,7 +160,7 @@ public class Blue2AUto extends LinearOpMode {
         motorBL.setPower(0);
         motorBR.setPower(0);*/
 
-    }}
+        }}
 
     // calculates the power which the motor should be set at.
     public double PIDControl(double setPosition, double currentPosition) {

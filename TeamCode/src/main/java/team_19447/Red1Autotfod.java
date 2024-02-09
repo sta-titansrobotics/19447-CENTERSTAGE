@@ -64,6 +64,9 @@ public class Red1Autotfod extends LinearOpMode {
     double Kd = 0.01;
     double Kf = 0.2;
 
+    int visionintX;
+    int visionintY;
+
     ElapsedTime timer = new ElapsedTime();
     public static double lastError = 0;
 
@@ -79,6 +82,8 @@ public class Red1Autotfod extends LinearOpMode {
         DcMotor Intake = hardwareMap.get(DcMotor.class, "Intake"); // Expansion hub 1
         DcMotor Sliders = hardwareMap.get(DcMotor.class, "Sliders"); // Control hub 0
         Servo Wrist = hardwareMap.get(Servo.class, "Wrist"); // control hub servo port 2
+
+
 
         // set mode to stop and reset encoders -- resets encoders to the 0 position
         motorFL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -314,6 +319,9 @@ public class Red1Autotfod extends LinearOpMode {
         for (Recognition recognition : currentRecognitions) {
             double imagecentreX = (recognition.getLeft() + recognition.getRight()) / 2 ;
             double imagecentreY = (recognition.getTop()  + recognition.getBottom()) / 2 ;
+
+            visionintX = (int)imagecentreX;
+            visionintY = (int)imagecentreY;
 
             telemetry.addData("Camera 1"," ");
             telemetry.addData("Image", "%s (%.0f %% Conf.)", recognition.getLabel(), recognition.getConfidence() * 100);
