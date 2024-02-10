@@ -169,6 +169,7 @@ public class Blue1Autotfod extends LinearOpMode {
         //detect where pixel is
 
         visionintX = 450;
+        //0=right 100=left
 
         //////////////-----------chain if statements
         // -----------------------------------MIDDLE--------------------------------------
@@ -319,8 +320,6 @@ public class Blue1Autotfod extends LinearOpMode {
             Drive(-25, -25, -25, -25);
             stopRobot();
         }
-
-
     }
 
 

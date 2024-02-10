@@ -14,7 +14,6 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  *   Blue2Auto - furtherest to back board
  *    Red1Auto -  closest to backboard
  *    Red2 Auto - furthurest to backboard
- *
  * */
 @Autonomous
 public class Blue2AUto extends LinearOpMode {
@@ -230,12 +229,14 @@ public class Blue2AUto extends LinearOpMode {
             motorBR.setPower(PIDControl(TargetPositionMotorBR, motorBR.getCurrentPosition())/10);
 
             // Wait until all motors reach the target position
-        /*while (opModeIsActive() && motorFL.isBusy() && motorFR.isBusy() && motorBL.isBusy() && motorBR.isBusy()) {
+        /*
+        while (opModeIsActive() && motorFL.isBusy() && motorFR.isBusy() && motorBL.isBusy() && motorBR.isBusy()) {
         }
         motorFL.setPower(0);
         motorFR.setPower(0);
         motorBL.setPower(0);
-        motorBR.setPower(0);*/
+        motorBR.setPower(0);
+        */
 
         }}
 
