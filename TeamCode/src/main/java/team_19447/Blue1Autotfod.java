@@ -220,7 +220,7 @@ public class Blue1Autotfod extends LinearOpMode {
             stopRobot();
             //-----------------------LEFT SIDE-----------------------------------------------------
         }else if(visionintX <300&& visionintX >60){
-            //turn left here to face sliders towards board
+            //turn left here to face intake towards board
             Drive(-62, -62, 62, 62);
             stopRobot();
 
@@ -229,11 +229,15 @@ public class Blue1Autotfod extends LinearOpMode {
             sleep(1500);
             Intake.setPower(0);
 
+            //turn 180 to face slider towards board
+            Drive(124, 124, -124, -124);
+            stopRobot();
+
             //approach the board
             Drive(-100, -100, -100, -100);
             stopRobot();
 
-            //align with board
+            //align with board left side
             Drive(20, -20,-20, 20);
             stopRobot();
             //////////////-----------end if statement
@@ -259,7 +263,7 @@ public class Blue1Autotfod extends LinearOpMode {
             Sliders.setPower(0.4);
 
             //move to parking
-            Drive(70, -70, -70, 70);
+            Drive(90, -90, -90, 90);
             stopRobot();
             //forward into parking
             Drive(-25, -25, -25, -25);
@@ -275,9 +279,6 @@ public class Blue1Autotfod extends LinearOpMode {
             sleep(1500);
             Intake.setPower(0);
 
-            //180 turn
-            Drive(124, 124, -124, -124);
-            stopRobot();
             //approach the board
             Drive(-100, -100, -100, -100);
             stopRobot();
@@ -308,7 +309,7 @@ public class Blue1Autotfod extends LinearOpMode {
             Sliders.setPower(0.4);
 
             //move to parking
-            Drive(110, -110, -110, 110);
+            Drive(-70, 70, 70, -70);
             stopRobot();
             //forward into parking
             Drive(-25, -25, -25, -25);

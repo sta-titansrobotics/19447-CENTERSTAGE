@@ -58,7 +58,7 @@ public class AnotherDriveTrain47 extends LinearOpMode {
         Servo Wrist = hardwareMap.get(Servo.class, "Wrist"); // control hub servo port 5
         Servo Launcher = hardwareMap.get(Servo.class, "Launcher"); // control hub servo port 4
 
-        Wrist.setPosition(0.79);
+        Wrist.setPosition(0.771);
 
         /*
          * prevtime = getRuntime();
@@ -179,7 +179,7 @@ public class AnotherDriveTrain47 extends LinearOpMode {
             }
 
             if (but2Ycheck) {
-                Wrist.setPosition(0.77);
+                Wrist.setPosition(0.771);
 
                 if (Sliders.getCurrentPosition() > 100) {
                     Sliders.setPower(-1);
