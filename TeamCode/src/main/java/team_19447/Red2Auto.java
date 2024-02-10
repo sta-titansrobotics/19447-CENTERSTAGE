@@ -1,24 +1,13 @@
 package team_19447;
 
+
 import com.qualcomm.hardware.bosch.BNO055IMU;
-import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
-
-import org.firstinspires.ftc.robotcore.external.Func;
-import org.firstinspires.ftc.robotcore.external.navigation.Acceleration;
-import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
-import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
-import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
-import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
-import org.firstinspires.ftc.robotcore.external.navigation.Position;
-import org.firstinspires.ftc.robotcore.external.navigation.Velocity;
-
-import java.util.Locale;
 
 
 /*The alliances closest to the back board are '1'
@@ -86,7 +75,7 @@ public class Red2Auto extends LinearOpMode {
         Sliders.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
 
-        Wrist.setPosition(0.79);
+        Wrist.setPosition(0.77);
         /*
         DcMotor Intake = hardwareMap.get(DcMotor.class, "Intake");   --> Done
         DcMotor Sliders = hardwareMap.get(DcMotor.class, "Sliders"); --> Done
@@ -135,7 +124,6 @@ public class Red2Auto extends LinearOpMode {
             //turn left here to face sliders towards board
             Drive(-62, -62, 62, 62);
             stopRobot();
-
             //raise sliders
             Sliders.setTargetPosition(3000);
             Sliders.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -148,13 +136,12 @@ public class Red2Auto extends LinearOpMode {
 
 
             //approach the board
-            Drive(-90, -90, -90, -90);
+            Drive(-200, -200, -200, -0);
             stopRobot();
 
             //align with board
             Drive(13, -13,-13, 13);
             stopRobot();
-            //////////////-----------end if statement
 
             //drop the pixel
             Wrist.setPosition(0.50);
@@ -170,6 +157,7 @@ public class Red2Auto extends LinearOpMode {
 
             //reset wrist
             Wrist.setPosition(0.79);
+
 
             //move to parking
             Drive(-75, 75, 75, -75);
@@ -214,6 +202,13 @@ public class Red2Auto extends LinearOpMode {
             //spin 180 to face board
             Drive(-124, -124, 124, 124);
             stopRobot();
+            //move to middle bar
+            Drive(28, -28,-28, 28);
+            stopRobot();
+
+            //move to board 40 trhough the middle bar
+            Drive(-80, -80, -80, -80);
+            stopRobot();
 
             //raise sliders
             Sliders.setTargetPosition(3000);
@@ -226,15 +221,8 @@ public class Red2Auto extends LinearOpMode {
             //lift wrist
             Wrist.setPosition(0.50);
 
-            //Strafe right to avoid pixel
-            Drive(-25, 25, 25, -25);
-            stopRobot();
-
-            //move to board 40
-            Drive(-40, -40, -40, -40);
-            stopRobot();
             //Strafe strafe back left to align with board
-            Drive(10, -10, -10, 10);
+            Drive(-38, 38, 38, -38);
             stopRobot();
             //Get to board
             Drive(-50, -50, -50, -50);
@@ -268,7 +256,77 @@ public class Red2Auto extends LinearOpMode {
             Sliders.setPower(0);
         }
         else{
+            //move it forward 70cm and push game obej
+            Drive(73, 73, 73, 73);
+            stopRobot();
 
+            //turn to face board and game object
+            Drive(-62, -62, 62, 62);
+            stopRobot();
+
+            Drive(8, 78, 78, 78);
+            stopRobot();
+
+            //back 2 cm
+            Drive(-8, -8, -8, -8);
+            stopRobot();
+
+            //outtake pixel
+            Intake.setPower(0.5);
+            sleep(900);
+            Intake.setPower(0);
+
+            //raise sliders
+            Sliders.setTargetPosition(3000);
+            Sliders.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            Sliders.setPower(0.5);
+            while(Sliders.getCurrentPosition()<2999){
+
+            }
+            Sliders.setPower(0);
+
+            //approach the board
+            Drive(-200, -200, -200, -20
+
+
+
+            );
+            stopRobot();
+
+            //align with board
+            Drive(24, -24,-24, 24);
+            stopRobot();
+            //////////////-----------end if statement
+
+            //drop the pixel
+            Wrist.setPosition(0.50);
+
+            //nudge the robot forward a bit to ensure the pixel drops
+            Drive(-17, -17, -17, -17);
+            stopRobot();
+
+            sleep(1000);
+
+            Drive(10, 10, 10, 10);
+            stopRobot();
+
+            //reset wrist
+            Wrist.setPosition(0.79);
+
+            //move to parking
+            Drive(-86, 86, 86, -86);
+            stopRobot();
+            //forward into parking
+            Drive(-40, -40, -40, -40);
+            stopRobot();
+            //pull down the sliders
+            Sliders.setTargetPosition(-3000);
+            Sliders.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            Sliders.setPower(0.4);
+            while(Sliders.getCurrentPosition()>1){
+
+            }
+            Sliders.setPower(0);
         }
         //robot.Forward(40);
         //robot.StrafeLeft(35);
@@ -349,8 +407,4 @@ public class Red2Auto extends LinearOpMode {
         motorFR.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         motorBL.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         motorBR.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-    }
-
-
-
-}
+    }}

@@ -137,7 +137,7 @@ public class Red1Autotfod extends LinearOpMode {
 
         initTfod();
 
-        while (visiontimer < 0) {
+        while (visiontimer > 0) {
 
             telemetryTfod();
 
@@ -170,11 +170,7 @@ public class Red1Autotfod extends LinearOpMode {
         //raise sliders
         Sliders.setTargetPosition(5000);
         Sliders.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        Sliders.setPower(0.5);
-        while(Sliders.getCurrentPosition()<4999){
-
-        }
-        Sliders.setPower(0);
+        Sliders.setPower(0.4);
 
         //approach the board
         Drive(-90, -90, -90, -90);
@@ -202,10 +198,6 @@ public class Red1Autotfod extends LinearOpMode {
         Sliders.setTargetPosition(-4990);
         Sliders.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         Sliders.setPower(0.4);
-        while(Sliders.getCurrentPosition()>1){
-
-        }
-        Sliders.setPower(0);
 
         //move to parking
         Drive(65, -65, -65, 65);
@@ -216,9 +208,7 @@ public class Red1Autotfod extends LinearOpMode {
         //robot.Forward(40);
         //robot.StrafeLeft(35);
 
-
         //---------------------------------------------------------------------
-
         stopRobot();
     }
 

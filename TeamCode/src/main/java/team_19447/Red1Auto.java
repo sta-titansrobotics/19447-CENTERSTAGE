@@ -32,6 +32,8 @@ import java.util.Locale;
 @Autonomous
 public class Red1Auto extends LinearOpMode {
     BNO055IMU imu;
+    public static final double forwardTicks = 47.63;
+    public static final double strafeTicks = 49.05;
 
     DcMotor motorFL;
     DcMotor motorBL;
@@ -85,7 +87,7 @@ public class Red1Auto extends LinearOpMode {
         Sliders.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
 
-        Wrist.setPosition(0.79);
+        Wrist.setPosition(0.77);
         /*
         DcMotor Intake = hardwareMap.get(DcMotor.class, "Intake");   --> Done
         DcMotor Sliders = hardwareMap.get(DcMotor.class, "Sliders"); --> Done
@@ -110,171 +112,239 @@ public class Red1Auto extends LinearOpMode {
 
         //-------------Auto code goes here --------------------------------
         //If statements
-        if(/*Straight*/true){
-            //move it forward 70cm and push game obej
-            Drive(78, 78, 78, 78);
-            stopRobot();
 
-            //back 2 cm
-            Drive(-5, -5, -5, -5);
-            stopRobot();
-            //detect where pixel is
-
-            //////////////-----------chain if statements
-            //drop the pixel
-            Intake.setPower(0.5);
-            sleep(900);
-            Intake.setPower(0);
-            //move away from dropped pixel
-            Drive(-10, -10, -10, -10);
-            stopRobot();
-
-            //turn left here to face sliders towards board
-            Drive(-62, -62, 62, 62);
-            stopRobot();
-
-            //raise sliders
-            Sliders.setTargetPosition(3000);
-            Sliders.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            Sliders.setPower(0.5);
-            while(Sliders.getCurrentPosition()<2999){
-
-            }
-            Sliders.setPower(0);
-
-
-
-            //approach the board
-            Drive(-90, -90, -90, -90);
-            stopRobot();
-
-            //align with board
-            Drive(13, -13,-13, 13);
-            stopRobot();
-            //////////////-----------end if statement
-
-            //drop the pixel
-            Wrist.setPosition(0.50);
-
-            //nudge the robot forward a bit to ensure the pixel drops
-            Drive(-17, -17, -17, -17);
-            stopRobot();
-
-            sleep(1000);
-
-            Drive(10, 10, 10, 10);
-            stopRobot();
-
-            //reset wrist
-            Wrist.setPosition(0.79);
-
-            //move to parking
-            Drive(-75, 75, 75, -75);
-            stopRobot();
-            //forward into parking
-            Drive(-40, -40, -40, -40);
-            stopRobot();
-            //pull down the sliders
-            Sliders.setTargetPosition(-3000);
-            Sliders.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            Sliders.setPower(0.4);
-            while(Sliders.getCurrentPosition()>1){
-
-            }
-            Sliders.setPower(0);
-        }
-        else if(/**/false){//Right Side
-            Drive(73, 73, 73, 73);
-            stopRobot();
-
-            //turn right to face game element
-            Drive(62, 62, -62, -62);
-            stopRobot();
-
-            //Push game element
-            Drive(5, 5, 5, 5);
-            stopRobot();
-
-            //back up
-            Drive(-5, -5, -5, -5);
-            stopRobot();
-
-            //drop pixel
-            Intake.setPower(0.5);
-            sleep(900);
-            Intake.setPower(0);
-
-            //move away from dropped pixel
-            Drive(-10, -10, -10, -10);
-            stopRobot();
-
-            //spin 180 to face board
-            Drive(-124, -124, 124, 124);
-            stopRobot();
-
-            //raise sliders
-            Sliders.setTargetPosition(3000);
-            Sliders.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            Sliders.setPower(0.5);
-            while(Sliders.getCurrentPosition()<2999){
-
-            }
-            Sliders.setPower(0);
-            //lift wrist
-            Wrist.setPosition(0.50);
-
-            //Strafe right to avoid pixel
-            Drive(-25, 25, 25, -25);
-            stopRobot();
-
-            //move to board 40
-            Drive(-40, -40, -40, -40);
-            stopRobot();
-            //Strafe strafe back left to align with board
-            Drive(10, -10, -10, 10);
-            stopRobot();
-            //Get to board
-            Drive(-50, -50, -50, -50);
-            stopRobot();
-
-            //nudge the robot forward a bit to ensure the pixel drops
-            Drive(-17, -17, -17, -17);
-            stopRobot();
-
-            sleep(1000);
-
-            Drive(10, 10, 10, 10);
-            stopRobot();
-
-            //reset wrist
-            Wrist.setPosition(0.77);
-
-            //move to parking
-            Drive(-55, 55, 55, -55);
-            stopRobot();
-            //forward into parking
-            Drive(-40, -40, -40, -40);
-            stopRobot();
-            //pull down the sliders
-            Sliders.setTargetPosition(-3000);
-            Sliders.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            Sliders.setPower(0.4);
-            while(Sliders.getCurrentPosition()>1){
-
-            }
-            Sliders.setPower(0);
-        }
-        else{
-
-        }
-        //robot.Forward(40);
-        //robot.StrafeLeft(35);
-
-
-        //---------------------------------------------------------------------
-
+        //move it forward 70cm and push game obej
+        Drive(78, 78, 78, 78);
         stopRobot();
+
+        //back 2 cm
+        Drive(-5, -5, -5, -5);
+        stopRobot();
+        //detect where pixel is
+
+
+
+        //////////////-----------chain if statements
+        //drop the pixel
+        Intake.setPower(0.5);
+        sleep(900);
+        Intake.setPower(0);
+        //move away from dropped pixel
+        Drive(-10, -10, -10, -10);
+        stopRobot();
+
+        //turn left here to face sliders towards board
+        Drive(-62, -62, 62, 62);
+        stopRobot();
+
+        //raise sliders
+        Sliders.setTargetPosition(3000);
+        Sliders.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        Sliders.setPower(0.5);
+        while(Sliders.getCurrentPosition()<2999){
+
+        }
+        Sliders.setPower(0);
+
+
+
+        //approach the board
+        Drive(-90, -90, -90, -90);
+        stopRobot();
+
+        //align with board
+        Drive(13, -13,-13, 13);
+        stopRobot();
+        //////////////-----------end if statement
+
+        //drop the pixel
+        Wrist.setPosition(0.50);
+
+        //nudge the robot forward a bit to ensure the pixel drops
+        Drive(-17, -17, -17, -17);
+        stopRobot();
+
+        sleep(1000);
+
+        Drive(10, 10, 10, 10);
+        stopRobot();
+
+        //reset wrist
+        Wrist.setPosition(0.79);
+
+        //move to parking
+        Drive(-75, 75, 75, -75);
+        stopRobot();
+        //forward into parking
+        Drive(-40, -40, -40, -40);
+        stopRobot();
+        //pull down the sliders
+        Sliders.setTargetPosition(-3000);
+        Sliders.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        Sliders.setPower(0.4);
+        while(Sliders.getCurrentPosition()>1){
+
+        }
+        Sliders.setPower(0);
     }
+        else if(/**/false){//Right Side
+        Drive(73, 73, 73, 73);
+        stopRobot();
+
+        //turn right to face game element
+        Drive(62, 62, -62, -62);
+        stopRobot();
+
+        //Push game element
+        Drive(5, 5, 5, 5);
+        stopRobot();
+
+        //back up
+        Drive(-5, -5, -5, -5);
+        stopRobot();
+
+        //drop pixel
+        Intake.setPower(0.5);
+        sleep(900);
+        Intake.setPower(0);
+
+        //move away from dropped pixel
+        Drive(-10, -10, -10, -10);
+        stopRobot();
+
+        //spin 180 to face board
+        Drive(-124, -124, 124, 124);
+        stopRobot();
+
+        //raise sliders
+        Sliders.setTargetPosition(3000);
+        Sliders.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        Sliders.setPower(0.5);
+        while(Sliders.getCurrentPosition()<2999){
+
+        }
+        Sliders.setPower(0);
+        //lift wrist
+        Wrist.setPosition(0.50);
+
+        //Strafe right to avoid pixel
+        Drive(-25, 25, 25, -25);
+        stopRobot();
+
+        //move to board 40
+        Drive(-40, -40, -40, -40);
+        stopRobot();
+        //Strafe strafe back left to align with board
+        Drive(10, -10, -10, 10);
+        stopRobot();
+        //Get to board
+        Drive(-50, -50, -50, -50);
+        stopRobot();
+
+        //nudge the robot forward a bit to ensure the pixel drops
+        Drive(-17, -17, -17, -17);
+        stopRobot();
+
+        sleep(1000);
+
+        Drive(10, 10, 10, 10);
+        stopRobot();
+
+        //reset wrist
+        Wrist.setPosition(0.77);
+
+        //move to parking
+        Drive(-55, 55, 55, -55);
+        stopRobot();
+        //forward into parking
+        Drive(-40, -40, -40, -40);
+        stopRobot();
+        //pull down the sliders
+        Sliders.setTargetPosition(-3000);
+        Sliders.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        Sliders.setPower(0.4);
+        while(Sliders.getCurrentPosition()>1){
+
+        }
+        Sliders.setPower(0);
+    }
+        else{
+        //move it forward 70cm and push game obej
+        Drive(73, 73, 73, 73);
+        stopRobot();
+
+        //turn to face board and game object
+        Drive(-62, -62, 62, 62);
+        stopRobot();
+
+        Drive(8, 78, 78, 78);
+        stopRobot();
+
+        //back 2 cm
+        Drive(-8, -8, -8, -8);
+        stopRobot();
+
+        //outtake pixel
+        Intake.setPower(0.5);
+        sleep(900);
+        Intake.setPower(0);
+
+        //raise sliders
+        Sliders.setTargetPosition(3000);
+        Sliders.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        Sliders.setPower(0.5);
+        while(Sliders.getCurrentPosition()<2999){
+
+        }
+        Sliders.setPower(0);
+
+        //approach the board
+        Drive(-90, -90, -90, -90);
+        stopRobot();
+
+        //align with board
+        Drive(24, -24,-24, 24);
+        stopRobot();
+        //////////////-----------end if statement
+
+        //drop the pixel
+        Wrist.setPosition(0.50);
+
+        //nudge the robot forward a bit to ensure the pixel drops
+        Drive(-17, -17, -17, -17);
+        stopRobot();
+
+        sleep(1000);
+
+        Drive(10, 10, 10, 10);
+        stopRobot();
+
+        //reset wrist
+        Wrist.setPosition(0.79);
+
+        //move to parking
+        Drive(-86, 86, 86, -86);
+        stopRobot();
+        //forward into parking
+        Drive(-40, -40, -40, -40);
+        stopRobot();
+        //pull down the sliders
+        Sliders.setTargetPosition(-3000);
+        Sliders.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        Sliders.setPower(0.4);
+        while(Sliders.getCurrentPosition()>1){
+
+        }
+        Sliders.setPower(0);
+    }
+    //robot.Forward(40);
+    //robot.StrafeLeft(35);
+
+
+    //---------------------------------------------------------------------
+
+    stopRobot();
+}
 
 
     public void Drive(int TargetPositionMotorFL, int TargetPositionMotorBL, int TargetPositionMotorFR,
@@ -319,6 +389,67 @@ public class Red1Auto extends LinearOpMode {
             telemetry.update();
         }
     }
+    public void DriveNSlides(int TargetPositionMotorFL, int TargetPositionMotorBL, int TargetPositionMotorFR, int TargetPositionMotorBR, int TargetPositionMotorSlides) {
+
+        DcMotor Sliders = hardwareMap.get(DcMotor.class, "Sliders"); // Control hub 0
+        Sliders.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        Sliders.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        Sliders.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        Sliders.setDirection(DcMotorSimple.Direction.REVERSE);
+
+        TargetPositionMotorFL = (int) (16.67 * TargetPositionMotorFL);
+        TargetPositionMotorBL = (int) (16.67 * TargetPositionMotorBL);
+        TargetPositionMotorFR = (int) (16.67 * TargetPositionMotorFR);
+        TargetPositionMotorBR = (int) (16.67 * TargetPositionMotorBR);
+
+        // this is in terms of cm
+        motorFL.setTargetPosition(TargetPositionMotorFL);
+        motorBL.setTargetPosition(TargetPositionMotorBL);
+        motorFR.setTargetPosition(TargetPositionMotorFR);
+        motorBR.setTargetPosition(TargetPositionMotorBR);
+        motorFL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motorFR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motorBL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motorBR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        boolean driveTarget = true;
+        boolean  slides = true;
+        while(driveTarget || slides){
+            if(Math.abs(motorFL.getCurrentPosition()-TargetPositionMotorFL)>1 && driveTarget) {
+                if (Math.abs(TargetPositionMotorFL - motorFL.getCurrentPosition()) > 300) {
+                    motorBL.setPower(0.6);
+                    motorFL.setPower(0.6);
+                    motorBR.setPower(0.6);
+                    motorFR.setPower(0.6);
+                } else {
+                    motorBL.setPower(0.2);
+                    motorFL.setPower(0.2);
+                    motorBR.setPower(0.2);
+                    motorFR.setPower(0.2);
+                }
+
+                telemetry.addData("motorFL Encoder Position: ", motorFL.getCurrentPosition());
+                telemetry.addData("motorBL Encoder Position: ", motorBL.getCurrentPosition());
+                telemetry.addData("motorFR Encoder Position: ", motorFR.getCurrentPosition());
+                telemetry.addData("motorBR Encoder Position: ", motorBR.getCurrentPosition());
+                telemetry.addData("motor power", motorFL.getPower());
+                //telemetry.addData("Wrist Position", Wrist.getController().getServoPosition(5));
+                telemetry.update();
+            }else{
+                driveTarget = false;
+            }
+            if(Sliders.getCurrentPosition()<2999) {
+                Sliders.setTargetPosition(3000);
+                Sliders.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                Sliders.setPower(0.5);
+                Sliders.setPower(0);
+            }
+            else{
+                Sliders.setPower(0);
+                slides = false;
+            }
+        }
+    }
 
     // calculates the power which the motor should be set at.
     public double PIDControl(double setPosition, double currentPosition) {
@@ -347,7 +478,4 @@ public class Red1Auto extends LinearOpMode {
         motorBL.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         motorBR.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
-
-
-
 }
