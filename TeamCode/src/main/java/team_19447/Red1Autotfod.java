@@ -7,7 +7,6 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
-import org.firstinspires.ftc.robotcore.external.hardware.camera.BuiltinCameraDirection;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
 import org.firstinspires.ftc.vision.VisionPortal;
@@ -30,7 +29,7 @@ public class Red1Autotfod extends LinearOpMode {
     // guide to ^^^ gameobjpos
     // if camera1 then = 1 if camera2 then = 2 if none then = 0
 
-    private static final String TFOD_MODEL_ASSET = "WORKING.tflite";
+    private static final String TFOD_MODEL_ASSET = "lesser_model.tflite";
 
     private static final String[] LABELS = {
             "redobject",
@@ -40,13 +39,11 @@ public class Red1Autotfod extends LinearOpMode {
     /* The variable to store our instance of the TensorFlow Object Detection processor.
      */
     private TfodProcessor tfod;
-    ///private TfodProcessor tfod2;
 
     /**
      * The variable to store our instance of the vision portal.
      */
     private VisionPortal visionPortal;
-    ///private VisionPortal visionPortal2;
 
     public static final double forwardTicks = 47.63;
     public static final double strafeTicks = 49.05;
@@ -135,9 +132,9 @@ public class Red1Autotfod extends LinearOpMode {
         waitForStart();
         timer.reset();
 
-      //  initTfod();
+        initTfod();
 
-        while (visiontimer < 0) {
+        while (visiontimer > 0) {
 
             telemetryTfod();
 
@@ -150,40 +147,57 @@ public class Red1Autotfod extends LinearOpMode {
         }
 
         // Save more CPU resources when camera is no longer needed.
-       // visionPortal.close();
+        visionPortal.close();
         ///visionPortal2.close();
 
         //-------------Auto code goes here --------------------------------
+
+        Sliders.setTargetPosition(3000);
+        Sliders.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        Sliders.setPower(0.5);
+
         //move it forward 70cm
-        Drive(70, 70, 70, 70);
-        stopRobot();
 
-        //detect where pixel is
-
-        //////////////-----------chain if statements
-        //drop the pixel
-
-        //turn left here to face sliders towards board
-        Drive(-63, -63, 63, 63);
+        Drive(73, 73, 73, 73);
         stopRobot();
 
         //raise sliders
-        Sliders.setTargetPosition(4000);
-        Sliders.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        Sliders.setPower(0.4);
 
-        //approach the board
-        Drive(-100, -100, -100, -100);
+        //detect where pixel is
+
+
+
+        //////////////-----------chain if statements
+        //drop the pixel
+        Intake.setPower(0.5);
+        sleep(900);
+        Intake.setPower(0);
+        //move away from dropped pixel
+        Drive(-10, -10, -10, -10);
+        stopRobot();
+
+        //turn left here to face sliders towards board
+        Drive(-62, -62, 62, 62);
         stopRobot();
 
 
+
+
+
+        //approach the board
+        Drive(-90, -90, -90, -90);
+        stopRobot();
+
+        //align with board
+        Drive(20, -20,-20, 20);
+        stopRobot();
         //////////////-----------end if statement
 
         //drop the pixel
-        Wrist.setPosition(0.55);
+        Wrist.setPosition(0.50);
 
-        //kudge the robot forward a bit to ensure the pixel drops
-        Drive(-10, -10, -10, -10);
+        //nudge the robot forward a bit to ensure the pixel drops
+        Drive(-17, -17, -17, -17);
         stopRobot();
 
         sleep(1000);
@@ -195,20 +209,15 @@ public class Red1Autotfod extends LinearOpMode {
         Wrist.setPosition(0.79);
 
         //pull down the sliders
-        Sliders.setTargetPosition(-4990);
+        Sliders.setTargetPosition(-3000);
         Sliders.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         Sliders.setPower(0.4);
 
         //move to parking
-        Drive(65, -65, -65, 65);
+        Drive(-75, 75, 75, -75);
         stopRobot();
-
-        Drive(-20, -20, -20, -20);
-        stopRobot();
-        //robot.Forward(40);
-        //robot.StrafeLeft(35);
-
-        //---------------------------------------------------------------------
+        //forward into parking
+        Drive(-40, -40, -40, -40);
         stopRobot();
     }
 
