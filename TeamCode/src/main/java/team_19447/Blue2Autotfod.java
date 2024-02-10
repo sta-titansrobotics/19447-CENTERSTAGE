@@ -61,8 +61,8 @@ public class Blue2Autotfod extends LinearOpMode {
     double Kd = 0.01;
     double Kf = 0.2;
 
-    int visionintX;
-    int visionintY;
+    int visionintX=0;
+    int visionintY=0;
 
     ElapsedTime timer = new ElapsedTime();
     public static double lastError = 0;
@@ -163,8 +163,6 @@ public class Blue2Autotfod extends LinearOpMode {
 
             //raise sliders
 
-            //detect where pixel is
-            visionintX = 450;
 
             //////////////-----------chain if statements
         //--------------------MIDDLE------------------
