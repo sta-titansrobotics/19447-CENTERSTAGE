@@ -168,7 +168,7 @@ public class Red1Autotfod extends LinearOpMode {
         stopRobot();
 
         //raise sliders
-        Sliders.setTargetPosition(5000);
+        Sliders.setTargetPosition(4000);
         Sliders.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         Sliders.setPower(0.4);
 

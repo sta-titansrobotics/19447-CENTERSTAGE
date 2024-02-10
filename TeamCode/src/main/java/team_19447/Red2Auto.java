@@ -407,4 +407,8 @@ public class Red2Auto extends LinearOpMode {
         motorFR.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         motorBL.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         motorBR.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-    }}
+    }
+
+
+
+}
