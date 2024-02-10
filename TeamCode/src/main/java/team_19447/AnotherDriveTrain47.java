@@ -59,6 +59,8 @@ public class AnotherDriveTrain47 extends LinearOpMode {
         Servo Launcher = hardwareMap.get(Servo.class, "Launcher"); // control hub servo port 4
 
         Wrist.setPosition(0.771);
+        Launcher.setPosition(0);
+
 
         /*
          * prevtime = getRuntime();
@@ -147,16 +149,16 @@ public class AnotherDriveTrain47 extends LinearOpMode {
 
             if (!but2Xcheck) {
                 if (button2X % 2 == 1) {
-                    Launcher.setPosition(0);
-                } else {
                     Launcher.setPosition(1);
+                } else {
+                    Launcher.setPosition(0);
                 }
             }
 
             // normal slider code
             if (gamepad1.right_bumper && Sliders.getCurrentPosition() < 8500) {
                 Sliders.setPower(1);
-            } else if (gamepad1.right_trigger > 0.1 /*&& Sliders.getCurrentPosition() > 100*/) {
+            } else if (gamepad1.right_trigger > 0.1 && Sliders.getCurrentPosition() > 100) {
                 Sliders.setPower(-gamepad1.right_trigger);
             } else {
                 Sliders.setPower(0);
