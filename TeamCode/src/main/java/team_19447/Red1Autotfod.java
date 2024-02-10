@@ -135,9 +135,9 @@ public class Red1Autotfod extends LinearOpMode {
         waitForStart();
         timer.reset();
 
-        initTfod();
+      //  initTfod();
 
-        while (visiontimer > 0) {
+        while (visiontimer < 0) {
 
             telemetryTfod();
 
@@ -150,7 +150,7 @@ public class Red1Autotfod extends LinearOpMode {
         }
 
         // Save more CPU resources when camera is no longer needed.
-        visionPortal.close();
+       // visionPortal.close();
         ///visionPortal2.close();
 
         //-------------Auto code goes here --------------------------------
@@ -164,7 +164,7 @@ public class Red1Autotfod extends LinearOpMode {
         //drop the pixel
 
         //turn left here to face sliders towards board
-        Drive(-62, -62, 62, 62);
+        Drive(-63, -63, 63, 63);
         stopRobot();
 
         //raise sliders
@@ -173,7 +173,7 @@ public class Red1Autotfod extends LinearOpMode {
         Sliders.setPower(0.4);
 
         //approach the board
-        Drive(-90, -90, -90, -90);
+        Drive(-100, -100, -100, -100);
         stopRobot();
 
 
