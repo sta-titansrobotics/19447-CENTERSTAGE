@@ -190,10 +190,14 @@ public class Blue1Autotfod extends LinearOpMode {
             Drive(-100, -100, -100, -100);
             stopRobot();
 
+            //approach the board
+            Drive(-12, 12, 12, -12);
+            stopRobot();
+
             //////////////-----------end if statement
 
             //drop the pixel
-            Wrist.setPosition(0.45);
+            Wrist.setPosition(0.5);
 
             //nudge the robot forward a bit to ensure the pixel drops
             Drive(-20, -20, -20, -20);
@@ -213,7 +217,7 @@ public class Blue1Autotfod extends LinearOpMode {
             Sliders.setPower(0.4);
 
             //move to parking
-            Drive(-70, 70, 70, -70);
+            Drive(-90, 90, 90, -90);
             stopRobot();
             //forward into parking
             Drive(-25, -25, -25, -25);
@@ -243,7 +247,7 @@ public class Blue1Autotfod extends LinearOpMode {
             //////////////-----------end if statement
 
             //drop the pixel
-            Wrist.setPosition(0.45);
+            Wrist.setPosition(0.5);
 
             //nudge the robot forward a bit to ensure the pixel drops
             Drive(20, -20, -20, -20);
@@ -289,7 +293,7 @@ public class Blue1Autotfod extends LinearOpMode {
             //////////////-----------end if statement
 
             //drop the pixel
-            Wrist.setPosition(0.45);
+            Wrist.setPosition(0.5);
 
             //nudge the robot forward a bit to ensure the pixel drops
             Drive(-20, -20, -20, -20);
