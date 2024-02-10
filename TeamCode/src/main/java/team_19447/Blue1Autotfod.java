@@ -29,7 +29,7 @@ public class Blue1Autotfod extends LinearOpMode {
     // guide to ^^^ gameobjpos
     // if camera1 then = 1 if camera2 then = 2 if none then = 0
 
-    private static final String TFOD_MODEL_ASSET = "lesser_model.tflite";
+    private static final String TFOD_MODEL_ASSET = "lesser_comp.tflite";
 
     private static final String[] LABELS = {
             "redobject",
