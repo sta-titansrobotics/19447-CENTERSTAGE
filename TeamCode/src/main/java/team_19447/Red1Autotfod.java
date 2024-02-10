@@ -132,6 +132,9 @@ public class Red1Autotfod extends LinearOpMode {
         waitForStart();
         timer.reset();
 
+        Drive(28, 28, 28, 28);
+        stopRobot();
+
         initTfod();
 
         while (visiontimer > 0) {
@@ -158,67 +161,161 @@ public class Red1Autotfod extends LinearOpMode {
 
         //move it forward 70cm
 
-        Drive(73, 73, 73, 73);
+        Drive(45, 45, 45, 45);
         stopRobot();
 
         //raise sliders
 
         //detect where pixel is
 
-
+    visionintX = 100;
 
         //////////////-----------chain if statements
-        //drop the pixel
-        Intake.setPower(0.5);
-        sleep(900);
-        Intake.setPower(0);
-        //move away from dropped pixel
-        Drive(-10, -10, -10, -10);
-        stopRobot();
+        // -----------------------------------MIDDLE--------------------------------------
+        if(visionintX>300) {
+            //drop the pixel
+            Intake.setPower(0.5);
+            sleep(1500);
 
-        //turn left here to face sliders towards board
-        Drive(-62, -62, 62, 62);
-        stopRobot();
+            Intake.setPower(0);
+            //move away from dropped pixel
+            Drive(-10, -10, -10, -10);
+            stopRobot();
+
+            //turn left here to face sliders towards board
+            Drive(-62, -62, 62, 62);
+            stopRobot();
+
+            //approach the board
+            Drive(-100, -100, -100, -100);
+            stopRobot();
+
+            //////////////-----------end if statement
+
+            //drop the pixel
+            Wrist.setPosition(0.45);
+
+            //nudge the robot forward a bit to ensure the pixel drops
+            Drive(-20, -20, -20, -20);
+            stopRobot();
+
+            sleep(1000);
+
+            Drive(10, 10, 10, 10);
+            stopRobot();
+
+            //reset wrist
+            Wrist.setPosition(0.79);
+
+            //pull down the sliders
+            Sliders.setTargetPosition(-3000);
+            Sliders.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            Sliders.setPower(0.4);
+
+            //move to parking
+            Drive(90, -90, -90, 90);
+            stopRobot();
+            //forward into parking
+            Drive(-25, -25, -25, -25);
+            stopRobot();
+            //-----------------------LEFT SIDE-----------------------------------------------------
+        }else if(visionintX <300&& visionintX >60){
+            //turn left here to face sliders towards board
+            Drive(-62, -62, 62, 62);
+            stopRobot();
+
+            //drop the pixel
+            Intake.setPower(0.5);
+            sleep(1500);
+            Intake.setPower(0);
+
+            //approach the board
+            Drive(-100, -100, -100, -100);
+            stopRobot();
+
+            //align with board
+            Drive(20, -20,-20, 20);
+            stopRobot();
+            //////////////-----------end if statement
+
+            //drop the pixel
+            Wrist.setPosition(0.45);
+
+            //nudge the robot forward a bit to ensure the pixel drops
+            Drive(20, -20, -20, -20);
+            stopRobot();
+
+            sleep(1000);
+
+            Drive(10, 10, 10, 10);
+            stopRobot();
+
+            //reset wrist
+            Wrist.setPosition(0.79);
+
+            //pull down the sliders
+            Sliders.setTargetPosition(-3000);
+            Sliders.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            Sliders.setPower(0.4);
+
+            //move to parking
+            Drive(70, -70, -70, 70);
+            stopRobot();
+            //forward into parking
+            Drive(-25, -25, -25, -25);
+            stopRobot();
+        }else{
+            //-----------------------------RIGHT SIDE---------------------------------
+            //turn right here to face intake towards board
+            Drive(62, 62, -62, -62);
+            stopRobot();
+
+            //drop the pixel
+            Intake.setPower(0.5);
+            sleep(1500);
+            Intake.setPower(0);
+
+            //180 turn
+            Drive(124, 124, -124, -124);
+            stopRobot();
+            //approach the board
+            Drive(-100, -100, -100, -100);
+            stopRobot();
+
+            //align with board
+            Drive(-20, 20,20, -20);
+            stopRobot();
+            //////////////-----------end if statement
+
+            //drop the pixel
+            Wrist.setPosition(0.45);
+
+            //nudge the robot forward a bit to ensure the pixel drops
+            Drive(-20, -20, -20, -20);
+            stopRobot();
+
+            sleep(1000);
+
+            Drive(10, 10, 10, 10);
+            stopRobot();
+
+            //reset wrist
+            Wrist.setPosition(0.79);
+
+            //pull down the sliders
+            Sliders.setTargetPosition(-3000);
+            Sliders.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            Sliders.setPower(0.4);
+
+            //move to parking
+            Drive(110, -110, -110, 110);
+            stopRobot();
+            //forward into parking
+            Drive(-25, -25, -25, -25);
+            stopRobot();
+        }
 
 
-
-
-
-        //approach the board
-        Drive(-90, -90, -90, -90);
-        stopRobot();
-
-        //align with board
-        Drive(20, -20,-20, 20);
-        stopRobot();
-        //////////////-----------end if statement
-
-        //drop the pixel
-        Wrist.setPosition(0.50);
-
-        //nudge the robot forward a bit to ensure the pixel drops
-        Drive(-17, -17, -17, -17);
-        stopRobot();
-
-        sleep(1000);
-
-        Drive(10, 10, 10, 10);
-        stopRobot();
-
-        //reset wrist
-        Wrist.setPosition(0.79);
-
-        //pull down the sliders
-        Sliders.setTargetPosition(-3000);
-        Sliders.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        Sliders.setPower(0.4);
-
-        //move to parking
-        Drive(-75, 75, 75, -75);
-        stopRobot();
-        //forward into parking
-        Drive(-40, -40, -40, -40);
-        stopRobot();
     }
 
 
@@ -243,7 +340,7 @@ public class Red1Autotfod extends LinearOpMode {
 
         while(Math.abs(motorFL.getCurrentPosition()-TargetPositionMotorFL)>1){
 
-            if(Math.abs(TargetPositionMotorFL - motorFL.getCurrentPosition())>300){
+            if(Math.abs(TargetPositionMotorFL - motorFL.getCurrentPosition())>500){
                 motorBL.setPower(0.6);
                 motorFL.setPower(0.6);
                 motorBR.setPower(0.6);
@@ -260,6 +357,7 @@ public class Red1Autotfod extends LinearOpMode {
             telemetry.addData("motorFR Encoder Position: ", motorFR.getCurrentPosition());
             telemetry.addData("motorBR Encoder Position: ", motorBR.getCurrentPosition());
             telemetry.addData("motor power", motorFL.getPower());
+            telemetry.addData("intXpos", visionintX);
             //telemetry.addData("Wrist Position", Wrist.getController().getServoPosition(5));
             telemetry.update();
         }
