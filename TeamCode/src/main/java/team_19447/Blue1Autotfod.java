@@ -118,7 +118,7 @@ public class Blue1Autotfod extends LinearOpMode {
         Climbing2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         */
 
-        int visiontimer = 120;
+        int visiontimer = 240;
 
         //Reverse left side motors, as they start out reversed
         motorFL.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -132,25 +132,8 @@ public class Blue1Autotfod extends LinearOpMode {
         waitForStart();
         timer.reset();
 
-        Drive(28, 28, 28, 28);
-        stopRobot();
 
-        initTfod();
 
-        while (visiontimer > 0) {
-
-            telemetryTfod();
-
-            // Push telemetry to the Driver Station.
-            telemetry.update();
-
-            visiontimer --;
-            // Share the CPU.
-            sleep(20);
-        }
-
-        // Save more CPU resources when camera is no longer needed.
-        visionPortal.close();
         ///visionPortal2.close();
 
         //-------------Auto code goes here --------------------------------
@@ -161,7 +144,7 @@ public class Blue1Autotfod extends LinearOpMode {
 
         //move it forward 70cm
 
-        Drive(45, 45, 45, 45);
+        Drive(73, 73, 73, 73);
         stopRobot();
 
         //raise sliders
@@ -170,17 +153,13 @@ public class Blue1Autotfod extends LinearOpMode {
 
         //0=right 100=left
 
+        visionintX=450;
         //////////////-----------chain if statements
         // -----------------------------------MIDDLE--------------------------------------
         if(visionintX>300) {
             //drop the pixel
-            Intake.setPower(0.5);
-            sleep(1500);
 
-            Intake.setPower(0);
-            //move away from dropped pixel
-            Drive(-10, -10, -10, -10);
-            stopRobot();
+
 
             //turn right here to face sliders towards board
             Drive(62, 62, -62, -62);
@@ -188,10 +167,6 @@ public class Blue1Autotfod extends LinearOpMode {
 
             //approach the board
             Drive(-100, -100, -100, -100);
-            stopRobot();
-
-            //approach the board
-            Drive(-12, 12, 12, -12);
             stopRobot();
 
             //////////////-----------end if statement
@@ -217,7 +192,7 @@ public class Blue1Autotfod extends LinearOpMode {
             Sliders.setPower(0.4);
 
             //move to parking
-            Drive(-90, 90, 90, -90);
+            Drive(80, -80, -80, 80);
             stopRobot();
             //forward into parking
             Drive(-25, -25, -25, -25);
@@ -230,19 +205,23 @@ public class Blue1Autotfod extends LinearOpMode {
 
             //drop the pixel
             Intake.setPower(0.5);
-            sleep(1500);
+            sleep(900);
             Intake.setPower(0);
 
             //turn 180 to face slider towards board
             Drive(124, 124, -124, -124);
             stopRobot();
 
+            //strafe left
+            Drive(40, -40, -40, 40);
+            stopRobot();
+
             //approach the board
-            Drive(-100, -100, -100, -100);
+            Drive(-60, -60, -60, -60);
             stopRobot();
 
             //align with board left side
-            Drive(20, -20,-20, 20);
+            Drive(-20, 20,20, -20);
             stopRobot();
             //////////////-----------end if statement
 
@@ -267,7 +246,7 @@ public class Blue1Autotfod extends LinearOpMode {
             Sliders.setPower(0.4);
 
             //move to parking
-            Drive(90, -90, -90, 90);
+            Drive(-90, 90, 90, -90);
             stopRobot();
             //forward into parking
             Drive(-25, -25, -25, -25);
@@ -280,7 +259,7 @@ public class Blue1Autotfod extends LinearOpMode {
 
             //drop the pixel
             Intake.setPower(0.5);
-            sleep(1500);
+            sleep(900);
             Intake.setPower(0);
 
             //approach the board
@@ -343,17 +322,11 @@ public class Blue1Autotfod extends LinearOpMode {
 
         while(Math.abs(motorFL.getCurrentPosition()-TargetPositionMotorFL)>1){
 
-            if(Math.abs(TargetPositionMotorFL - motorFL.getCurrentPosition())>500){
-                motorBL.setPower(0.6);
-                motorFL.setPower(0.6);
-                motorBR.setPower(0.6);
-                motorFR.setPower(0.6);
-            }else{
-                motorBL.setPower(0.2);
-                motorFL.setPower(0.2);
-                motorBR.setPower(0.2);
-                motorFR.setPower(0.2);
-            }
+                motorBL.setPower(0.7);
+                motorFL.setPower(0.7);
+                motorBR.setPower(0.7);
+                motorFR.setPower(0.7);
+
 
             telemetry.addData("motorFL Encoder Position: ", motorFL.getCurrentPosition());
             telemetry.addData("motorBL Encoder Position: ", motorBL.getCurrentPosition());

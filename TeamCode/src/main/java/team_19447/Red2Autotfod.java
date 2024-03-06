@@ -117,8 +117,7 @@ public class Red2Autotfod extends LinearOpMode {
         Climbing1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         Climbing2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         */
-
-        int visiontimer = 120;
+        int visiontimer = 240;
 
         //Reverse left side motors, as they start out reversed
         motorFL.setDirection(DcMotorSimple.Direction.REVERSE);

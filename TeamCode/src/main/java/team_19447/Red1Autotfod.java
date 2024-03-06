@@ -118,7 +118,7 @@ public class Red1Autotfod extends LinearOpMode {
         Climbing2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         */
 
-        int visiontimer = 120;
+        int visiontimer = 240;
 
         //Reverse left side motors, as they start out reversed
         motorFL.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -173,7 +173,7 @@ public class Red1Autotfod extends LinearOpMode {
         if(visionintX>300) {
             //drop the pixel
             Intake.setPower(0.5);
-            sleep(1500);
+            sleep(900);
 
             Intake.setPower(0);
             //move away from dropped pixel
@@ -224,7 +224,7 @@ public class Red1Autotfod extends LinearOpMode {
 
             //drop the pixel
             Intake.setPower(0.5);
-            sleep(1500);
+            sleep(900);
             Intake.setPower(0);
 
             //approach the board
@@ -240,7 +240,7 @@ public class Red1Autotfod extends LinearOpMode {
             Wrist.setPosition(0.45);
 
             //nudge the robot forward a bit to ensure the pixel drops
-            Drive(20, -20, -20, -20);
+            Drive(-20, -20, -20, -20);
             stopRobot();
 
             sleep(1000);
@@ -270,20 +270,24 @@ public class Red1Autotfod extends LinearOpMode {
 
             //drop the pixel
             Intake.setPower(0.5);
-            sleep(1500);
+            sleep(900);
             Intake.setPower(0);
 
             //180 turn
             Drive(124, 124, -124, -124);
             stopRobot();
+            //Strafe inwards to avoid pixel
+            Drive(-45, 45, 45, -45);
+            stopRobot();
+            //move to board 40
+            Drive(-40, -40, -40, -40);
+            stopRobot();
+            //Strafe strafe back left to align with board
+            Drive(30, -30, -30, 30);
+            stopRobot();
             //approach the board
-            Drive(-100, -100, -100, -100);
+            Drive(-20, -20, -20, -20);
             stopRobot();
-
-            //align with board
-            Drive(-20, 20,20, -20);
-            stopRobot();
-            //////////////-----------end if statement
 
             //drop the pixel
             Wrist.setPosition(0.45);
@@ -306,7 +310,7 @@ public class Red1Autotfod extends LinearOpMode {
             Sliders.setPower(0.4);
 
             //move to parking
-            Drive(110, -110, -110, 110);
+            Drive(90, -90, -90, 90);
             stopRobot();
             //forward into parking
             Drive(-25, -25, -25, -25);

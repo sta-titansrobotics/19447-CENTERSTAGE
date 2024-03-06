@@ -30,7 +30,6 @@ public class Blue2Autotfod extends LinearOpMode {
     // if camera1 then = 1 if camera2 then = 2 if none then = 0
 
     private static final String TFOD_MODEL_ASSET = "lesser_comp.tflite";
-
     private static final String[] LABELS = {
             "redobject",
             "blueobject",
@@ -118,7 +117,7 @@ public class Blue2Autotfod extends LinearOpMode {
         Climbing2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         */
 
-        int visiontimer = 120;
+        int visiontimer = 240;
 
         //Reverse left side motors, as they start out reversed
         motorFL.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -131,6 +130,9 @@ public class Blue2Autotfod extends LinearOpMode {
         telemetry.update();
         waitForStart();
         timer.reset();
+
+        Drive(28, 28, 28, 28);
+        stopRobot();
 
         initTfod();
 
@@ -152,45 +154,46 @@ public class Blue2Autotfod extends LinearOpMode {
 
         //-------------Auto code goes here --------------------------------
 
-            Sliders.setTargetPosition(3000);
-            Sliders.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            Sliders.setPower(0.5);
+        Sliders.setTargetPosition(3000);
+        Sliders.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        Sliders.setPower(0.5);
 
-            //move it forward 70cm
+        //move it forward 70cm
 
-            Drive(45, 45, 45, 45);
-            stopRobot();
+        Drive(45, 45, 45, 45);
+        stopRobot();
 
-            //raise sliders
+        //raise sliders
 
+        //detect where pixel is
 
-            //////////////-----------chain if statements
-        //--------------------MIDDLE------------------
-
-        if (visionintX>300) {
+        //////////////-----------chain if statements
+        // -----------------------------------MIDDLE--------------------------------------
+        if(visionintX>300) {
             //drop the pixel
             Intake.setPower(0.5);
-            sleep(900);
+            sleep(1500);
+
             Intake.setPower(0);
-            //move away from dropped pixel
-            Drive(-10, -10, -10, -10);
+            //move away from dropped pixel throuhg truss system
+            Drive(-75, -75, -75, -75);
             stopRobot();
 
             //turn left here to face sliders towards board
-            Drive(62, 62, -62, -62);
+            Drive(-62, -62, 62, 62);
             stopRobot();
 
             //approach the board
-            Drive(-200, -200, -200, -200);
+            Drive(-180, -180, -180, -180);
             stopRobot();
 
-            //align with board
-            Drive(-12, 12, 12, 12);
+            //strafe left into the board.
+            Drive(70, -70, -70, 70);
             stopRobot();
-            //////////////-----------end if statement
 
             //drop the pixel
-            Wrist.setPosition(0.50);
+            Wrist.setPosition(0.45);
+
             //nudge the robot forward a bit to ensure the pixel drops
             Drive(-20, -20, -20, -20);
             stopRobot();
@@ -203,27 +206,20 @@ public class Blue2Autotfod extends LinearOpMode {
             //reset wrist
             Wrist.setPosition(0.79);
 
-            //move to parking on midddle side
-            Drive(75, -75, -75, 75);
-            stopRobot();
-            //forward into parking
-            Drive(-40, -40, -40, -40);
-            stopRobot();
             //pull down the sliders
             Sliders.setTargetPosition(-3000);
             Sliders.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             Sliders.setPower(0.4);
 
             //move to parking
-            Drive(-90, 90, 90, -90);
+            Drive(-80, 80, 80, -80);
             stopRobot();
             //forward into parking
             Drive(-25, -25, -25, -25);
             stopRobot();
-        }
-        //---------------------LEFT SIDE-----------------------
-        else if (visionintX <300&& visionintX >60) {
-            //turn left here to face intake towards board
+            //-----------------------LEFT SIDE-----------------------------------------------------
+        }else if(visionintX <300&& visionintX >60){
+            //turn left here to face sliders towards board
             Drive(-62, -62, 62, 62);
             stopRobot();
 
@@ -232,21 +228,17 @@ public class Blue2Autotfod extends LinearOpMode {
             sleep(1500);
             Intake.setPower(0);
 
-            //turn 180 to face slider towards board
-            Drive(124, 124, -124, -124);
-            stopRobot();
-
             //approach the board
-            Drive(-200, -200, -200, -200);
+            Drive(-100, -100, -100, -100);
             stopRobot();
 
-            //align with board left side
+            //align with board
             Drive(20, -20,-20, 20);
             stopRobot();
             //////////////-----------end if statement
 
             //drop the pixel
-            Wrist.setPosition(0.5);
+            Wrist.setPosition(0.45);
 
             //nudge the robot forward a bit to ensure the pixel drops
             Drive(20, -20, -20, -20);
@@ -266,13 +258,13 @@ public class Blue2Autotfod extends LinearOpMode {
             Sliders.setPower(0.4);
 
             //move to parking
-            Drive(90, -90, -90, 90);
+            Drive(70, -70, -70, 70);
             stopRobot();
             //forward into parking
             Drive(-25, -25, -25, -25);
             stopRobot();
-        } else {
-            //-------------------------RIGHT SIDE---------------------------
+        }else{
+            //-----------------------------RIGHT SIDE---------------------------------
             //turn right here to face intake towards board
             Drive(62, 62, -62, -62);
             stopRobot();
@@ -282,8 +274,11 @@ public class Blue2Autotfod extends LinearOpMode {
             sleep(1500);
             Intake.setPower(0);
 
+            //180 turn
+            Drive(124, 124, -124, -124);
+            stopRobot();
             //approach the board
-            Drive(-200, -200, -200, -200);
+            Drive(-100, -100, -100, -100);
             stopRobot();
 
             //align with board
@@ -292,7 +287,7 @@ public class Blue2Autotfod extends LinearOpMode {
             //////////////-----------end if statement
 
             //drop the pixel
-            Wrist.setPosition(0.5);
+            Wrist.setPosition(0.45);
 
             //nudge the robot forward a bit to ensure the pixel drops
             Drive(-20, -20, -20, -20);
@@ -312,13 +307,16 @@ public class Blue2Autotfod extends LinearOpMode {
             Sliders.setPower(0.4);
 
             //move to parking
-            Drive(-70, 70, 70, -70);
+            Drive(110, -110, -110, 110);
             stopRobot();
             //forward into parking
             Drive(-25, -25, -25, -25);
             stopRobot();
         }
+
+
     }
+
 
     public void Drive(int TargetPositionMotorFL, int TargetPositionMotorBL, int TargetPositionMotorFR,
                       int TargetPositionMotorBR) {
@@ -341,7 +339,7 @@ public class Blue2Autotfod extends LinearOpMode {
 
         while(Math.abs(motorFL.getCurrentPosition()-TargetPositionMotorFL)>1){
 
-            if(Math.abs(TargetPositionMotorFL - motorFL.getCurrentPosition())>300){
+            if(Math.abs(TargetPositionMotorFL - motorFL.getCurrentPosition())>500){
                 motorBL.setPower(0.6);
                 motorFL.setPower(0.6);
                 motorBR.setPower(0.6);
@@ -358,6 +356,7 @@ public class Blue2Autotfod extends LinearOpMode {
             telemetry.addData("motorFR Encoder Position: ", motorFR.getCurrentPosition());
             telemetry.addData("motorBR Encoder Position: ", motorBR.getCurrentPosition());
             telemetry.addData("motor power", motorFL.getPower());
+            telemetry.addData("intXpos", visionintX);
             //telemetry.addData("Wrist Position", Wrist.getController().getServoPosition(5));
             telemetry.update();
         }
