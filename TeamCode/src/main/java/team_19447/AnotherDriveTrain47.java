@@ -22,6 +22,8 @@ public class AnotherDriveTrain47 extends LinearOpMode {
     int buttonX = 0;
     int buttonY = 0;
 
+    int sliderLim = 0;
+
     boolean but2Acheck = false;
     boolean but2Ycheck = false;
     boolean but2Xcheck = false;
@@ -100,6 +102,15 @@ public class AnotherDriveTrain47 extends LinearOpMode {
             if (gamepad2.right_trigger > 0) {
                 Intake.setPower(-gamepad2.right_trigger / 1.5);
             }
+            //manual adjustment    
+            if (gamepad2.dpad_down)
+                sliderLim = sliderLim - 20;
+            else if (gamepad2.dpad_up){
+                sliderLim = sliderLim + 20;
+            }
+            if (gamepad2.right_trigger > 0) {
+                Intake.setPower(-gamepad2.right_trigger / 1.5);
+            }
 
             // hang: mapped to right joystick power
             // Climbing1.setPower(gamepad2.right_stick_y);
@@ -156,9 +167,9 @@ public class AnotherDriveTrain47 extends LinearOpMode {
             }
 
             // normal slider code
-            if (gamepad1.right_bumper && Sliders.getCurrentPosition() < 8500) {
+            if (gamepad1.right_bumper && Sliders.getCurrentPosition() < (8500 + sliderLim)) {
                 Sliders.setPower(1);
-            } else if (gamepad1.right_trigger > 0.1 && Sliders.getCurrentPosition() > 100) {
+            } else if (gamepad1.right_trigger > 0.1 && Sliders.getCurrentPosition() > (100 + sliderLim)) {
                 Sliders.setPower(-gamepad1.right_trigger);
             } else {
                 Sliders.setPower(0);
